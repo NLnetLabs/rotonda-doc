@@ -12,7 +12,7 @@ build:
 
 # Build documentation in with Sphinx
 sphinx:
-  configuration: doc/manual/source/conf.py
+  configuration: manual/source/conf.py
 
 # Build PDF & ePub
 formats:
