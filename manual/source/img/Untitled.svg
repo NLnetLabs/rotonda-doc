@@ -1,9 +1,6 @@
-Default Pipeline
-================
-
-.. raw:: html
-
-    <svg width="276px" height="250px" viewBox="0 0 276 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 276 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <rect x="137.904" y="80.036" width="137.904" height="169.683" style="fill:white;"/>
     <path d="M36.627,14.829l54.011,0.014" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
     <path d="M127.757,14.844l39.806,0.01" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
@@ -92,4 +89,4 @@ Default Pipeline
         <path d="M179.359,178.477c0,-1.246 -1.011,-2.258 -2.257,-2.258l-4.515,-0c-1.246,-0 -2.258,1.012 -2.258,2.258l-0,5.876c-0,1.246 1.012,2.257 2.258,2.257l4.515,0c1.246,0 2.257,-1.011 2.257,-2.257l0,-5.876Z" style="fill-opacity:0;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
         <path d="M170.332,178.242c-0.013,1.052 -0.046,1.805 1.304,2.189c0.666,0.189 1.67,0.288 3.181,0.288c4.568,0 4.562,-0.705 4.539,-2.189" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
     </g>
-    </svg>
+</svg>

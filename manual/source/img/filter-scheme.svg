@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 350 242" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <rect x="96.58" y="103.133" width="42.412" height="39.911" style="fill:rgb(128,128,128);"/>
+    <path d="M126.827,122.867l-18.625,11.068l0,-22.137l18.625,11.069Z" style="fill:none;stroke:white;stroke-width:1.33px;"/>
+    <path d="M127.227,133.956l-0.4,-22.137" style="fill:none;stroke:white;stroke-width:1.33px;"/>
+    <text x="-1.168px" y="126.073px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">pa<tspan x="15.52px " y="126.073px ">y</tspan>load</text>
+    <g transform="matrix(1,0,0,1,48.5167,112.687)">
+        <text x="135.051px" y="12.613px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">(tr<tspan x="151.963px " y="12.613px ">a</tspan>nsformed) pa<tspan x="251.691px " y="12.613px ">y</tspan>load +</text>
+        <text x="135.051px" y="28.613px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">AcceptReject</text>
+    </g>
+    <text x="66.938px" y="238.464px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">output stream</text>
+    <text x="45.418px" y="11.784px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">e<tspan x="53.322px " y="11.784px ">x</tspan>ternal data source</text>
+    <path d="M85.764,127.556l4.528,-4.472l-4.472,-4.528" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    <path d="M90.292,123.084c-4.841,-0.03 -32.897,-0.204 -32.897,-0.204" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;"/>
+    <path d="M173.645,127.353l4.527,-4.473l-4.472,-4.527" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    <path d="M178.172,122.88l-33.603,-0.207" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;"/>
+    <path d="M113.286,92.773l4.5,4.5l4.5,-4.5" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    <path d="M117.786,97.273l-0,-33.605" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;"/>
+    <path d="M113.286,177.994l4.5,4.5l4.5,-4.5" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    <path d="M117.786,182.494l-0,-33.604" style="fill:none;stroke:rgb(128,128,128);stroke-width:1px;"/>
+    <path d="M133.304,28.354c-0,-4.283 -3.477,-7.76 -7.759,-7.76l-15.518,0c-4.283,0 -7.759,3.477 -7.759,7.76l-0,20.194c-0,4.283 3.476,7.76 7.759,7.76l15.518,-0c4.282,-0 7.759,-3.477 7.759,-7.76l-0,-20.194Z" style="fill-opacity:0;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    <path d="M102.278,27.546c-0.043,3.617 -0.156,6.207 4.481,7.524c2.291,0.651 5.741,0.991 10.933,0.991c15.701,0 15.68,-2.423 15.602,-7.524" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    <g>
+        <rect x="94.134" y="194.352" width="47.303" height="22.028" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+        <path d="M141.437,194.352l-24.343,11.014" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+        <path d="M94.134,194.352l22.96,11.014" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    </g>
+</svg>

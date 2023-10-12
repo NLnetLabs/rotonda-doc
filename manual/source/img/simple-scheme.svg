@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 242 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <path d="M78.613,33.76l100.077,0.026" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    <g>
+        <g>
+            <path d="M78.613,34.081c0,7.822 -6.35,14.172 -14.172,14.172c-7.822,0 -14.172,-6.35 -14.172,-14.172c-0,-7.822 6.35,-14.172 14.172,-14.172c7.822,0 14.172,6.35 14.172,14.172Z" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+        </g>
+        <path d="M70.654,34.072l-12.426,7.385l0,-14.77l12.426,7.385Z" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+        <path d="M70.921,41.47l-0.267,-14.769" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    </g>
+    <path d="M193.459,33.778c0,4.076 -3.309,7.385 -7.384,7.385c-4.076,-0 -7.385,-3.309 -7.385,-7.385c-0,-4.076 3.309,-7.385 7.385,-7.385c4.075,0 7.384,3.309 7.384,7.385Z" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
+    <text x="39.357px" y="11.672px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">ingress</text>
+    <text x="163.479px" y="11.672px" style="font-family:'Lato-Regular', 'Lato', sans-serif;font-size:16px;fill:rgb(128,128,128);">egress</text>
+    <text x="-0.648px" y="39.385px" style="font-family:'Lato-Italic', 'Lato', sans-serif;font-style:italic;font-size:16px;fill:rgb(128,128,128);">west</text>
+    <text x="214.603px" y="37.129px" style="font-family:'Lato-Italic', 'Lato', sans-serif;font-style:italic;font-size:16px;fill:rgb(128,128,128);">east</text>
+</svg>
