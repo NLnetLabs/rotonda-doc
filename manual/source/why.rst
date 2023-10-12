@@ -82,7 +82,7 @@ function does indeed not require one or both of the "Keeping state" or
 Route Server
 ~~~~~~~~~~~~
 
-A Route Server (as mentioned in RFC7947) would be a clear-cut example of a BGP
+A Route Server (as mentioned in :RFC:`7947`) would be a clear-cut example of a BGP
 function. A Route Server requires the 'Speaking' features of the BGP protocol
 and the BGP state machine, but it does not require the best-path selection
 mechanism, at least not in the form mentioned in RFC4271 and its updates.
