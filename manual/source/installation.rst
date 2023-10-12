@@ -15,7 +15,7 @@ compatible systems such as Rocky Linux. Alternatively, you can run with
 Docker. 
 
 You can also build Rotonda from the source code using Cargo, Rust's build
-system and package manager. Cargo lets you to run Rotonda on almost any
+system and package manager. Cargo lets you run Rotonda on almost any
 operating system and CPU architecture. Refer to the :doc:`building` section
 to get started.
 
