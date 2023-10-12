@@ -90,7 +90,7 @@ mechanism, at least not in the form mentioned in :RFC:`4271` and its updates.
 Route Reflector
 ~~~~~~~~~~~~~~~
 
-Likewise, a Route Reflector (RFC4456) serves a specific function in an iBGP
+Likewise, a Route Reflector (:RFC:`4456`) serves a specific function in an iBGP
 network. Again, it requires the 'Speaking' features of the BGP protocol, but
 it doesn't have to engage necessarily in best-path selection. Very simple
 Route Reflectors would not have a need for RIBs, they would just reflect the
