@@ -93,16 +93,12 @@ Open-source with professional support services
    NLnet Labs offers `professional support and consultancy
    services <https://www.nlnetlabs.nl/services/contracts/>`__ with a
    service-level agreement. Rotonda is liberally licensed under the
-   [Mozilla Public License 2.0]
-   (https://github.com/NLnetLabs/rotonda/blob/main/LICENSE).
+   `Mozilla Public License 2.0
+   <https://github.com/NLnetLabs/rotonda/blob/main/LICENSE>`__.
 
    .. only:: html
 
-      |discord| |mastodon|
-      
-      .. |discord| image:: https://img.shields.io/discord/818584154278199396   
-         :alt: Discord
-         :target: https://discord.gg/8dvKB5Ykhy
+      |mastodon|
 
       .. |mastodon| image:: https://img.shields.io/mastodon/follow/109262826617293067?domain=https%3A%2F%2Ffosstodon.org&style=social
          :alt: Mastodon
