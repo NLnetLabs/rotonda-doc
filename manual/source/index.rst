@@ -15,10 +15,10 @@ open-source software.
 .. DANGER:: ROTONDA IS CURRENTLY IN ALPHA, DO NOT USE IN PRODUCTION
    :name: rotonda-is-currently-in-alpha-do-not-use-in-production
 
-   Rotonda is being actively worked on and this repository and all the
-   packages we supply are still in ALPHA stage. Use it to experiment freely
-   (we value your feedback!), but do not use it with data and data-streams you
-   cannot afford to lose.
+   Rotonda is being actively worked on and the code and packages we
+   supply are still in ALPHA stage. Use it to experiment freely (we
+   value your feedback!), but do not use it with data and
+   data-streams that you cannot afford to lose.
 
    You should also be aware that all the APIs, configuration and the ``Roto``
    syntax and grammar are still (highly) unstable.
