@@ -19,7 +19,7 @@ will be free, open-source software.
 > feedback!), but do not use it with data and data-streams you cannot afford
 > to lose.
 >
-> You should also be aware that all the APIs, configuration and the `roto`
+> You should also be aware that all the APIs, configuration and the `Roto`
 > syntax and grammar are still (highly) unstable.
 >
 > For more information see the [ROADMAP](ROADMAP.md)
@@ -36,10 +36,10 @@ Information Bases (RIBs), and more.
 
 ### Flexible
 
-The behavior of the units can be modeled by using a small, fun programming
+The behaviour of the units can be modelled by using a small, fun programming
 language called `Roto`, that we created to combine flexibility and
 ease-of-use. `Roto` lets you configure a Rotonda application, program units
-and create queries. `Roto` scripts can be created with your favorite text
+and create queries. `Roto` scripts can be created with your favourite text
 editor, but they can also be composed from the command line that's included
 in Rotonda.
 
