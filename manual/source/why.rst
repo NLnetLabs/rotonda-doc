@@ -115,7 +115,7 @@ the collector tries to "speak passively". As we saw, though, a passive speaker
 will have to engage in a minimum of speaking BGP. A Route Collector must never
 engage in best-path selection, or propagate routes to its peers whatsoever.
 Therefore, Route Collectors have no need for keeping state in RIBs as
-described in RFC4271. Indeed, Route Collectors may entirely forego having
+described in :RFC:`4271`. Indeed, Route Collectors may entirely forego having
 RIBs, since they can be synthesized later from the stored routes and meta-data
 if need be.
 
