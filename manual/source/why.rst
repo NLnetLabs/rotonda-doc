@@ -106,7 +106,7 @@ storing these routes would be troubleshooting, and (longitudinal) analysis.
 
 "Engaging passively" may mean that the collector wil connect over BMP (BGP
 Monitoring Protocol), out-of-band, with one or more BGP routers. In this case
-the collector, called a 'BMP Station' (RFC7854), will **not** be a node in the
+the collector, called a 'BMP Station' (:RFC:`7854`), will **not** be a node in the
 BGP network. It will only require the packet parsing features of BGP in order
 to be able to extract the routes, and to be able to gather metadata. 
 
