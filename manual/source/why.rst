@@ -20,7 +20,7 @@ BGP Functions
 ~~~~~~~~~~~~~
 
 So, what are these BGP functions anyway? The way we would like to describe them
-is "a specialized task within a network relying on BGP, that requires a
+is "a specialised task within a network relying on BGP, that requires a
 subset of BGP's features". Often, this task is performed by a node in the
 network.
 
@@ -82,17 +82,16 @@ function does indeed not require one or both of the "Keeping state" or
 Route Server
 ~~~~~~~~~~~~
 
-A Route Server (as mentioned in RFC7947) would be a clear-cut example
-of a BGP function. A Route Server requires the 'Speaking' features of the
-BGP protocol and the BGP state machine, but it does not require the best-path
-selection mechanism, at least not in the form mentioned in RFC4271 and its
-updates.
+A Route Server (as mentioned in RFC7947) would be a clear-cut example of a BGP
+function. A Route Server requires the 'Speaking' features of the BGP protocol
+and the BGP state machine, but it does not require the best-path selection
+mechanism, at least not in the form mentioned in RFC4271 and its updates.
 
 Route Reflector
 ~~~~~~~~~~~~~~~
 
 Likewise, a Route Reflector (RFC4456) serves a specific function in an iBGP
-network. Again, it requires the 'Speaking' features fo the BGP protocol, but
+network. Again, it requires the 'Speaking' features of the BGP protocol, but
 it doesn't have to engage necessarily in best-path selection. Very simple
 Route Reflectors would not have a need for RIBs, they would just reflect the
 announcements and withdrawals they receive to their iBGP peers.
@@ -115,9 +114,10 @@ More commonly, though, Route Collectors **are** a node in the BGP network and
 the collector tries to "speak passively". As we saw, though, a passive speaker
 will have to engage in a minimum of speaking BGP. A Route Collector must never
 engage in best-path selection, or propagate routes to its peers whatsoever.
-Therefore, Route Collectors have no need for keeping state in RIBs as described
-in RFC4271. Indeed, Route Collectors may entirely forego having RIBs, since
-they can be synthesized later from the stored routes and meta-data if need be.
+Therefore, Route Collectors have no need for keeping state in RIBs as
+described in RFC4271. Indeed, Route Collectors may entirely forego having
+RIBs, since they can be synthesized later from the stored routes and meta-data
+if need be.
 
 Route Monitor
 ~~~~~~~~~~~~~
@@ -125,7 +125,7 @@ Route Monitor
 A Route Monitor is like a Route Collector in that it engages passively with
 BGP speakers through BMP or "passive speaking". However, instead of or in
 addition to storing, it will send signals to other systems and/or applications
-based on certain user-defined events or combinations of (accumulated) events
+based on specific user-defined events or combinations of (accumulated) events
 occurring in the observed BGP network. Some purposes would be troubleshooting,
 post-mortem analysis and anomaly detection.
 
