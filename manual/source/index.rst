@@ -116,6 +116,14 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: About Rotonda
+   :name: toc-why
+
+   why
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
    :caption: Getting Started
    :name: toc-getting-started
 
