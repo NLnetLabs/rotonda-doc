@@ -3,7 +3,7 @@
 
 # Rotonda
 
-<img align="right" src="images/rotonda-illustrative-icon.png" height="150">
+<img align="right" src="manual/source/resources/rotonda-illustrative-icon.png" height="150">
 
 Roll your own BGP service application with Rotonda. 
 
