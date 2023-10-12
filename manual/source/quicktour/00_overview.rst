@@ -38,7 +38,7 @@ Here you see an Ingress Unit on the left, the *west* side, and an egress unit on
 A Filter and RIB Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This pipeline however would just move all the data throught its ingress unit to the the egress unit, and that's that.
+This pipeline however would just move all the data through its ingress unit to the the egress unit, and that's that.
 
 .. raw:: html
 
