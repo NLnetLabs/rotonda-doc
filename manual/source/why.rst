@@ -129,27 +129,13 @@ based on certain user-defined events or combinations of (accumulated) events
 occurring in the observed BGP network. Some purposes would be troubleshooting,
 post-mortem analysis and anomaly detection.
 
-Off-line Looking Glass
-~~~~~~~~~~~~~~~~~~~~~~
-
-A looking glass is a command-line interface to a BGP speaker, quite often
-publicly available, that allows the user to query the content of the RIBs
-together with a few metrics. Many networks used to offer a web-interface that
-offers data directly to these looking glasses, but security as well as
-availability concerns led to unwillingness to continue doing this. Instead BGP
-data from the RIBs is collected from these routers into databases and made
-available to users from there ("off-line").
-
-In order to collect data from the router, the looking glass should be able to
-support the "passively speaking" feature, or it should retrieve the data over
-BMP. Other BGP features are not required.
-
 Other Functions
 ~~~~~~~~~~~~~~~
 
 There are other numerous BGP functions that already exist in some shape or
 form or that could be extracted from current practices, to name just a few:
 
+- Off-line Looking Glass
 - Route Provisioning
 - Route Policy Engine
 - RPKI injection Filter
