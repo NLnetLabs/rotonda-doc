@@ -29,7 +29,7 @@ BGP's Features
 
 Before we delve deeper into BGP functions, let's first establish what we mean
 with BGP's features, by posing the question: "What are the
-requirements for a fully-fledged BGP speaker?". RFC4271 and its updates
+requirements for a fully-fledged BGP speaker?". :RFC:`4271` and its updates
 describes BGP consisting of three components: the BGP packet format, the BGP
 state machine, and the Routing Information Base.
 
