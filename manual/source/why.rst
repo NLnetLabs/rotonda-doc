@@ -9,7 +9,7 @@ information about network nodes, increasing its complexity. Pressure on BGP to
 offer better security further increased the complexity of BGP itself and its
 deployments.
 
-By now, the notion of a 'BGP speaker' (the wording of RFC4271) with a fixed
+By now, the notion of a 'BGP speaker' (the wording of :RFC:`4271`) with a fixed
 set of 'Routing Information Bases' (RIBs) with prescribed behaviour is only
 one of many different "BGP functions", as we would like to call them, that we
 can identify in a network. Rotonda aims to provide users with the building
