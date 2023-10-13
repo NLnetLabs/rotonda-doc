@@ -36,11 +36,11 @@ Modular
    Information Bases (RIBs), and more.
 
 Flexible
-   The behavior of the units can be modeled by using a small, fun
+   The behaviour of the units can be modeled by using a small, fun
    programming language called ``Roto``, that we created to combine
    flexibility and ease-of-use. ``Roto`` lets you configure a Rotonda
    application, program units and create queries. ``Roto`` scripts can be
-   created with your favorite text editor, but they can also be composed
+   created with your favourite text editor, but they can also be composed
    from the command line that’s included in Rotonda.
 
 Tailored Performance
@@ -117,9 +117,10 @@ Open-source with professional support services
    :maxdepth: 2
    :hidden:
    :caption: About Rotonda
-   :name: toc-why
+   :name: toc-about-rotonda
 
-   why
+   about/why
+   about/overview
 
 .. toctree::
    :maxdepth: 2

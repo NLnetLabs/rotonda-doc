@@ -4,7 +4,7 @@ Rotonda Overview
 A very simple Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~
 
-So, as said earlier, Rotonda can be though of as a pipieline through which BGP data will flow. This pipeline consists of units that pass on data. All units emit data and most of them can specify from which other unit(s) they want to receive data. Furthermore some units can receive input from users and they can output data through additional channels.
+So, as said earlier, Rotonda can be though of as a pipeline through which BGP data will flow. This pipeline consists of units that pass on data. All units emit data and most of them can specify from which other unit(s) they want to receive data. Furthermore some units can receive input from users and they can output data through additional channels.
 
 Let's a look at a very simple pipeline:
 
@@ -38,7 +38,7 @@ Here you see an Ingress Unit on the left, the *west* side, and an egress unit on
 A Filter and RIB Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This pipeline however would just move all the data throught its ingress unit to the the egress unit, and that's that.
+This pipeline however would just move all the data through its ingress unit to the the egress unit, and that's that.
 
 .. raw:: html
 
