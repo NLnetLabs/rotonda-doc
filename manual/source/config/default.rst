@@ -1,11 +1,18 @@
-Default Pipeline
-================
+Default Configuration (MVP)
+===========================
 
+The default Pipeline
+~~~~~~~~~~~~~~~~~~~~
 
+Now about the actual pipeline that was started. A Rotonda pipeline is loosely based on the way BGP packets flow through a BGP speaker according to :RFC:`4271`, but without the prescribed RIBs. In Rotonda RIBs can be added or  omitted at will by the user. You can read more about the concept of the Rotonda pipelines, and the units that it is comprised of in the <<introduction>>.
+
+Now, our the default pipeline looks like this:
+
+Fig 1. The MVP default Pipeline
 
 .. raw:: html
 
-    <svg width="276px" height="250px" viewBox="0 0 276 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <svg width="276px" height="250px" style="margin-bottom: 12px;" viewBox="0 0 276 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <rect x="137.904" y="80.036" width="137.904" height="169.683" style="fill:white;"/>
     <path d="M36.627,14.829l54.011,0.014" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;"/>
     <path d="M127.757,14.844l39.806,0.01" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
@@ -94,4 +101,18 @@ Default Pipeline
         <path d="M179.359,178.477c0,-1.246 -1.011,-2.258 -2.257,-2.258l-4.515,-0c-1.246,-0 -2.258,1.012 -2.258,2.258l-0,5.876c-0,1.246 1.012,2.257 2.258,2.257l4.515,0c1.246,0 2.257,-1.011 2.257,-2.257l0,-5.876Z" style="fill-opacity:0;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
         <path d="M170.332,178.242c-0.013,1.052 -0.046,1.805 1.304,2.189c0.666,0.189 1.67,0.288 3.181,0.288c4.568,0 4.562,-0.705 4.539,-2.189" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
     </g>
-    </svg>
+
+The pipeline flows from the west to the east. On the west it has two ingress connectors, one for BMP sessions and one for BGP sessions. The RIB labeled ``rib-in-pre`` gets its input from those two connectors. Furthermore, it is a physical RIB, a RIB that actually stores the routes that come in. It passes the routes it receives on to ``rib-in-post``, which is a Virtual RIB: A RIB that doesn’t store anything itself, but just queries the physical RIB to the west with the requested prefix and then applies its only filter to it. Each connector and RIB, be it physical or virtual, has its own filter defined: the filters mentioned in the log lines on STDOUT that we saw earlier on. A total of 4 filters are thus used.
+
+Both the RIBs can queried through a HTTP JSON API 
+
+API endpoints
+~~~~~~~~~~~~~
+
+/metrics
+/status
+/status/graph
+
+/bmp-routers
+/rib-in-pre/{prefix}/[?include=moreSpecifics/lessSpecifics]
+/rib-in-post/
