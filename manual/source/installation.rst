@@ -26,6 +26,7 @@ to get started.
        To install a Rotonda package, you need the 64-bit version of one of
        these Debian versions:
 
+         -  Debian Bookworm 12
          -  Debian Bullseye 11
          -  Debian Buster 10
          -  Debian Stretch 9
