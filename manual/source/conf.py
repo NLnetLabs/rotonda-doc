@@ -27,7 +27,7 @@ year = datetime.datetime.now().year
 copyright = f'2020–{year}, NLnet Labs'
 author = 'NLnet Labs'
 
-semver = toml.load('../../Cargo.toml')
+semver = toml.load('../../Cargo_copy.toml')
 
 # The short X.Y version
 version = semver.get('package').get('version')

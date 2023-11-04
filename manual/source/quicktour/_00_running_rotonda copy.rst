@@ -1,5 +1,3 @@
-Rotonda Overview
-================
 
 A very simple Pipeline
 ~~~~~~~~~~~~~~~~~~~~~~

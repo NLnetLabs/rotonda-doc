@@ -1,5 +1,5 @@
-Why does this exist?
-====================
+On speaking BGP
+---------------
 
 Central to Rotonda is the observation that there is no one-size-fits-all
 application for a network's BGP routing needs any more. As networks are
@@ -76,12 +76,11 @@ best-path selection, and in turn, it wouldn't have to do any state-keeping.
 Strictly speaking, it would at that point not be standards-compliant any more,
 but there would be no way for an outside observer to establish its
 non-compliance. We shall see that many a BGP function does indeed not require
-one or both of the "Keeping state` or `Speaking BGP" features, hence the word
+one or both of the "Keeping state" or "Speaking BGP" features, hence the word
 "subset" in our definition.
 
 Route Server
 ------------
-
 
 A Route Server (as mentioned in :RFC:`7947`) would be a clear-cut example of a BGP
 function. A Route Server requires the "Speaking BGP" feature of the BGP protocol
@@ -90,7 +89,6 @@ mechanism, at least not in the form mentioned in :RFC:`4271` and its updates.
 
 Route Reflector
 ---------------
-
 
 Likewise, a Route Reflector (:RFC:`4456`) serves a specific function in an iBGP
 network. Again, it requires the "Speaking BGP" feature of the BGP protocol, but

@@ -116,10 +116,17 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: About Rotonda
-   :name: toc-about-rotonda
+   :caption: Why does this exist?
+   :name: toc-why
 
    about/why
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: A Gentle Introduction
+   :name: toc-introduction
+
    about/overview
 
 .. toctree::
