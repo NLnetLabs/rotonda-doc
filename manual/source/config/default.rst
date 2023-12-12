@@ -4,9 +4,20 @@ Default Configuration (MVP)
 The default Pipeline
 ~~~~~~~~~~~~~~~~~~~~
 
-Now about the actual pipeline that was started. A Rotonda pipeline is loosely based on the way BGP packets flow through a BGP speaker according to :RFC:`4271`, but without the prescribed RIBs. In Rotonda RIBs can be added or  omitted at will by the user. You can read more about the concept of the Rotonda pipelines, and the units that it is comprised of in the <<introduction>>.
+Rotonda consists of units that are connected to form a pipeline, where data
+flows from sources to target. Conceptually the data flows from the ingress all
+the way to the west to the egress in the east, through user-defined units. A
+unit may also have a north-facing input, and a south-facing output. Each units
+has a type, and the available types are: ``Connector``, ``RIB``, and
+``Filter``. You can read about the details of these units <<here>>.
 
-Now, our the default pipeline looks like this:
+When you start Rotonda without a configuration file, it will use its built-in
+configuration, that features a pipe-line that exists of five units, namely two
+connectors (``bmp-in`` and ``bgp-in``), two RIBs (``rib-in-pre`` and
+``rib-in-post``) and a terminating connector called ``null``. We will refer to
+this configuration as the 'default configuration'.
+
+The west-east flow of the default pipeline looks schematically like this:
 
 Fig 1. The MVP default Pipeline
 
@@ -102,7 +113,35 @@ Fig 1. The MVP default Pipeline
         <path d="M170.332,178.242c-0.013,1.052 -0.046,1.805 1.304,2.189c0.666,0.189 1.67,0.288 3.181,0.288c4.568,0 4.562,-0.705 4.539,-2.189" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
     </g>
 
-The pipeline flows from the west to the east. On the west it has two ingress connectors, one for BMP sessions and one for BGP sessions. The RIB labeled ``rib-in-pre`` gets its input from those two connectors. Furthermore, it is a physical RIB, a RIB that actually stores the routes that come in. It passes the routes it receives on to ``rib-in-post``, which is a Virtual RIB: A RIB that doesn’t store anything itself, but just queries the physical RIB to the west with the requested prefix and then applies its only filter to it. Each connector and RIB, be it physical or virtual, has its own filter defined: the filters mentioned in the log lines on STDOUT that we saw earlier on. A total of 4 filters are thus used.
+Let's go over this configuration a bit. On the west-side we see the two
+connectors that act as ingress connectors, one for BMP sessions, and one for
+BGP sessions. The BMP connector knows how to handle a BMP sessions, where it
+acts as a so-called ``monitoring station`` (:RFC:`7854`), with one BMP peer
+per session, presumably a router. Likewise, the BGP connector can handle BGP
+sessions with BGP speakers. The packets received by these connectors are
+parsed by these connectors into BMP or BGP messages, and run through a
+user-defined roto filter, one per connector. If the BMP or BGP message passes
+the filter, then it is 'exploded' into one or several routes. Then these
+routes are broadcasted to all connected units on their east side, which in the
+case of the default configuration is the ``rib-in-pre`` RIB unit.
+
+The ``rib-in-pre`` unit is a physical RIB, meaning the routes that it receives
+are stored in memory, and can be queried through the HTTP interface. This RIB
+also includes a filter in front of it, that determines whether the incoming
+route should be stored and passed on to the next RIB to the east.
+
+From ``rib-in-pre`` the routes are broadcasted to ``rib-in-post``, a virtual
+RIB, this means that the routes are *not* stored in this RIB. The RIB can
+still be queried through the HTTP interface, but when done so it will go back
+to the first virtual RIB to the west and fetch the requested routes from
+there, and then filter them through its own filter.
+
+All ``RIB`` units in a pipeline are required to connect both on the west and
+on the east side, and therefore the ``rib-in-post`` unit must also have a east
+bound connection. To fulfil this requirement, we connect a ``null``, or
+terminating connector to the east. This terminating connector acts somewhat
+like ``/dev/null`` does on UNIX, it accepts the packets, but simply discards
+them upon reception.
 
 Both the RIBs can queried through a HTTP JSON API 
 

@@ -1,6 +1,16 @@
-Default Pipeline
-================
+Changing the Pipeline
+~~~~~~~~~~~~~~~~~~~~~
 
+As we've briefly explained in the <<gentle introduction>> and the
+<<configuration defualt>>, Rotonda consists of units that are connected to
+form a pipeline, where data flows from sources to target.
+
+When you start Rotonda without a configuration file, it will use its built-in
+configuration, that features a pipe-line that exists of five units, namely two
+connectors (``bmp-in`` and ``bgp-in``), two RIBs (``rib-in-pre`` and
+``rib-in-post``) and a terminating connector called ``null``.
+
+The west-east flow of the default pipeline looks schematically like this:
 
 
 .. raw:: html
@@ -95,3 +105,4 @@ Default Pipeline
         <path d="M170.332,178.242c-0.013,1.052 -0.046,1.805 1.304,2.189c0.666,0.189 1.67,0.288 3.181,0.288c4.568,0 4.562,-0.705 4.539,-2.189" style="fill:none;stroke:rgb(128,128,128);stroke-width:1.33px;stroke-linecap:round;"/>
     </g>
     </svg>
+
