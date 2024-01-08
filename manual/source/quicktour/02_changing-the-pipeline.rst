@@ -3,7 +3,7 @@ Changing the Pipeline
 
 As we've briefly explained in the <<gentle introduction>> and the
 <<configuration defualt>>, Rotonda consists of units that are connected to
-form a pipeline, where data flows from sources to target.
+form a pipeline, where data flows from sources to targets.
 
 When you start Rotonda without a configuration file, it will use its built-in
 configuration, that features a pipe-line that exists of five units, namely two
@@ -106,3 +106,91 @@ The west-east flow of the default pipeline looks schematically like this:
     </g>
     </svg>
 
+In the last chapter we saw how we could query these RIBs through the HTTP
+interface, on their respective endpoints, i.e.
+`<https://localhost:8080/rib-in-pre>`_ and
+`<https://localhost:8080/rib-in-post/>`_. But there's more that we can do with
+our pipeline. We can add and remove units at run-time. For example, we could
+add another RIB to our pipeline. Let's do that.
+
+Suppose we want to create a RIB that stores routes that have AS PAThs that
+have origins only from certain autonomous systems (ASes). We'll break this down
+in a few steps:
+
+1. Start Rotonda with the default configuration, in the right directory.
+
+We will have to make sure first that we are running Rotonda with an on-disk
+configuration file, so not the built-in configuration, since the built-in
+configuration cannot be changed at run-time. 
+
+If you have a Rotonda running then stop that instance, by sending it a SIGKILL
+through any means, e.g. `ctrl-c` in the terminal that runs it. Make sure that
+you go into a directory that has a `etc/` directory in it, with the roto
+scripts and the `rotonda.conf` that comes with the Rotonda installation. Now
+start Rotonda like so:
+
+.. code:: console
+
+    rotonda -c etc/examples/rotonda.conf
+
+You can consult the prior chapter if things don't go as expected. If all's
+well you now have a running Rotonda.
+
+2. Modify the configuration file that is being used.
+
+Now for the cool stuff. Fire up your favourite text editor and edit the file
+that we used for our configuration, `etc/examples/rotonda.example.conf`
+(relative to the rotonda installation path). Add a unit at the end of the file
+like so:
+
+.. code:: toml
+
+    [units.my-rib]
+    type = "rib"
+    sources = ["rib-in-pre"]
+    rib_type = "Physical"
+    filter_name = "my-rib-filter"
+    http_api_path = "/my-rib"
+
+... and edit the the ``[targets.null]`` unit, and add `"my-rib"` to the
+``sources`` field, like so:
+
+.. code:: toml
+
+    [targets.null]
+    type = "null-out"
+    sources = ["rib-in-post","my-rib"]
+
+... and save the file.
+
+1. Create the roto filter script.
+
+Now we still must create the roto script we referenced in our modified
+``rotonda.conf``, namely the file ``my_rib.roto``. So create that file, and
+fill it with this:
+
+.. code:: text
+
+    filter my-rib-filter {
+        define {
+            rx route: Route;
+        }
+
+        apply {
+            accept;
+        }
+    }
+
+2. SGHUP Rotonda.
+
+Now with everything in place we can send the HUP signal to the rotonda process:
+
+.. code:: console
+
+    pgrep rotonda | xargs kill -HUP
+
+You should get new log output like this:
+
+.. code:: console
+
+    
