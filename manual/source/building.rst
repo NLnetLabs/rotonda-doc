@@ -2,11 +2,10 @@ Building From Source
 ====================
 
 In addition to meeting the :ref:`system requirements <installation:System
-Requirements>`, these are things you need to build Rotonda: 
+Requirements>`, these are two things you need to build Rotonda: 
 
+- a C toolchain
 - Rust
-- Item 2
-- Item 3
 
 You can run Rotonda on any operating system and CPU architecture where you
 can fulfil these requirements.
@@ -14,9 +13,9 @@ can fulfil these requirements.
 Dependencies
 ------------
 
-Some of the cryptographic primitives used by Rotonda require a C toolchain.
-You also need Rust because that’s the programming language that Rotonda has
-been written in.
+Some of the libraries used by Rotonda require a C toolchain, most notably the
+MQTT client. You also need Rust because that’s the programming language that
+Rotonda has been written in.
 
 C Toolchain
 """""""""""
@@ -28,7 +27,7 @@ everything you need on Debian/Ubuntu:
 
 .. code-block:: text
 
-  apt install build-essential
+  apt install curl build-essential gcc make
 
 If you are unsure, try to run :command:`cc` on a command line. If there is a
 complaint about missing input files, you are probably good to go.

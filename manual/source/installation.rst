@@ -4,20 +4,26 @@ Installation
 System Requirements
 -------------------
 
-Rotonda has system requirements... [TODO]
+The system requirements of Rotonda depend highly on the volume of routes that
+you want to keep in memory, and the amount of BGP/BMP messages that flow
+through Rotonda. If you do not wish to keep any routes in memory (say you want
+to emit only MQTT messages based on incoming messages), the requirements would
+be fairly minimal, both in terms of memory and CPU power. If on the other
+hand, you want to keep all routes that you receive from multiple sessions that
+feed full tables, your memory requirements will surely run into the tens of
+gigabytes.
 
 Binary Packages
 ---------------
 
-Getting started with Rotonda is really easy by installing a binary package
-for either Debian and Ubuntu or for Red Hat Enterprise Linux (RHEL) and
-compatible systems such as Rocky Linux. Alternatively, you can run with
-Docker. 
+There is no packaged, versioned release of `Rotonda` yet, so right now the
+only viable way to install Rotonda is by building from source, from the `main`
+branch on `github`, using the `Cargo`, Rust's build system and package
+manager. Cargo lets you run Rotonda on almost any operating system and CPU
+architecture. Refer to the :doc:`building` section to get started.
 
-You can also build Rotonda from the source code using Cargo, Rust's build
-system and package manager. Cargo lets you run Rotonda on almost any
-operating system and CPU architecture. Refer to the :doc:`building` section
-to get started.
+The installation instructions below here, will be applicable once the first
+official version of `Rotonda` is released.
 
 .. tabs::
 
@@ -45,17 +51,13 @@ to get started.
 
        .. code-block:: bash
 
-          sudo apt install \
-            ca-certificates \
-            curl \
-            gnupg \
-            lsb-release
+         apt install curl build-essential gcc make
 
        Add the GPG key from NLnet Labs:
 
        .. code-block:: bash
 
-          curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
+         curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
 
        Now, use the following command to set up the *main* repository:
 
