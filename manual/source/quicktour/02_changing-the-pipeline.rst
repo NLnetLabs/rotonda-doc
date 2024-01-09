@@ -121,26 +121,54 @@ in a few steps:
 
 We will have to make sure first that we are running Rotonda with an on-disk
 configuration file, so not the built-in configuration, since the built-in
-configuration cannot be changed at run-time. 
+configuration cannot be changed at run-time.
 
 If you have a Rotonda running then stop that instance, by sending it a SIGKILL
-through any means, e.g. `ctrl-c` in the terminal that runs it. Make sure that
-you go into a directory that has a `etc/` directory in it, with the roto
-scripts and the `rotonda.conf` that comes with the Rotonda installation. Now
-start Rotonda like so:
+through any means, e.g. `ctrl-c` in the terminal that runs it.
+
+If you have installed by building from source, using the `cargo install`
+method (<<here>>), you should first change your working directory to the
+directory mentioned in the `warning` at install time. The path probably looks
+something like this: `/<USER_DIR>/.cargo/git/checkouts/rotonda-<HEX NUMBER>/<HEX NUMBER>`.
+
+If you have installed from a package this directory is most likely,
+`/etc/rotonda`. This `/etc` directory can also be found in the `Rotonda github
+repo <https://github.com/nlnetlabs/rotonda>`_. Change your working directory
+to one level above this `etc` directory.
+
+You are now ready to start Rotonda by issuing:
 
 .. code:: console
 
-    rotonda -c etc/examples/rotonda.conf
+    rotonda -c etc/rotonda.example.conf
 
-You can consult the prior chapter if things don't go as expected. If all's
-well you now have a running Rotonda.
+You should see output like this:
 
-2. Modify the configuration file that is being used.
+.. code:: console
+    Loading new Roto script etc/bmp-in-filter.roto
+    Loading new Roto script etc/rib-in-post-filter.roto
+    Loading new Roto script etc/rib-in-pre-filter.roto
+    Loading new Roto script etc/bgp-in-filter.roto
+    Listening for HTTP connections on 127.0.0.1:8080
+    Starting target 'null'
+    Starting unit 'bgp-in'
+    Starting unit 'rib-in-post'
+    Starting unit 'bmp-in'
+    Starting unit 'rib-in-pre'
+    All components are ready.
+    All components are running.
+    bgp-in: Listening for connections on 0.0.0.0:11179
+    bmp-in: Listening for connections on 0.0.0.0:11019
 
-Now for the cool stuff. Fire up your favourite text editor and edit the file
-that we used for our configuration, `etc/examples/rotonda.example.conf`
-(relative to the rotonda installation path). Add a unit at the end of the file
+If you have a browser present on the system you are running Rotonda on, you
+can navigate to `<http://localhost:8080/status/graph>`_ and see a graph that
+describes the pipeline that we just started.
+
+1. Modify the configuration file that is being used.
+
+Now for the cool stuff. While leaving Rotonda running, fire up your favourite
+text editor in another shell, and edit the file that we used for our
+configuration, `etc/rotonda.example.conf`. Add a unit at the end of the file
 like so:
 
 .. code:: toml
@@ -165,9 +193,9 @@ like so:
 
 1. Create the roto filter script.
 
-Now we still must create the roto script we referenced in our modified
-``rotonda.conf``, namely the file ``my_rib.roto``. So create that file, and
-fill it with this:
+Now we must still create the roto script we referenced in our modified
+``rotonda.exmaple.conf``, namely the file ``my_rib.roto``. So create that
+file, and fill it with this:
 
 .. code:: text
 
@@ -181,7 +209,7 @@ fill it with this:
         }
     }
 
-2. SGHUP Rotonda.
+2. SIGHUP Rotonda.
 
 Now with everything in place we can send the HUP signal to the rotonda process:
 
@@ -189,8 +217,24 @@ Now with everything in place we can send the HUP signal to the rotonda process:
 
     pgrep rotonda | xargs kill -HUP
 
-You should get new log output like this:
+You should get new log output like this in the console that is running your Rotonda:
 
 .. code:: console
 
-    
+    SIGHUP signal received, re-reading configuration file '/home/rotonda/.cargo/git/checkouts/rotonda-54306a42d783f077/8e4d152/etc/rotonda.example.conf'
+    Loading new Roto script etc/my-rib.roto
+    Roto script etc/bmp-in-filter.roto is already loaded and unchanged. Skipping reload
+    Roto script etc/rib-in-post-filter.roto is already loaded and unchanged. Skipping reload
+    Roto script etc/rib-in-pre-filter.roto is already loaded and unchanged. Skipping reload
+    Roto script etc/bgp-in-filter.roto is already loaded and unchanged. Skipping reload
+    Reconfiguring target 'null'
+    Reconfiguring unit 'rib-in-pre'
+    Starting unit 'my-rib'
+    Reconfiguring unit 'bgp-in'
+    Reconfiguring unit 'bmp-in'
+    Reconfiguring unit 'rib-in-post'
+    Configuration changes applied
+    All components are ready.
+    All components are running.
+
+If you now refresh your browser tab that showed the pipeline graph, you'll see that our new `my-rib` was added!

@@ -20,10 +20,11 @@ Rotonda has been written in.
 C Toolchain
 """""""""""
 
-Some of the libraries Rotonda depends on require a C toolchain to be
-present. Your system probably has some easy way to install the minimum set of
-packages to build from C sources. For example, this command will install
-everything you need on Debian/Ubuntu:
+Some of the libraries Rotonda depends on require a C toolchain to be present.
+Your system probably has some easy way to install the minimum set of packages
+to build from C sources. For example, this command will install everything you
+need on Debian/Ubuntu, provided the currently logged in user has enough
+privileges to install system packages:
 
 .. code-block:: text
 
@@ -40,7 +41,7 @@ though not all of them are equally supported. The official `Rust Platform
 Support`_ page provides an overview of the various support levels.
 
 While some system distributions include Rust as system packages, Rotonda
-relies on a relatively new version of Rust, currently 1.60.0 or newer. We
+relies on a relatively new version of Rust, currently 1.71.0 or newer. We
 therefore suggest to use the canonical Rust installation via a tool called
 :program:`rustup`.
 
@@ -50,6 +51,16 @@ Assuming you already have :program:`curl` installed, you can install
 .. code-block:: text
 
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+This will install the stable rust toolchain, on a per user basis. This means
+that you probably want to install this as the same user as you will be running
+the `Rotonda` application itself. This should most probably be a non-root
+user, so we suggest you create a `rotonda` user, log in as that user and then
+perform the `curl` command above.
+
+Make sure to restart your shell, or add `$HOME/.cargo/bin` to your $PATH
+enviroment variable manually. This will make sure that the tools, most notably
+`cargo`, are reachable without specifying the full path.
 
 Alternatively, visit the `Rust website
 <https://www.rust-lang.org/tools/install>`_ for other installation methods.
@@ -73,11 +84,21 @@ running:
 
 .. code-block:: text
 
-  cargo install --locked rotonda
+  cargo install rotonda --locked --git https://github.com/nlnetlabs/rotonda.git
 
 The command will build Rotonda and install it in the same directory that
 Cargo itself lives in, likely ``$HOME/.cargo/bin``. This means Rotonda
 will be in your path, too.
+
+In the output of the `cargo install` command you'll see, a `warning` that
+looks like this:
+
+.. code-block:: text
+  warning: rotonda@0.1.0-dev: Directory '/etc' can be found in "/home/rotonda/.cargo/git/checkouts/rotonda-54306a42d783f077/8e4d152
+
+Please store the path that is mentioned in there somewhere (clipboard, a file,
+etc.). You'll need it if you want to use default and/or example configurations
+and filters for Rotonda.
 
 Updating
 """"""""
