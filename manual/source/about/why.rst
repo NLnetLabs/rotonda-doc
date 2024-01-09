@@ -82,10 +82,12 @@ one or both of the "Keeping state" or "Speaking BGP" features, hence the word
 Route Server
 ------------
 
-A Route Server (as mentioned in :RFC:`7947`) would be a clear-cut example of a BGP
-function. A Route Server requires the "Speaking BGP" feature of the BGP protocol
-and the BGP state machine, but it does not require the best-path selection
-mechanism, at least not in the form mentioned in :RFC:`4271` and its updates.
+A Route Server (as mentioned in :RFC:`7947`) would be a example of a BGP
+function. A Route Server requires the "Speaking BGP" feature of the BGP
+protocol and the BGP state machine. It does require some kind of best-path
+selection mechanism, but it deviate considerably∑ from the mechanism specified
+in :RFC:`4271` and its updates. See for example `here
+<https://github.com/FRRouting/frr/blob/master/doc/user/routeserver.rst>`_.
 
 Route Reflector
 ---------------
