@@ -145,6 +145,7 @@ You are now ready to start Rotonda by issuing:
 You should see output like this:
 
 .. code:: console
+
     Loading new Roto script etc/bmp-in-filter.roto
     Loading new Roto script etc/rib-in-post-filter.roto
     Loading new Roto script etc/rib-in-pre-filter.roto
@@ -237,4 +238,5 @@ You should get new log output like this in the console that is running your Roto
     All components are ready.
     All components are running.
 
-If you now refresh your browser tab that showed the pipeline graph, you'll see that our new `my-rib` was added!
+If you now refresh your browser tab that showed the pipeline graph, you'll see
+that our new `my-rib` was added!
