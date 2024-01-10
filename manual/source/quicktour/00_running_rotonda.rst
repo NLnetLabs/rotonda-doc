@@ -1,12 +1,13 @@
 For this quick tour we assume that you have installed Rotonda by using one of
-the methods described in the <<GETTTING STARTED>> chapter. We’re only going to
-invoke the binary it installed directly in this quick tour. Most probably you
-can just invoke the binary without further ado, as ``rotonda`` on the command
-line. If that does not work you might have to restart your shell (to add the
-path to your default paths), or as a last resort figure the full path to the
-binary, and use that.
+the methods described in the :doc:`Getting Started </installation>` section.
+We’re only going to invoke the binary it installed directly in this quick
+tour. Most probably you can just invoke the binary without further ado, as
+``rotonda`` on the command line. If that does not work you might have to
+restart your shell (to add the path to your default paths), or as a last
+resort figure the full path to the binary, and use that.
 
-It probably helps if you’ve read the <<gentle introduction>>, but you can also
+It probably helps if you’ve read the :doc:`Why does this exist? </about/why>`
+section and/or :doc:`Overview </about/overview>` section, but you can also
 learn on the job by following this tour, especially if you’re a bit familiar
 with how a BGP speaker operates.
 
@@ -15,12 +16,12 @@ Run it
 
 So, let’s invoke the binary directly. By default the binary will run as daemon
 in the foreground, i.e. it will not exit unless you explicit kill by sending a
-KILLSIG signal, normally invoked by issuing a CLTR-C in the shell instance
+KILLSIG signal, normally invoked by issuing a ``ctrl-C`` in the shell instance
 that is running it. Let’s try:
 
 .. code-block:: text
 
-	rotonda
+	$ rotonda
 
 Hopefully you’ll see output like this:
 
@@ -62,12 +63,12 @@ product” release. It creates a pipeline that can ingress data from BMP and BGP
 sources, has two RIBs and a few filters.
 
 Before we go into details about that, let’s go over the output to STDOUT a
-bit. The first few lines that mention ``Roto`` are messages about filters that
-are being loaded in various places in the Rotonda pipeline. The line following
-that is a HTTP web server that is started to host requests from the users
-issued to any of the RIBs. Then there is a line about a target ‘null’ being
-started, that’s the endpoint of the pipeline, in this case it’s basically send
-to ``/dev/null``. 
+bit. The first few lines that mention :doc:`Roto </roto/introduction>` are
+messages about filters that are being loaded in various places in the Rotonda
+pipeline. The line following that is a HTTP web server that is started to host
+requests from the users issued to any of the RIBs. Then there is a line about
+a target ‘null’ being started, that’s the endpoint of the pipeline, in this
+case it’s basically send to ``/dev/null``. 
 
 Then a few lines about the units that are being started. Units are the parts
 that together form the pipeline. They look innocuous 
@@ -88,9 +89,9 @@ interfaces, not very exciting. We can however inspect some of its internal
 state. If you let the shell with Rotonda running, open another shell and issue
 this command:
 
-.. code:: text
+.. code:: console
 
-  curl http://localhost:8080/status
+  $ curl http://localhost:8080/status
 
 
 (Or open the URL in a browser; also make sure to **not** add a trailing slash)
@@ -100,7 +101,7 @@ Again, not super exciting, butß at least we are seeing the confirmation that
 it is running and waiting.
 
 Now let’s query another endpoint, preferably in a browser (since it outputs
-html): ``http://localhost:8080/bmp-routers/``.
+html): `<http://localhost:8080/bmp-routers/>`_.
 
 Hopefully, you’ll see something like this, but formatted differently, an empty
 table:
@@ -128,18 +129,19 @@ Mocking some Ingress Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have two ingress connectors up and running, a BGP and a BMP one, so you
-could setup a BGP session with a routing daemon that speaks BGP, like <<Bird>>
-or <<FRR>>, or even a session with a hardware BGP router. Likewise, you could
-set up a BMP session with one of these (although BMP support is limited at
-this point in time, still). If this is what you want you should read the
-<<configuration>> chapter of this manual and you should be able to set that
-up. 
+could setup a BGP session with a routing daemon that speaks BGP, like `BIRD
+<https://bird.network.cz/>`_ or `FRR <https://frrouting.org/>`_, or even a
+session with a hardware BGP router. Likewise, you could set up a BMP session
+with one of these (although BMP support is limited at this point in time,
+still). If this is what you want you should read the :doc:`Configuration
+</config/introduction>` chapter of this manual and you should be able to set
+that up. 
 
 To make things more snappy for our quick tour, we are going to use a tool that
 we have created, called ``bmp-speaker``. It can be installed with ``cargo``,
 the same tool that installed Rotonda for you:
 
-.. code:: text
+.. code:: console
 
 	$ cargo install routes --bin bmp-speaker --version 0.1.0-dev --git https://github.com/NLnetLabs/routes
 
@@ -147,7 +149,7 @@ When you’ve successfully installed it, we can try inserting routes into it.
 Now, start a new shell and start the ``bmp-speaker`` tool. It will present you
 a command line:
 
-.. code:: text
+.. code:: console
 
 	$ bmp-speaker --server localhost
 
@@ -166,7 +168,7 @@ now have two processes running in two shells, one runs Rotonda, and one runs
 ``bmp-speaker``. The latter produced two routes and send those in a BMP
 session to Rotonda. Let’s see if we can find that in Rotonda. 
 
-In a browser you can now navigate to ``http://localhost:8080/bmp-routers/``,
+In a browser you can now navigate to `<http://localhost:8080/bmp-routers/>`_,
 and now you’ll see one entry in the table:
 
 .. raw:: html
@@ -234,8 +236,8 @@ Rotonda creates a special HTTP endpoint that outputs JSON for every RIB that
 it has created. By default, the HTTP server is running on ``localhost:8080``,
 and the RIB endpoints live directly in the root of the URL path under their
 name. As said, by default Rotonda creates two RIBS, so there is one endpoint
-``http://localhost:8080/rib-in-pre`` and one endpoint
-``https://localhost:8080/rib-in-post``. When requested like this they will
+`<http://localhost:8080/rib-in-pre>`_ and one endpoint
+`<https://localhost:8080/rib-in-post>`_. When requested like this they will
 return nothing but an error. You should create a query, by issuing a prefix
 that you want to query for, and, optionally you can include less and/or more
 specific prefixes.
@@ -246,9 +248,9 @@ don't have ``jq``, just leave out the ``| jq .`` part. ``jq`` is only used
 here to format the JSON output, there's no filtering or transformation going
 on.
 
-.. code:: text
+.. code:: console
 
-	curl -s http://localhost:8080/rib-in-post/192.0.2.0/25 | jq .
+	$ curl -s http://localhost:8080/rib-in-post/192.0.2.0/25 | jq .
 
 You should now see output like this:
 
@@ -305,7 +307,7 @@ Let's try another query:
 
 .. code:: console
 
-	curl -s http://localhost:8080/rib-in-post/192.0.2.0/24?include=moreSpecifics | jq .
+	$ curl -s http://localhost:8080/rib-in-post/192.0.2.0/24?include=moreSpecifics | jq .
 	
 .. code:: json
 
@@ -402,7 +404,7 @@ And yes, you guessed it, there's also a query parameter argument
 
 .. code:: console
 
-	curl -s http://localhost:8080/rib-in-post/192.0.2.1/32?include=lessSpecifics | jq .
+	$ curl -s http://localhost:8080/rib-in-post/192.0.2.1/32?include=lessSpecifics | jq .
 
 .. code:: json
 
@@ -452,7 +454,7 @@ And yes, you guessed it, there's also a query parameter argument
 	}
 	
 More details on the HTTP server and its endpoints for each RIB can be found in
-the chapter about <<RIB unit>>.
+the section about the :doc:`RIB unit </units/rib>`.
 
 Using a Configuration file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -579,24 +581,25 @@ called ``rib-in-pre``.
 Explaining our Filter
 ~~~~~~~~~~~~~~~~~~~~~
 
-So what does this script do? First of all, in the ``define`` section, we defined
-the incoming *type* of our payload. For filters to be able to meaningfully
-create a filtering decision it needs to know how the contents of the payload
-can be parsed and this is exactly what specifying the type does. `Roto` has
-built-in types, primitive ones, like various integer types, a string type and
-so on, more complex built-in ones especially for BGP/BMP purposes, like
-``BgpMessage``, ``Route``. Finally, roto users can create their own types, based
-on a `Record` or a `List`. In our `define` section the keyword ``rx`` stands for
-the incoming payload ("receive"), we assign a variable called ``route`` to it,
-and its type is ``Route``. ``Route`` is a built-in Roto type, that resembles a
-Record. This is the roto type that Rotonda extracts from a BGP message, and is
-modeled after the way :RFC:`4271` uses the term. It contains a prefix, the
-path attributes and some meta-data that were found in a BGP UPDATE message. So
-a BGP UPDATE may get transformed into multiple routes, since a BGP UPDATE
-message can contain more than one prefix in its NLRI(s). You can read more
-about the roto ``Route`` type <<here>>. Suffices to say for now, that we can use
-the payload-as-a-route to make filtering decisions with, and that's exactly
-what we do in the rest of our roto script.
+So what does this script do? First of all, in the ``define`` section, we
+defined the incoming *type* of our payload. For filters to be able to
+meaningfully create a filtering decision it needs to know how the contents of
+the payload can be parsed and this is exactly what specifying the type does.
+`Roto` has built-in types, primitive ones, like various integer types, a
+string type and so on, more complex built-in ones especially for BGP/BMP
+purposes, like ``BgpMessage``, ``Route``. Finally, roto users can create their
+own types, based on a `Record` or a `List`. In our `define` section the
+keyword ``rx`` stands for the incoming payload ("receive"), we assign a
+variable called ``route`` to it, and its type is ``Route``. ``Route`` is a
+built-in Roto type, that resembles a Record. This is the roto type that
+Rotonda extracts from a BGP message, and is modeled after the way :RFC:`4271`
+uses the term. It contains a prefix, the path attributes and some meta-data
+that were found in a BGP UPDATE message. So a BGP UPDATE may get transformed
+into multiple routes, since a BGP UPDATE message can contain more than one
+prefix in its NLRI(s). You can read more about the roto ``Route`` type
+:doc:`here </roto/types>`. Suffices to say for now, that we can use the
+payload-as-a-route to make filtering decisions with, and that's exactly what
+we do in the rest of our roto script.
 
 We have one ``term`` section in our script called `my-asn`, and it contains one
 match rule, that features our ``route`` variable, that has as its value our
@@ -657,7 +660,7 @@ Trying the modified Filter
 If you now restart the ``bmp-speaker`` tool that we used earlier, we can try
 to send a few BMP messages and then see if our filter functions.
 
-.. code:: shell-session
+.. code:: console
 
 	$ bmp-speaker --server localhost
 	> initiation my-bmp-router "Mock BMP monitored router"
