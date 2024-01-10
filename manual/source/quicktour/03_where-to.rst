@@ -6,7 +6,11 @@ We've showed you how to run Rotonda with some mock data, do some configuration
 and create and modify a roto script.
 
 You may want to run Rotonda, while inserting real BGP/BMP data, read about
-`Connectors` here, to set up a BGP or BMP session.
+`connector` units :doc:`here </units/connector>`, to set up a BGP or BMP
+session.
 
-You can read more about the roto language here. Finally you could read about
-the details of the various units :ref:`here <units:introduction>`.
+When you've got one or more connectors working, you probably want to change
+one or more Roto filters. Read more about it :doc:`here </roto/introduction>`.
+
+Finally you could read about
+the details of the various units :doc:`here </units/introduction>`.
