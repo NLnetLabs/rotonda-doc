@@ -9,4 +9,4 @@ You may want to run Rotonda, while inserting real BGP/BMP data, read about
 `Connectors` here, to set up a BGP or BMP session.
 
 You can read more about the roto language here. Finally you could read about
-the details of RIB units here.
+the details of the various units :ref:`here <units:introduction>`.
