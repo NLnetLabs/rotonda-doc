@@ -54,6 +54,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx_tabs.tabs',
     'sphinx_copybutton',
+    'sphinxcontrib.jquery',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
     'notfound.extension'
