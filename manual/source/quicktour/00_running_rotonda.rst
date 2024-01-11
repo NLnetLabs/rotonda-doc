@@ -16,7 +16,7 @@ Run it
 
 So, let’s invoke the binary directly. By default the binary will run as daemon
 in the foreground, i.e. it will not exit unless you explicit kill by sending a
-KILLSIG signal, normally invoked by issuing a ``ctrl-C`` in the shell instance
+SIGINT signal, normally invoked by issuing a ``ctrl-C`` in the shell instance
 that is running it. Let’s try:
 
 .. code-block:: text
@@ -71,14 +71,14 @@ a target ‘null’ being started, that’s the endpoint of the pipeline, in thi
 case it’s basically send to ``/dev/null``. 
 
 Then a few lines about the units that are being started. Units are the parts
-that together form the pipeline. They look innocuous 
+that together form the pipeline. They look innocuous.
 
-Then followed by two lines, one for each ingress connector unit, one for BGP
-(``bgp-in``), and one for BMP ingress (``bmp-tcp-in``). Lastly, a confirmation
+Then following two lines for the ingress connector units, one for BGP
+(``bgp-in``), and one for BMP ingress (``bmp-in``). Lastly, a confirmation
 that everything’s ready and that everything’s successfully started.
 
 TODO TODO lines about components. Should we have components mentioned here?
-implementation details, I guess. TODO TODO reconcile ``bmp-tcp-in`` and
+implementation details, I guess. TODO TODO reconcile ``bmp-in`` and
 ``bgp-in``
 
 Querying the Instance
@@ -97,7 +97,7 @@ this command:
 (Or open the URL in a browser; also make sure to **not** add a trailing slash)
 
 Then you'll see a list of variables names with zeroes and minus ones as values.
-Again, not super exciting, butß at least we are seeing the confirmation that
+Again, not super exciting, but at least we are seeing the confirmation that
 it is running and waiting.
 
 Now let’s query another endpoint, preferably in a browser (since it outputs
@@ -131,11 +131,10 @@ Mocking some Ingress Data
 We have two ingress connectors up and running, a BGP and a BMP one, so you
 could setup a BGP session with a routing daemon that speaks BGP, like `BIRD
 <https://bird.network.cz/>`_ or `FRR <https://frrouting.org/>`_, or even a
-session with a hardware BGP router. Likewise, you could set up a BMP session
-with one of these (although BMP support is limited at this point in time,
-still). If this is what you want you should read the :doc:`Configuration
-</config/introduction>` chapter of this manual and you should be able to set
-that up. 
+session with a hardware BGP router. Likewise, you could configure a BMP stream
+from one of these. If this is what you want you should read the
+:doc:`Configuration </config/introduction>` chapter of this manual and you
+should be able to set that up. 
 
 To make things more snappy for our quick tour, we are going to use a tool that
 we have created, called ``bmp-speaker``. It can be installed with ``cargo``,
@@ -146,14 +145,15 @@ the same tool that installed Rotonda for you:
 	$ cargo install routes --bin bmp-speaker --version 0.1.0-dev --git https://github.com/NLnetLabs/routes
 
 When you’ve successfully installed it, we can try inserting routes into it.
-Now, start a new shell and start the ``bmp-speaker`` tool. It will present you
-a command line:
+Now, start a new shell and start the ``bmp-speaker`` tool. We connect to our
+running Rotonda instance:
 
 .. code:: console
 
 	$ bmp-speaker --server localhost
 
-You’ll be presented with a prompt, waiting for your input. Now, let’s input some of those:
+You’ll be presented with a prompt, waiting for your input. Now, let’s input some
+of those:
 
 .. code:: shell-session
 
@@ -165,7 +165,7 @@ You’ll be presented with a prompt, waiting for your input. Now, let’s input 
 
 If all’s well, you should not have gotten any errors, just a new prompt. We
 now have two processes running in two shells, one runs Rotonda, and one runs
-``bmp-speaker``. The latter produced two routes and send those in a BMP
+``bmp-speaker``. The latter produced two routes and sent those in a BMP
 session to Rotonda. Let’s see if we can find that in Rotonda. 
 
 In a browser you can now navigate to `<http://localhost:8080/bmp-routers/>`_,
@@ -219,12 +219,12 @@ expand into this:
 
 	<pre style="font-size:0.8em;width:600px;">
 	Announced prefixes:
-		        192.0.2.128/25: <a href="/rib-in-post/192.0.2.128/25">rib-in-post</a> <a href="/rib-in-pre/192.0.2.128/25">rib-in-pre</a> 
-		        192.0.2.0/25: <a href="/rib-in-post/192.0.2.0/25">rib-in-post</a> <a href="/rib-in-pre/192.0.2.0/25">rib-in-pre</a>
+		        192.0.2.128/25: rib-in-post rib-in-pre
+		        192.0.2.0/25: rib-in-post rib-in-pre
 	</pre>
 
 The links called ``rib-in-pre`` and ``rib-in-post`` are the two RIBs that
-Rotonda configured by default. If you click one of them, you will taken to yet
+Rotonda configured by default. If you click one of them, you will be taken to yet
 again a new page filled with JSON, and the URL will have the name of the RIB
 and the prefix in it. You've now hit one of the RIB query endpoints in
 Rotonda.
@@ -242,7 +242,7 @@ return nothing but an error. You should create a query, by issuing a prefix
 that you want to query for, and, optionally you can include less and/or more
 specific prefixes.
 
-Since these are JSON endpoints, let's use ``curl`` to query them, if you have
+Since these are JSON endpoints, let's use ``curl`` to query them. If you have
 ``jq`` installed, you can pipe the output of curl into it. Do not worry if you
 don't have ``jq``, just leave out the ``| jq .`` part. ``jq`` is only used
 here to format the JSON output, there's no filtering or transformation going
@@ -301,7 +301,7 @@ You should now see output like this:
 	
 In the ``data`` object of this JSON output you'll see one of the routes that
 was transmitted by our ``bmp-speaker`` to Rotonda, with the BGP path
-attributes that we're set, and some metadata, such as the ``router_id`` field.
+attributes that we set, and some metadata, such as the ``router_id`` field.
 
 Let's try another query:
 
@@ -474,26 +474,26 @@ RIBs.
 First, we are going to interrupt the current Rotonda, and after that we are
 going to start a new Rotonda with a correct `etc/` path. Let's start.
 
-Rotonda can only be canceled by sending a SIGKILL to the rotonda process. This
-can be done by pressing `ctr-c` in the terminal where you started the Rotonda
-process, or you can send a SIGKILL signal to the process with the `kill` or
-`killal` command.
+Rotonda can be stopped by sending a SIGINT to the Rotonda process. This
+can be done by pressing `ctrl-c` in the terminal where you started the Rotonda
+process, or you can send a SIGINT signal to the process via either
+`kill -INT $(pidof rotonda)` or `killall -INT rotonda`.
 
 Now we have to go to a working directory where we have a `etc/` directory. The
 Rotonda source code repository contains this directory with `.roto` filter
 files. It also has a `rotonda.conf` file. This configuration file contains the
-same configuration as the default rotonda setup.
+same configuration as the default Rotonda setup.
 
 So, if you have installed from source by using `cargo build` you can navigate
-to the root of the `rotonda` repository by `cd`ing into it and then just
-restart `rotonda` from there.
+to the root of the `rotonda` repository by `cd`-ing into it and then just
+start `rotonda` from there.
 
 If you have installed a package, e.g. a `.deb`, or `.rpm`, then a
-`/etc/rotonda` directory was created. If you go to the root of your filesystem
-than you can start Rotonda from there and then Rotonda will look for the
-directory `/etc/rotonda/` and load all `.roto` files it can find in there.
+`/etc/rotonda` directory was created. If you go to the root of your filesystem,
+you can start Rotonda from there, and it will look for the directory
+`/etc/rotonda/` and load all `.roto` files it can find in there.
 
-After you have started rotonda with one of these methods the first lines in
+After you have started Rotonda with one of these methods the first lines in
 the log output should start with four `INFO` level lines, with a confirmation
 for each roto filter file. If you see this `WARN` message:
 
@@ -501,13 +501,13 @@ for each roto filter file. If you see this `WARN` message:
 
 	[2023-12-11 11:45:30] WARN  Roto filters 'bgp-in-filter','rib-in-pre-filter', 'bmp-in-filter', 'rib-in-post-filter' are referenced by your configuration but do not exist because no .roto scripts could be loaded from the configured `roto_scripts_path` directory 'etc/'. These filters will be ignored.
 
-...then our strategy failed, and we still don't have any filters. A method of
+... then our strategy failed, and we still don't have any filters. A method of
 last resort would be to download the `/etc` directory from the source code
 repository from `github.com
 <https://github.com/NLnetLabs/rotonda/tree/main/etc>`_. Make sure you put the
 files in a directory called `etc/` and copy all the files there. You can now
-start rotonda, by `cd`ing into the parent of the `etc/` you created and then
-start rotonda with:
+start Rotonda, by `cd`-ing into the parent of the `etc/` you created and then
+start Rotonda with:
 
 .. code:: console
 
@@ -523,7 +523,7 @@ filter.
 Modifying a Filter
 ~~~~~~~~~~~~~~~~~~
 
-If you're not in the ``/etc`` directory, please `cd` into it. If you
+If you're not in the ``/etc`` directory, `cd` into it. If you
 look at the content of that directory, you'll notice a bunch of files of type
 ``.roto``, these are the files containing the filters. Open the file called
 ``rib-in-pre-filter.roto`` with your favourite text editor. It should look
@@ -585,23 +585,24 @@ So what does this script do? First of all, in the ``define`` section, we
 defined the incoming *type* of our payload. For filters to be able to
 meaningfully create a filtering decision it needs to know how the contents of
 the payload can be parsed and this is exactly what specifying the type does.
-`Roto` has built-in types, primitive ones, like various integer types, a
-string type and so on, more complex built-in ones especially for BGP/BMP
-purposes, like ``BgpMessage``, ``Route``. Finally, roto users can create their
+`Roto` has built-in types: Primitive ones, like various integer types, a
+string type and so on, and more complex ones especially for BGP/BMP
+purposes, like ``BgpMessage`` and ``Route``. Finally, roto users can create their
 own types, based on a `Record` or a `List`. In our `define` section the
-keyword ``rx`` stands for the incoming payload ("receive"), we assign a
-variable called ``route`` to it, and its type is ``Route``. ``Route`` is a
+keyword ``rx`` stands for the incoming payload ("receive"). We assign it to a
+variable called ``route``, of type ``Route``. ``Route`` is a
 built-in Roto type, that resembles a Record. This is the roto type that
-Rotonda extracts from a BGP message, and is modeled after the way :RFC:`4271`
-uses the term. It contains a prefix, the path attributes and some meta-data
-that were found in a BGP UPDATE message. So a BGP UPDATE may get transformed
+Rotonda extracts from a BGP UPDATE message (or a BGP UPDATE message carried in a
+BMP RouteMonitoring message), and is modeled after the way :RFC:`4271` uses the
+term. It contains a prefix, the path attributes and some meta-data that were
+found in a BGP UPDATE message. So a single BGP UPDATE may get transformed
 into multiple routes, since a BGP UPDATE message can contain more than one
-prefix in its NLRI(s). You can read more about the roto ``Route`` type
+prefix in its NLRI. You can read more about the roto ``Route`` type
 :doc:`here </roto/types>`. Suffices to say for now, that we can use the
 payload-as-a-route to make filtering decisions with, and that's exactly what
 we do in the rest of our roto script.
 
-We have one ``term`` section in our script called `my-asn`, and it contains one
+We have one ``term`` section in our script called `my-asn`. It contains one
 match rule, that features our ``route`` variable, that has as its value our
 incoming payload. With the expression ``route.as-path.origin() == AS64512`` we
 create a comparison with the value returned from a method that is being called
@@ -612,11 +613,11 @@ true``.
 In the `apply` section - a roto script can only have one ``apply`` section -
 `term` sections are bound to a filtering decision by means of one or more
 `filter` expressions. In our script we only have one ``filter`` expression. It
-states that the mentioned ``term`` should return ``true``, by means of the `match`
-statement. Then, inside that ``filter`` block The `return reject;` statement is
+states that the mentioned ``term`` should `match`, meaning it should return
+``true``. Then, inside that ``filter`` block, the `return reject;` statement is
 an early return from the whole script. The `accept` statement in the last line
 of the `apply` section is the fall-through return value from the script if
-nothing above it in the section is validated. So our ``filter`` expression says:
+nothing above it in the section matched. So our ``filter`` expression says:
 "if the ``my-asn`` term returns ``true``, then return ``reject`` from our script. In
 all other cases return ``accept``".
 
@@ -636,7 +637,7 @@ still have to activate the filter. We can do this by sending Rotonda the
 
 	$ killall -HUP rotonda
 
-in a shell. In the log output you should see the confirmation of rotonda
+in a shell. In the log output you should see the confirmation of Rotonda
 reloading the changed script:
 
 .. code:: text
@@ -649,8 +650,7 @@ reloading the changed script:
 	[2023-12-11 13:34:42] INFO  Done reloading roto scripts
 
 In the first line we see the confirmation that Rotonda received our signal,
-and in the fourth line, we see that confirmation that it is reloading our
-script.
+and in the fourth line, we see confirmation that it is reloading our script.
 
 .. Tip:: If you don't see any new logging information, then maybe your process is not precisely called rotonda. You can try `pgrep rotonda | xargs kill` and see if that works.
 
