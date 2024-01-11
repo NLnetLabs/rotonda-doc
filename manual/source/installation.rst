@@ -51,7 +51,7 @@ official version of `Rotonda` is released.
 
        .. code-block:: bash
 
-         apt install curl build-essential gcc make
+         apt install curl
 
        Add the GPG key from NLnet Labs:
 
