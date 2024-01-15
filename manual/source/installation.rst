@@ -16,14 +16,17 @@ gigabytes.
 Binary Packages
 ---------------
 
-There is no packaged, versioned release of `Rotonda` yet, so right now the
-only viable way to install Rotonda is by building from source, from the `main`
-branch on `github`, using the `Cargo`, Rust's build system and package
-manager. Cargo lets you run Rotonda on almost any operating system and CPU
-architecture. Refer to the :doc:`building` section to get started.
+There is no offically released version Rotonda yet, there is a release
+candidate ("rc"), though. You can install that by following the instructions
+under `Installing Specific Versions`_.
+
+You can also build Rotonda from the source code using Cargo, Rust's build
+system and package manager. Cargo lets you to run Rotonda on almost any
+operating system and CPU architecture. Refer to the :doc:`building` section to
+get started.
 
 The installation instructions below here, will be applicable once the first
-official version of `Rotonda` is released.
+official version of Rotonda is released.
 
 .. tabs::
 
@@ -38,32 +41,33 @@ official version of `Rotonda` is released.
          -  Debian Stretch 9
 
        Packages for the ``amd64``/``x86_64`` architecture are available for
-       all listed versions. In addition, we offer ``armhf`` architecture
-       packages for Debian/Raspbian Bullseye, and ``arm64`` for Buster.
+       all listed versions. In addition, we offer ``armhf``/``armv7``
+       architecture packages for Debian/Raspbian Bullseye, and
+       ``arm64``/``aarch64`` for Buster and Bookworm.
        
        First update the :program:`apt` package index: 
 
        .. code-block:: bash
 
-          sudo apt update
+         $ sudo apt update
 
        Then install packages to allow :program:`apt` to use a repository over HTTPS:
 
        .. code-block:: bash
 
-         apt install curl
+         $ sudo apt install curl gpg
 
        Add the GPG key from NLnet Labs:
 
        .. code-block:: bash
 
-         curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
+         $ curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
 
        Now, use the following command to set up the *main* repository:
 
        .. code-block:: bash
 
-          echo \
+          $ echo \
           "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/nlnetlabs-archive-keyring.gpg] https://packages.nlnetlabs.nl/linux/debian \
           $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/nlnetlabs.list > /dev/null
 
@@ -71,13 +75,13 @@ official version of `Rotonda` is released.
 
        .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
 
        You can now install Rotonda with:
 
        .. code-block:: bash
 
-          sudo apt install rotonda
+          $ sudo apt install rotonda
 
        After installation Rotonda will run immediately as the user
        *rotonda* and be configured to start at boot. 
@@ -86,13 +90,13 @@ official version of `Rotonda` is released.
        
        .. code-block:: bash 
        
-          sudo systemctl status rotonda
+          $ sudo systemctl status rotonda
        
        You can view the logs with: 
        
        .. code-block:: bash
        
-          sudo journalctl --unit=rotonda
+          $ sudo journalctl --unit=rotonda
 
    .. group-tab:: Ubuntu
 
@@ -110,13 +114,13 @@ official version of `Rotonda` is released.
 
        .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
 
        Then install packages to allow :program:`apt` to use a repository over HTTPS:
 
        .. code-block:: bash
 
-          sudo apt install \
+          $ sudo apt install \
             ca-certificates \
             curl \
             gnupg \
@@ -126,13 +130,13 @@ official version of `Rotonda` is released.
 
        .. code-block:: bash
 
-          curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
+          $ curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
 
        Now, use the following command to set up the *main* repository:
 
        .. code-block:: bash
 
-          echo \
+          $ echo \
           "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/nlnetlabs-archive-keyring.gpg] https://packages.nlnetlabs.nl/linux/ubuntu \
           $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/nlnetlabs.list > /dev/null
 
@@ -140,13 +144,13 @@ official version of `Rotonda` is released.
 
        .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
 
        You can now install Rotonda with:
 
        .. code-block:: bash
 
-          sudo apt install rotonda
+          $ sudo apt install rotonda
 
        After installation Rotonda will run immediately as the user
        *rotonda* and be configured to start at boot.
@@ -155,13 +159,13 @@ official version of `Rotonda` is released.
        
        .. code-block:: bash 
        
-          sudo systemctl status rotonda
+          $ sudo systemctl status rotonda
        
        You can view the logs with: 
        
        .. code-block:: bash
        
-          sudo journalctl --unit=rotonda
+          $ sudo journalctl --unit=rotonda
 
    .. group-tab:: RHEL/CentOS
 
@@ -183,13 +187,13 @@ official version of `Rotonda` is released.
        
        .. code-block:: bash
        
-          sudo rpm --import https://packages.nlnetlabs.nl/aptkey.asc
+          $ sudo rpm --import https://packages.nlnetlabs.nl/aptkey.asc
        
        You can now install Rotonda with:
 
        .. code-block:: bash
 
-          sudo yum install -y rotonda
+          $ sudo yum install -y rotonda
 
        After installation Rotonda will run immediately as the user
        *rotonda* and be configured to start at boot. 
@@ -198,13 +202,13 @@ official version of `Rotonda` is released.
        
        .. code-block:: bash 
        
-          sudo systemctl status rotonda
+          $ sudo systemctl status rotonda
        
        You can view the logs with: 
        
        .. code-block:: bash
        
-          sudo journalctl --unit=rotonda
+          $ sudo journalctl --unit=rotonda
        
    .. group-tab:: Docker
 
@@ -223,44 +227,44 @@ Updating
        To update an existing Rotonda installation, first update the 
        repository using:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
 
        You can use this command to get an overview of the available versions:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt policy rotonda
+          $ sudo apt policy rotonda
 
        You can upgrade an existing Rotonda installation to the latest
        version using:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt --only-upgrade install rotonda
+          $ sudo apt --only-upgrade install rotonda
 
    .. group-tab:: Ubuntu
 
        To update an existing Rotonda installation, first update the 
        repository using:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
 
        You can use this command to get an overview of the available versions:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt policy rotonda
+          $ sudo apt policy rotonda
 
        You can upgrade an existing Rotonda installation to the latest
        version using:
 
-       .. code-block:: text
+       .. code-block:: bash
 
-          sudo apt --only-upgrade install rotonda
+          $ sudo apt --only-upgrade install rotonda
 
    .. group-tab:: RHEL/CentOS
 
@@ -269,27 +273,27 @@ Updating
         
        .. code-block:: bash
         
-          sudo yum --showduplicates list rotonda
+          $ sudo yum --showduplicates list rotonda
           
        You can update to the latest version using:
          
        .. code-block:: bash
          
-          sudo yum update -y rotonda
+          $ sudo yum update -y rotonda
              
    .. group-tab:: Docker
 
        Assuming that you run Docker with image `nlnetlabs/rotonda`, upgrading
        to the latest version can be done by running the following commands:
         
-       .. code-block:: text
+       .. code-block:: bash
        
-          sudo docker pull nlnetlabs/rotonda
-          sudo docker rm --force rotonda
-          sudo docker run <your usual arguments> nlnetlabs/rotonda
+          $ sudo docker pull nlnetlabs/rotonda
+          $ sudo docker rm --force rotonda
+          $ sudo docker run <your usual arguments> nlnetlabs/rotonda
 
-Installing Specific Versions
-----------------------------
+_`Installing Specific Versions`
+-------------------------------
 
 Before every new release of Rotonda, one or more release candidates are 
 provided for testing through every installation method. You can also install
@@ -299,12 +303,33 @@ a specific version, if needed.
 
    .. group-tab:: Debian
 
-       If you would like to try out release candidates of Rotonda you can
-       add the *proposed* repository to the existing *main* repository
-       described earlier. 
+       If you would like to try out release candidates of Rotonda you can add
+       the *proposed* repository. This repository can live side by side wih
+       the *main* repository.
        
-       Assuming you already have followed the steps to install regular releases,
-       run this command to add the additional repository:
+       If you have already installed the *main*
+       repository you can skip the first three steps here, and go directly to
+       `Debian proposed repository`_.
+       
+       First update the :program:`apt` package index: 
+
+       .. code-block:: bash
+
+         $ sudo apt update
+
+       Then install packages to allow :program:`apt` to use a repository over HTTPS:
+
+       .. code-block:: bash
+
+         $ sudo apt install curl gpg
+
+       _`Add the GPG key` from NLnet Labs:
+
+       .. code-block:: bash
+
+          curl -fsSL https://packages.nlnetlabs.nl/aptkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/nlnetlabs-archive-keyring.gpg
+
+       Now, use the following command to set up the _`Debian proposed repository`:
 
        .. code-block:: bash
 
@@ -316,21 +341,21 @@ a specific version, if needed.
 
        .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
        
        You can now use this command to get an overview of the available 
        versions:
 
        .. code-block:: bash
 
-          sudo apt policy rotonda
+          $ sudo apt policy rotonda
 
        You can install a specific version using ``<package name>=<version>``,
        e.g.:
 
        .. code-block:: bash
 
-          sudo apt install rotonda=0.2.0~rc2-1buster
+          $ sudo apt install rotonda=0.2.0~rc2-1buster
 
    .. group-tab:: Ubuntu
 
@@ -343,7 +368,7 @@ a specific version, if needed.
 
        .. code-block:: bash
 
-          echo \
+          $ echo \
           "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/nlnetlabs-archive-keyring.gpg] https://packages.nlnetlabs.nl/linux/ubuntu \
           $(lsb_release -cs)-proposed main" | sudo tee /etc/apt/sources.list.d/nlnetlabs-proposed.list > /dev/null
 
@@ -351,21 +376,21 @@ a specific version, if needed.
 
        .. code-block:: bash
 
-          sudo apt update
+          $ sudo apt update
        
        You can now use this command to get an overview of the available 
        versions:
 
        .. code-block:: bash
 
-          sudo apt policy rotonda
+          $ sudo apt policy rotonda
 
        You can install a specific version using ``<package name>=<version>``,
        e.g.:
 
        .. code-block:: bash
 
-          sudo apt install rotonda=0.2.0~rc2-1bionic
+          $ sudo apt install rotonda=0.2.0~rc2-1bionic
           
    .. group-tab:: RHEL/CentOS
 
@@ -384,14 +409,14 @@ a specific version, if needed.
         
        .. code-block:: bash
         
-          sudo yum --showduplicates list rotonda
+          $ sudo yum --showduplicates list rotonda
           
        You can install a specific version using 
        ``<package name>-<version info>``, e.g.:
          
        .. code-block:: bash
          
-          sudo yum install -y rotonda-0.2.0~rc2
+          $ sudo yum install -y rotonda-0.2.0~rc2
              
    .. group-tab:: Docker
 
@@ -401,7 +426,7 @@ a specific version, if needed.
        
        For example, installing Rotonda 0.2.0 RC2 is as simple as:
         
-       .. code-block:: text
+       .. code-block:: bash
        
-          sudo docker run <your usual arguments> nlnetlabs/rotonda:v0.2.0-rc2
+          $ sudo docker run <your usual arguments> nlnetlabs/rotonda:v0.2.0-rc2
                
