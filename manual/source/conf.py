@@ -211,6 +211,13 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
+# -- Options for copybutton extension ----------------------------------------
+
+# Configure this so the prompt will not be copied to the clipboard. Also
+# prevents output lines (lines not starting with the prompt) to be copied.
+copybutton_prompt_text = "$"
+
+
 # -- Extension interface --------------------------------------------------
 from sphinx import addnodes
 def parse_cmd_args_node(env, sig, signode):
