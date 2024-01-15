@@ -16,7 +16,6 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import toml
 import datetime
 import sphinx_rtd_theme
 
@@ -27,12 +26,10 @@ year = datetime.datetime.now().year
 copyright = f'2020–{year}, NLnet Labs'
 author = 'NLnet Labs'
 
-semver = toml.load('../../Cargo_copy.toml')
-
-# The short X.Y version
-version = semver.get('package').get('version')
-# The full version, including alpha/beta/rc tags
-release = version
+# The full version, including alpha/beta/rc tags.
+# Note: this is not only used in the documentation text, but also in several
+# commands!
+version = "0.1.0-rc0"
 
 # -- Sphinx Tabs configuration -----------------------------------------------
 
@@ -57,6 +54,7 @@ extensions = [
     'sphinxcontrib.jquery',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
+    'sphinx_substitution_extensions',
     'notfound.extension'
 ]
 
@@ -211,14 +209,9 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-# -- Options for copybutton extension ----------------------------------------
 
-# Configure this so the prompt will not be copied to the clipboard. Also
-# prevents output lines (lines not starting with the prompt) to be copied.
-copybutton_prompt_text = "$"
+# -- Extension interface -----------------------------------------------------
 
-
-# -- Extension interface --------------------------------------------------
 from sphinx import addnodes
 def parse_cmd_args_node(env, sig, signode):
     try:
@@ -240,3 +233,12 @@ def setup(app):
     app.add_css_file('css/dark.css')
     app.add_css_file('css/light.css')
     
+# -- Options for copybutton extenstion ---------------------------------------
+
+# Configure this so the prompt will not be copied to the clipboard. Also
+# prevents output lines (lines not starting with the prompt) to be copied.
+copybutton_prompt_text = "$"
+
+# -- Options for substitution extension --------------------------------------
+
+rst_prolog = ".. |version| replace:: {version}".format(version = version)

@@ -16,7 +16,7 @@ Run it
 
 So, let’s invoke the binary directly. By default the binary will run as daemon
 in the foreground, i.e. it will not exit unless you explicit kill by sending a
-SIGINT signal, normally invoked by issuing a ``ctrl-C`` in the shell instance
+SIGINT signal, normally invoked by issuing a ``ctrl-c`` in the shell instance
 that is running it. Let’s try:
 
 .. code-block:: text
@@ -27,32 +27,32 @@ Hopefully you’ll see output like this:
 
 .. code-block:: text
 
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/filter.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/bmp-in-filter.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/rib-in-pre.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/bmp-in-post-filter.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/bgp-in-post-filter.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/rib-in-post.roto
-	[2023-10-17 11:56:39] INFO  Loading new Roto script etc/bgp-in-filter.roto
-	[2023-10-17 11:56:39] INFO  Listening for HTTP connections on 127.0.0.1:8080
-	[2023-10-17 11:56:39] INFO  Starting target 'null'
-	[2023-10-17 11:56:39] INFO  Starting unit 'bmp-tcp-in'
-	[2023-10-17 11:56:39] INFO  Starting unit 'rib-in-post'
-	[2023-10-17 11:56:39] INFO  Starting unit 'bmp-in'
-	[2023-10-17 11:56:39] INFO  Starting unit 'bmp-in-filter'
-	[2023-10-17 11:56:39] INFO  Starting unit 'bgp-in'
-	[2023-10-17 11:56:39] INFO  Starting unit 'rib-in-pre'
-	[2023-10-17 11:56:39] INFO  All components are ready.
-	[2023-10-17 11:56:39] INFO  All components are running.
-	[2023-10-17 11:56:39] INFO  bgp-in: Listening for connections on 0.0.0.0:11179
-	[2023-10-17 11:56:39] INFO  bmp-tcp-in: Listening for connections on 0.0.0.0:11019
+	Loading new Roto script etc/filters/bmp-in-filter.roto
+	Loading new Roto script etc/filters/rib-in-pre-filter.roto
+	Loading new Roto script etc/filters/rib-in-post-filter.roto
+	Loading new Roto script etc/filters/bgp-in-filter.roto
+	Listening for HTTP connections on 127.0.0.1:8080
+	Starting target 'null'
+	Starting unit 'rib-in-pre'
+	Starting unit 'bmp-in'
+	Starting unit 'bgp-in'
+	Starting unit 'rib-in-post'
+	All components are ready.
+	All components are running.
+	bmp-in: Listening for connections on 0.0.0.0:11019
+	bgp-in: Listening for connections on 0.0.0.0:11179
 
 The first few lines of logging may also read something like
 
 .. code-block:: text
 
-  [2023-12-11 09:30:53] WARN  Unable to load Roto scripts: read directory error for path /Users/jasper/Projects/rotonda/rotonda-base/target/release/etc/: No such file or directory (os error 2).
-  [2023-12-11 09:30:53] WARN  Roto filters 'rib-in-post-filter', 'bmp-in-filter', 'bgp-in-filter', 'rib-in-pre-filter' are referenced by your configuration but do not exist because no .roto scripts could be loaded from the configured `roto_scripts_path` directory 'etc/'. These filters will be ignored.
+	Unable to load Roto scripts: 
+	read directory error for path /Users/jasper/Projects/rotonda/etc/filters: 
+	No such file or directory (os error 2).
+	Roto filters 'rib-in-post-filter', 'bmp-in-filter', 'bgp-in-filter', 
+	'rib-in-pre-filter' are referenced by your configuration but do not exist
+	because no .roto scripts could be loaded from the configured
+	`roto_scripts_path` directory 'etc/filters'. These filters will be ignored.
 
 This sounds scary, but you can ignore it for now, we'll come back to it later.
 
@@ -474,19 +474,20 @@ RIBs.
 First, we are going to interrupt the current Rotonda, and after that we are
 going to start a new Rotonda with a correct `etc/` path. Let's start.
 
-Rotonda can be stopped by sending a SIGINT to the Rotonda process. This
-can be done by pressing `ctrl-c` in the terminal where you started the Rotonda
-process, or you can send a SIGINT signal to the process via either
-`kill -INT $(pidof rotonda)` or `killall -INT rotonda`.
+Rotonda can be stopped by sending a SIGINT to the Rotonda process. This can be
+done by pressing `ctrl-c` in the terminal where you started the Rotonda
+process, or you can send a SIGINT signal to the process via either ``killall
+rotonda``, or if the process isn't precisely called rotonda, you can try:
+``pgrep rotonda | xargs kill``.
 
 Now we have to go to a working directory where we have a `etc/` directory. The
 Rotonda source code repository contains this directory with `.roto` filter
-files. It also has a `rotonda.conf` file. This configuration file contains the
+files. It also has a ``rotonda.conf`` file. This configuration file contains the
 same configuration as the default Rotonda setup.
 
 So, if you have installed from source by using `cargo build` you can navigate
-to the root of the `rotonda` repository by `cd`-ing into it and then just
-start `rotonda` from there.
+to the root of the ``rotonda`` repository by `cd`-ing into it and then just
+start Rotonda from there.
 
 If you have installed a package, e.g. a `.deb`, or `.rpm`, then a
 `/etc/rotonda` directory was created. If you go to the root of your filesystem,

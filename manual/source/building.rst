@@ -28,7 +28,7 @@ privileges to install system packages:
 
 .. code-block:: text
 
-  apt install curl build-essential gcc make
+  $ sudo apt install curl build-essential gcc make
 
 If you are unsure, try to run :command:`cc` on a command line. If there is a
 complaint about missing input files, you are probably good to go.
@@ -50,11 +50,11 @@ Assuming you already have :program:`curl` installed, you can install
 
 .. code-block:: text
 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 This will install the stable rust toolchain, on a per user basis. This means
 that you probably want to install this as the same user as you will be running
-the `Rotonda` application itself. This should most probably be a non-root
+the Rotonda application itself. This should most probably be a non-root
 user, so we suggest you create a `rotonda` user, log in as that user and then
 perform the `curl` command above.
 
@@ -82,23 +82,38 @@ example also install from a specific Git URL, as explained below.
 Installing the latest Rotonda release from crates.io is as simple as
 running:
 
-.. code-block:: text
+.. code-block:: bash
+  :substitutions:
 
-  cargo install rotonda --locked --git https://github.com/nlnetlabs/rotonda.git
+  $ cargo install rotonda --version |version| --locked
 
-The command will build Rotonda and install it in the same directory that
-Cargo itself lives in, likely ``$HOME/.cargo/bin``. This means Rotonda
-will be in your path, too.
+The command will build Rotonda and install it in the same directory that Cargo
+itself lives in, likely ``$HOME/.cargo/bin``. This means Rotonda will be in
+your path, too. The version of Rotonda that was build corresponds to the
+version of this documentation you are reading. If for any reason you want to
+install another version of Rotonda, you should substitute the value after
+``--version`` with the version you want. Omitting the whole ``--version```
+option will install the latest published version on ``crates.io``.
 
-In the output of the `cargo install` command you'll see, a `warning` that
-looks like this:
+Downloading the configuration files
+"""""""""""""""""""""""""""""""""""
 
-.. code-block:: text
-  warning: rotonda@0.1.0-dev: Directory '/etc' can be found in "/home/rotonda/.cargo/git/checkouts/rotonda-54306a42d783f077/8e4d152
+Although Rotonda has a built-in configuration, and you can create a
+configuration file from scratch it's very useful to download the configuration
+files that come with Rotonda. These files are situated in the github
+repository of Rotonda. Provided you have a version of `git` higher than or
+equal to 2.25 installed, you can issue these commands to download them to a
+newly created directory, called ``rotonda`` in your current working directory:
 
-Please store the path that is mentioned in there somewhere (clipboard, a file,
-etc.). You'll need it if you want to use default and/or example configurations
-and filters for Rotonda.
+.. code-block:: bash
+  :substitutions:
+
+  $ git clone --no-checkout --depth 1 --branch v|version| https://github.com/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout v|version|
+
+Again, the version of the configuration files installed here matches with the
+Rotonda version you just installed, and this documentation. If you've
+installed another Rotonda version, you should also substitute the two version
+values with the version you used when installing Rotonda.
 
 Updating
 """"""""
@@ -106,27 +121,19 @@ Updating
 If you want to update to the latest version of Rotonda, it’s recommended
 to update Rust itself as well, using:
 
-.. code-block:: text
+.. code-block:: bash
 
-    rustup update
+  $ rustup update
 
 Use the ``--force`` option to overwrite an existing version with the latest
 Rotonda release:
 
 .. code-block:: text
 
-    cargo install --locked --force rotonda
+  $ cargo install --locked --force rotonda
 
-Installing Specific Versions
-""""""""""""""""""""""""""""
-
-If you want to install a specific version of
-Rotonda using Cargo, explicitly use the ``--version`` option. If needed,
-use the ``--force`` option to overwrite an existing version:
-        
-.. code-block:: text
-
-    cargo install --locked --force rotonda --version 0.2.0-rc2
+Installing Rotonda from the main branch
+"""""""""""""""""""""""""""""""""""""""
 
 All new features of Rotonda are built on a branch and merged via a `pull
 request <https://github.com/NLnetLabs/rotonda/pulls>`_, allowing you to
@@ -135,8 +142,14 @@ the repository you can use the ``--git`` and ``--branch`` options:
 
 .. code-block:: text
 
-    cargo install --git https://github.com/NLnetLabs/rotonda.git --branch main
-    
+  $ cargo install --git https://github.com/NLnetLabs/rotonda.git --branch main
+
+Note that you will also have to download the correct configuration files with:
+
+.. code-block:: bash
+
+  $ git clone --no-checkout --depth 1 --branch main https://github.com/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout main
+
 .. Seealso:: For more installation options refer to the `Cargo book
              <https://doc.rust-lang.org/cargo/commands/cargo-install.html#install-options>`_.
 
@@ -164,4 +177,4 @@ Rust can be installed on OpenBSD by running:
 
 .. code-block:: bash
 
-   pkg_add rust
+  $ pkg_add rust
