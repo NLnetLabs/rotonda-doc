@@ -5,17 +5,18 @@ Rotonda |version|
    
    For more information see the `ROADMAP <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__ on Github
 
-Roll your own BGP applications with programmable RIBs and Filters.
+Rotonda, the composable BGP engine
+----------------------------------
 
-BGP applications that you can build with Rotonda include, but are not limited
-to, a route monitor|collector|server|reflector. All this without modifying a
-single line in the source code of Rotonda. Rotonda is and always will be free,
-open-source software.
+Rotonda enables you to build BGP applications such as route monitors, route
+collectors, route servers, route reflectors, or any variation or combination
+thereof. All this without modifying a single line of source code. Rotonda is and
+always will be free, open-source software.
 
 Below is a brief overview of the key concepts and characteristics of Rotonda. If
-you want to try it out right away, consider reading the :doc:`Quick
+you want to try it out right away, consider following the :doc:`Quick
 Tour<quicktour/00_running_rotonda>`, or jump directly to the :doc:`Installation
-instructions<installation>`.
+Instructions<installation>`.
 
 
 .. DANGER:: ROTONDA IS CURRENTLY IN ALPHA, DO NOT USE IN PRODUCTION
