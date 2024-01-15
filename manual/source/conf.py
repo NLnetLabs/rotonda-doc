@@ -76,7 +76,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -209,7 +209,9 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
+
 # -- Extension interface -----------------------------------------------------
+
 from sphinx import addnodes
 def parse_cmd_args_node(env, sig, signode):
     try:
@@ -233,6 +235,8 @@ def setup(app):
     
 # -- Options for copybutton extenstion ---------------------------------------
 
+# Configure this so the prompt will not be copied to the clipboard. Also
+# prevents output lines (lines not starting with the prompt) to be copied.
 copybutton_prompt_text = "$"
 
 # -- Options for substitution extension --------------------------------------

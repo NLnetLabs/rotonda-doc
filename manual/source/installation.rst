@@ -16,17 +16,19 @@ gigabytes.
 Binary Packages
 ---------------
 
-There is no offically released version Rotonda yet, there is a release
-candidate ("rc"), though. You can install that by following the instructions
-under `Installing Specific Versions`_.
+.. note::
+    There is no officially released version of Rotonda yet, only a release \
+    candidate ("rc"). You can install that by following the instructions under \
+    `Installing Specific Versions`_.
+
+
+Rotonda is packaged for several popular Linux distributions, and Docker images
+based on Alpine Linux are provided. Instructions for all these are below.
 
 You can also build Rotonda from the source code using Cargo, Rust's build
-system and package manager. Cargo lets you to run Rotonda on almost any
-operating system and CPU architecture. Refer to the :doc:`building` section to
-get started.
-
-The installation instructions below here, will be applicable once the first
-official version of Rotonda is released.
+system and package manager. Cargo lets you build Rotonda on almost any operating
+system and CPU architecture. Refer to the :doc:`building` section to get
+started.
 
 .. tabs::
 
