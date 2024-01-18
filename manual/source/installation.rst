@@ -294,8 +294,9 @@ Updating
           $ sudo docker rm --force rotonda
           $ sudo docker run <your usual arguments> nlnetlabs/rotonda
 
-_`Installing Specific Versions`
--------------------------------
+
+Installing Specific Versions
+----------------------------
 
 Before every new release of Rotonda, one or more release candidates are 
 provided for testing through every installation method. You can also install

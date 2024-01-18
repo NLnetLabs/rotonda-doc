@@ -1,5 +1,8 @@
-The top level of a Roto script
-------------------------------
+Structure and scoping
+=====================
+
+Structure
+---------
 
 The top-level of a ``Roto`` script can contain
 definitions of blocks. The type of these blocks can be:

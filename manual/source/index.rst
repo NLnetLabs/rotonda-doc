@@ -1,9 +1,23 @@
 Rotonda |version|
 =================
 
-.. WARNING:: NOT ALL FEATURES MENTIONED IN THE DOCUMENTATION IN THIS REPOSITORY ARE CURRENTLY IMPLEMENTED.
-   
-   For more information see the `ROADMAP <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__ on Github
+.. WARNING::
+
+   Rotonda is currently considered to be in early-access stage, and is actively
+   worked on (as is this documentation).
+
+   Use it to experiment freely (we value your feedback!), but do not use it with
+   data and data-streams that you cannot afford to lose.
+
+   You should also be aware that all the APIs, configuration and the ``Roto``
+   syntax and grammar are still unstable.
+
+   Not all features mentioned in the documentation in this repository are
+   currently implemented.  For more information see the `ROADMAP
+   <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__.
+
+
+
 
 Rotonda, the composable BGP engine
 ----------------------------------
@@ -18,20 +32,12 @@ you want to try it out right away, consider following the :doc:`Quick
 Tour<quicktour/00_running_rotonda>`, or jump directly to the :doc:`Installation
 Instructions<installation>`.
 
+Note that there are currently some :ref:`caveats<config-caveats>` worth being
+aware of, mostly regarding Rotonda's configuration.
 
-.. DANGER:: ROTONDA IS CURRENTLY IN ALPHA, DO NOT USE IN PRODUCTION
-   :name: rotonda-is-currently-in-alpha-do-not-use-in-production
+For more background, read :doc:`why<about/why>` we made Rotonda and how we envision it
+can be used for different use cases.
 
-   Rotonda is being actively worked on and the code and packages we
-   supply are still in ALPHA stage. Use it to experiment freely (we
-   value your feedback!), but do not use it with data and
-   data-streams that you cannot afford to lose.
-
-   You should also be aware that all the APIs, configuration and the ``Roto``
-   syntax and grammar are still (highly) unstable.
-
-   For more information see the `ROADMAP
-   <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__
 
 Modular
    Rotonda applications are built by combining units into a pipeline through
@@ -117,35 +123,22 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Why does this exist?
-   :name: toc-why
-
-   about/why
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: A Gentle Introduction
-   :name: toc-introduction
-
-   about/overview
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
    :caption: Getting Started
    :name: toc-getting-started
 
    installation
    building
 
+
 .. toctree::
-   :maxdepth: 2
    :hidden:
+   :titlesonly:
    :caption: Quick Tour
    :name: toc-quick-tour
    :glob:
 
+   quicktour/00_running_rotonda
+   quicktour/inject_and_query
    quicktour/*
 
 .. toctree::
@@ -169,8 +162,40 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: Why does this exist?
+   :name: toc-why
+
+   about/why
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: A Gentle Introduction
+   :name: toc-introduction
+
+   about/overview
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
    :caption: Roto Language
    :name: toc-roto
    :glob:
 
    roto/*
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Man page
+   :name: toc-man
+
+   manual-page
+
+.. toctree::
+   :caption: Troubleshooting
+   :hidden:
+   :glob:
+   
+   troubleshooting/*

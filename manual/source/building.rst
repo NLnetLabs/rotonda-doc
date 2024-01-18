@@ -1,6 +1,18 @@
 Building From Source
 ====================
 
+.. warning::
+
+   Building from source is perfectly possible, but you have to ensure all the
+   required configuration files to run Rotonda are in the right place.
+   If you intend to follow the `Quick Tour`, it is recommend to use a packaged
+   version if possible.
+
+   If you do build from source but run into problems afterwards, refer to
+   :ref:`troubleshooting` or :ref:`config-caveats`.
+
+
+
 In addition to meeting the :ref:`system requirements <installation:System
 Requirements>`, these are two things you need to build Rotonda: 
 
@@ -32,6 +44,8 @@ privileges to install system packages:
 
 If you are unsure, try to run :command:`cc` on a command line. If there is a
 complaint about missing input files, you are probably good to go.
+
+.. _rustup:
 
 Rust
 """"
@@ -94,6 +108,8 @@ version of this documentation you are reading. If for any reason you want to
 install another version of Rotonda, you should substitute the value after
 ``--version`` with the version you want. Omitting the whole ``--version```
 option will install the latest published version on ``crates.io``.
+
+.. _download-config:
 
 Downloading the configuration files
 """""""""""""""""""""""""""""""""""

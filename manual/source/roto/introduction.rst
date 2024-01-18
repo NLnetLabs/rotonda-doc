@@ -1,5 +1,5 @@
 Introduction
-------------
+============
 
 ``Roto`` is the filter language used by Rotonda. Eventually it will also be used
 as a query and configuration language.

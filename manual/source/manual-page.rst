@@ -99,7 +99,7 @@ Configuration File
 
 Instead of providing all options on the command line, they can also be
 provided through a configuration file. Such a file can be selected through
-the :option:`-c` option. If no configuration file is specified this way but a
+the ``-c`` option. If no configuration file is specified this way but a
 file named :file:`$HOME/.rotonda.conf` is present, this file is used.
 
 The configuration file is a file in TOML format. In short, it consists of a
