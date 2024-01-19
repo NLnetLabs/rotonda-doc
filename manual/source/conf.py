@@ -29,7 +29,7 @@ author = 'NLnet Labs'
 # The full version, including alpha/beta/rc tags.
 # Note: this is not only used in the documentation text, but also in several
 # commands!
-version = "0.1.0-rc0"
+version = "0.1.0"
 
 # -- Sphinx Tabs configuration -----------------------------------------------
 
