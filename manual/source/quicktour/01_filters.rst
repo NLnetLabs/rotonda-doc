@@ -10,11 +10,10 @@ Using Filters
 
 
 The filter scripts Rotonda uses are located in ``/etc/rotonda/filters`` if you
-installed via a package, or should be in the relative ``etc/rotonda/filters``
-directory. If you list the contents of that directory, you'll notice a bunch of
-files of type ``.roto``, these are the files containing the filters. Open the
-file called ``rib-in-pre-filter.roto`` with your favourite text editor. It
-should look like this:
+installed via a package directory. If you list the contents of that directory,
+you'll notice a bunch of files of type ``.roto``, these are the files
+containing the filters. Open the file called ``rib-in-pre-filter.roto`` with
+your favourite text editor. It should look like this:
 
 .. code:: text
 
@@ -129,11 +128,11 @@ reloading the changed script:
 
 .. code:: text
 
-	[2023-12-11 13:34:42] INFO  SIGHUP signal received, re-loading roto scripts from location "etc/"
-	[2023-12-11 13:34:42] INFO  Roto script etc/bmp-in-filter.roto is already loaded and unchanged. Skipping reload
-	[2023-12-11 13:34:42] INFO  Re-loading modified Roto script etc/rib-in-pre-filter.roto
-	[2023-12-11 13:34:42] INFO  Roto script etc/rib-in-post-filter.roto is already loaded and unchanged. Skipping reload
-	[2023-12-11 13:34:42] INFO  Roto script etc/bgp-in-filter.roto is already loaded and unchanged. Skipping reload
+	[2023-12-11 13:34:42] INFO  SIGHUP signal received, re-loading roto scripts from location "/etc/rotonda/filters"
+	[2023-12-11 13:34:42] INFO  Roto script /etc/rotonda/filters/bmp-in-filter.roto is already loaded and unchanged. Skipping reload
+	[2023-12-11 13:34:42] INFO  Re-loading modified Roto script /etc/rotonda/filters/rib-in-pre-filter.roto
+	[2023-12-11 13:34:42] INFO  Roto script etc/rotonda/filters/rib-in-post-filter.roto is already loaded and unchanged. Skipping reload
+	[2023-12-11 13:34:42] INFO  Roto script etc/rotonda/filters/bgp-in-filter.roto is already loaded and unchanged. Skipping reload
 	[2023-12-11 13:34:42] INFO  Done reloading roto scripts
 
 In the first line we see the confirmation that Rotonda received our signal,

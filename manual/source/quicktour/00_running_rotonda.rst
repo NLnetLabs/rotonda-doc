@@ -2,10 +2,9 @@ For this quick tour we assume that you have installed Rotonda via one of the
 packages (see :doc:`Getting Started </installation>`), putting the required
 configuration files in ``/etc/rotonda``.
 
-If you built Rotonda from source, make sure you have the configuration files in
-a similar directory structure. By default, Rotonda will look for the
-**relative** ``etc/`` directory.
-
+If you built Rotonda from source, you should create the directory
+``/etc/rotonda`` yourself. You can copy the configuration need for this tour
+from the `Rotonda GitHub repository <https://github.com/NlnetLabs/rotonda/>`_.
 
 We’re only going to invoke the binary it installed directly in this quick
 tour. Most probably you can just invoke the binary without further ado, as
@@ -34,10 +33,10 @@ Hopefully you’ll see output like this:
 
 .. code-block:: text
 
-	Loading new Roto script etc/filters/bmp-in-filter.roto
-	Loading new Roto script etc/filters/rib-in-pre-filter.roto
-	Loading new Roto script etc/filters/rib-in-post-filter.roto
-	Loading new Roto script etc/filters/bgp-in-filter.roto
+	Loading new Roto script /etc/filters/bmp-in-filter.roto
+	Loading new Roto script /etc/filters/rib-in-pre-filter.roto
+	Loading new Roto script /etc/filters/rib-in-post-filter.roto
+	Loading new Roto script /etc/filters/bgp-in-filter.roto
 	Listening for HTTP connections on 127.0.0.1:8080
 	Starting target 'null'
 	Starting unit 'rib-in-pre'
