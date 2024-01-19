@@ -16,8 +16,8 @@ Rotonda |version|
    currently implemented.  For more information see the `ROADMAP
    <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__.
 
-Rotonda, the composable BGP engine
-----------------------------------
+The composable, programmable BGP Engine
+---------------------------------------
 
 Rotonda enables you to build BGP applications such as route monitors, route
 collectors, route servers, route reflectors, or any variation or combination
