@@ -180,14 +180,6 @@ Open-source with professional support services
    roto/*
 
 .. toctree::
-   :hidden:
-   :maxdepth: 2
-   :caption: Man page
-   :name: toc-man
-
-   manual-page
-
-.. toctree::
    :caption: Troubleshooting
    :hidden:
    :glob:
