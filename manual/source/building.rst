@@ -9,7 +9,7 @@ Building From Source
    version if possible.
 
    If you do build from source but run into problems afterwards, refer to
-   :ref:`troubleshooting` or :ref:`config-caveats`.
+   :ref:`configuration/introduction` or :ref:`troubleshooting`.
 
 
 

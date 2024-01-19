@@ -1,4 +1,45 @@
 Introduction
 ------------
 
-Configuration
+.. warning::
+
+    The current configuration setup of Rotonda is needlessly complex. It will
+    very likely change in the near future.
+
+Built-in vs file-based configuration
+------------------------------------
+
+When Rotonda is compiled, a configuration is built in. The built-in
+configuration is used when no configuration file is specified when invoking
+``rotonda`` on the command line with the ``-c`` option. You can see the
+details of the built-in configuration by issuing ``rotonda
+--print-config-and-exit`` on the command line.
+
+If you've installed Rotonda through a binary package, the built-in
+configuration is roughly equivalent to the file you will find in
+``/etc/rotonda/rotonda.conf``.
+
+When running with the built-in configuration Rotonda will look for the roto
+filter scripts in the absolute path ``/etc/rotonda/filters``. If the directory
+specified by ``roto_scripts_path`` can not be found, or the required filters
+cannot be found in that path, no filter scripts can be loaded resulting in a
+filter-less, accept-everything Rotonda instance.
+
+In contrast: if you are starting Rotonda with an explicit configuration file,
+by invoking the ``-c`` option, and the ``roto_scripts_path`` in that
+configuration file cannot be found, or the required filters cannot be found,
+then **Rotonda will not start**.
+
+.. tip::
+
+    When compiling from source, the file in the repository in
+    ``src/etc/rotonda/rotonda.builtin.conf`` is used to create the built-in
+    configuration. Note that if you comment out the ``[targets.mqtt]`` mqtt
+    functionality will not be available in the Rotonda build you going to compile
+    based on it.
+
+    This only applies to building with ``cargo build --release``, not ``cargo install``.
+
+Completing the configuration
+----------------------------
+

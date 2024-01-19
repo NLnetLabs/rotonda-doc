@@ -2,9 +2,9 @@ Global Configuration Files
 ==========================
 
 Global configuration happens in a file that by convention is called
-``rotonda.conf[.USE_CASE]``, where USE_CASE describes what the purpose of this
+``rotonda[.DESCRIPTION].conf``, where USE_CASE describes what the purpose of this
 specific configuration file is, e.g. a there is file called
-``rotonda.conf.example``, that describes an example configuration.
+``rotonda.example.conf``, that describes an example configuration.
 
 This file must be in TOML format (https://toml.io/) and is structured as
 follows:

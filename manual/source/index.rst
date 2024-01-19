@@ -3,8 +3,8 @@ Rotonda |version|
 
 .. WARNING::
 
-   Rotonda is currently considered to be in early-access stage, and is actively
-   worked on (as is this documentation).
+   Rotonda is currently considered to be alpha software, and is actively
+   developed.
 
    Use it to experiment freely (we value your feedback!), but do not use it with
    data and data-streams that you cannot afford to lose.
@@ -15,9 +15,6 @@ Rotonda |version|
    Not all features mentioned in the documentation in this repository are
    currently implemented.  For more information see the `ROADMAP
    <https://github.com/NLnetLabs/rotonda/blob/main/ROADMAP.md>`__.
-
-
-
 
 Rotonda, the composable BGP engine
 ----------------------------------
@@ -31,9 +28,6 @@ Below is a brief overview of the key concepts and characteristics of Rotonda. If
 you want to try it out right away, consider following the :doc:`Quick
 Tour<quicktour/00_running_rotonda>`, or jump directly to the :doc:`Installation
 Instructions<installation>`.
-
-Note that there are currently some :ref:`caveats<config-caveats>` worth being
-aware of, mostly regarding Rotonda's configuration.
 
 For more background, read :doc:`why<about/why>` we made Rotonda and how we envision it
 can be used for different use cases.
