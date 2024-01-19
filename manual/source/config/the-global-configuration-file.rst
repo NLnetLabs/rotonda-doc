@@ -1,5 +1,5 @@
-Global Configuration Files
-==========================
+The Global Configuration File
+=============================
 
 Global configuration happens in a file that by convention is called
 ``rotonda[.DESCRIPTION].conf``, where USE_CASE describes what the purpose of this
