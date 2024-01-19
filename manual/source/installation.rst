@@ -16,12 +16,6 @@ gigabytes.
 Binary Packages
 ---------------
 
-.. note::
-    There is no officially released version of Rotonda yet, only a release \
-    candidate ("rc"). You can install that by following the instructions under \
-    `Installing Specific Versions`_.
-
-
 Rotonda is packaged for several popular Linux distributions, and Docker images
 based on Alpine Linux are provided. Instructions for all these are below.
 
