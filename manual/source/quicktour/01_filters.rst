@@ -6,7 +6,7 @@ Using Filters
    Make sure your Rotonda instance found and loaded the filter scripts upon
    startup before working your way through this section.
 
-   If not, refer to :ref:`troubleshooting` or :doc:`configuration/introduction`.
+   If not, refer to :ref:`troubleshooting` or :doc:`/config/introduction`.
 
 
 The filter scripts Rotonda uses are located in ``/etc/rotonda/filters`` if you

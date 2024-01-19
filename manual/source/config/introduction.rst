@@ -3,8 +3,8 @@ Introduction
 
 .. warning::
 
-    The current configuration setup of Rotonda is needlessly complex. It will
-    very likely change in the near future.
+    The current configuration setup of Rotonda has serious shortcomings. It
+    will very likely change drastically in the near future.
 
 Built-in vs file-based configuration
 ------------------------------------
