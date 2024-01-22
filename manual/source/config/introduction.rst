@@ -39,10 +39,10 @@ then **Rotonda will not start**.
 .. tip::
 
     When compiling from source, the file in the repository in
-    ``src/etc/rotonda/rotonda.builtin.conf`` is used to create the built-in
-    configuration. Note that if you comment out the ``[targets.mqtt]`` mqtt
-    functionality will not be available in the Rotonda build you going to
-    compile based on it.
+    ``etc/rotonda/rotonda.builtin.conf`` is used to create the built-in
+    configuration. Note that if you comment out the ``[targets.mqtt]`` section,
+    mqtt functionality will not be available in the Rotonda build you are going
+    to compile based on it.
 
     This only applies to building with ``cargo build --release``, not ``cargo
     install``.
@@ -50,9 +50,9 @@ then **Rotonda will not start**.
 Completing the configuration file
 ---------------------------------
 
-The file ``/etc/rotonda/rotonda.conf`` configuration that comes with the
-packaged version of Rotonda is not complete, if you try to use it Rotonda will
-abort. You will have to edit it and at the very least fill out the values in
-the ``[targets.mqtt]`` section. Probably you'll also want to edit the fields
-``my_asn`` and ``my_bgp_id`` in the ``[untis.bgp-tcp-in]`` section. 
+The ``/etc/rotonda/rotonda.conf`` configuration file that comes with the
+packaged version of Rotonda is not complete, and Rotonda will abort if you try
+to use it as-is.  You will have to edit it and at the very least fill out the
+values in the ``[targets.mqtt]`` section. Probably you'll also want to edit the
+fields ``my_asn`` and ``my_bgp_id`` in the ``[units.bgp-in]`` section. 
 
