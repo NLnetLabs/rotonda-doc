@@ -247,7 +247,7 @@ This function does not return anything:
         x + 1;
     }
 
-The ``return`` keyword can still be used functions that don't return a value to
+The ``return`` keyword can still be used in functions that don't return a value to
 exit the function early.
 
 Filter-map
