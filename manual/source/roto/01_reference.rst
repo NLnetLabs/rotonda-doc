@@ -91,7 +91,6 @@ There are mathematical operators for common operations:
 These operators follow the conventional PEMDAS rule for precedence. The order is
 
 - Parentheses
-- *Exponentiation (currently not applicable)*
 - Multiplication and division
 - Addition and subtraction
 
@@ -254,9 +253,8 @@ Filter-map
 ----------
 
 A ``filter-map`` is a function that filters and transforms some incoming value.
-Filter-maps are exported to Rotonda.
 
-``filter-maps``s resemble functions but they don't ``return``. Instead they
+Filter-maps resemble functions but they don't ``return``. Instead they
 either ``accept`` or ``reject``, which determines what happens to the value.
 
 A very simple ``filter-map`` takes just one parameter and only has an ``apply``
