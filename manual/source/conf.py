@@ -18,6 +18,9 @@
 
 import datetime
 import sphinx_rtd_theme
+from pygments.lexer import RegexLexer, words
+from pygments import token
+from sphinx.highlighting import lexers
 
 # -- Project information -----------------------------------------------------
 
@@ -244,3 +247,26 @@ copybutton_prompt_text = "$"
 # -- Options for substitution extension --------------------------------------
 
 rst_prolog = ".. |version| replace:: {version}".format(version = version)
+
+class RotoLexer(RegexLexer):
+    name = 'roto'
+
+    tokens = {
+        'root': [
+            (r'#.*?$', token.Comment.Singleline),
+            (
+                words(
+                    ('function', 'filter-map', 'filter', 'match', 'apply', 'define', 'if', 'else', 'accept', 'reject', 'return'),
+                    suffix=r'\b'
+                ),
+                token.Keyword
+            ),
+            (words(('+', '-', '/', '*', '==', '>=', '>', '<=', '<', '=', '&&', '||')), token.Operator),
+            (words(('{', '}', '(', ')', '[', ']', ':', '.', ';')), token.Operator),
+            (r'[a-zA-Z_][a-zA-Z0-9_]*', token.Name),
+            (r'[0-9]', token.Number),
+            (r'\s+', token.Text.Whitespace),
+        ]
+    }
+
+lexers['roto'] = RotoLexer(startinline=True)
