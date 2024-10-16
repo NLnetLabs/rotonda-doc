@@ -253,16 +253,16 @@ class RotoLexer(RegexLexer):
 
     tokens = {
         'root': [
-            (r'#.*?$', token.Comment.Singleline),
+            (r'//.*?$', token.Comment.Singleline),
             (
                 words(
-                    ('function', 'filter-map', 'filter', 'match', 'apply', 'define', 'if', 'else', 'accept', 'reject', 'return'),
+                    ('type', 'function', 'filter-map', 'filter', 'match', 'apply', 'define', 'if', 'else', 'accept', 'reject', 'return'),
                     suffix=r'\b'
                 ),
                 token.Keyword
             ),
             (words(('+', '-', '/', '*', '==', '>=', '>', '<=', '<', '=', '&&', '||')), token.Operator),
-            (words(('{', '}', '(', ')', '[', ']', ':', '.', ';')), token.Operator),
+            (words(('{', '}', '(', ')', '[', ']', ':', '.', ';', ',')), token.Punctuation),
             (r'[a-zA-Z_][a-zA-Z0-9_]*', token.Name),
             (r'[0-9]', token.Number),
             (r'\s+', token.Text.Whitespace),
