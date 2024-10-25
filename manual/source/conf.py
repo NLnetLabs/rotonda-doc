@@ -16,11 +16,15 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import sys
+import os
 import datetime
 import sphinx_rtd_theme
 from pygments.lexer import RegexLexer, words
 from pygments import token
 from sphinx.highlighting import lexers
+
+sys.path.append(os.path.abspath("./_ext"))
 
 # -- Project information -----------------------------------------------------
 
@@ -58,7 +62,9 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
     'sphinx_substitution_extensions',
-    'notfound.extension'
+    'notfound.extension',
+    'roto_domain',
+    'myst_parser',
 ]
 
 autosectionlabel_prefix_document = True
@@ -69,7 +75,10 @@ autosectionlabel_prefix_document = True
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # The master toctree document.
 master_doc = 'index'
@@ -253,7 +262,7 @@ class RotoLexer(RegexLexer):
 
     tokens = {
         'root': [
-            (r'//.*?$', token.Comment.Singleline),
+            (r'#.*?$', token.Comment.Singleline),
             (
                 words(
                     ('type', 'function', 'filter-map', 'filter', 'match', 'apply', 'define', 'if', 'else', 'accept', 'reject', 'return'),

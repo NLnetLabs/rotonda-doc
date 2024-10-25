@@ -8,12 +8,12 @@ the language.
 Comments
 --------
 
-Comments in Roto start with a ``//`` and end at the end of a line. They can
+Comments in Roto start with a ``#`` and end at the end of a line. They can
 be inserted anywhere in the script and are ignored.
 
 .. code-block:: roto
 
-    // this is a comment
+    # this is a comment
 
 Literals
 --------
@@ -99,19 +99,19 @@ example, this expression:
 
 .. code-block:: roto
 
-    1 + 2 * 3   // evaluates to 7
+    1 + 2 * 3    # evaluates to 7
 
 is interpreted as
 
 .. code-block:: roto
 
-    1 + (2 * 3) // evaluates to 7
+    1 + (2 * 3)  # evaluates to 7
 
 and not as
 
 .. code-block:: roto
 
-    (1 + 2) * 3 // evaluates to 9
+    (1 + 2) * 3  # evaluates to 9
 
 Comparison operators
 --------------------
@@ -138,11 +138,11 @@ Examples:
 
 .. code-block:: roto
 
-    5 > 10      // evaluates to false
-    10 > 5      // evaluates to true
-    5 == 5      // evaluates to true
-    5 == true   // compile error!
-    1 < x < 10  // compile error!
+    5 > 10      # evaluates to false
+    10 > 5      # evaluates to true
+    5 == 5      # evaluates to true
+    5 == true   # compile error!
+    1 < x < 10  # compile error!
 
 Logical operators
 -----------------
@@ -182,7 +182,7 @@ condition must evaluate to a boolean.
 .. code-block:: roto
 
     if x > 0 {
-        // if the condition is true
+        # if the condition is true
     }
 
 An ``else``-clause can optionally follow the ``if``-block. The ``if``-``else``
@@ -191,9 +191,9 @@ construct is an expression and therefore evaluates to a value.
 .. code-block:: roto
 
     if x > 0 {
-        // if the condition is true
+        # if the condition is true
     } else {
-        // if the condition is false
+        # if the condition is false
     }
 
 Functions
@@ -314,7 +314,7 @@ a type checking error:
     if x {
         { foo: 5, bar: 10 }
     } else {
-        { foo: 5 } // error!
+        { foo: 5 }  # error!
     }
 
 Note that this makes records significantly different from dictionaries in Python
@@ -346,7 +346,7 @@ yield more readable type checking errors.
         bar: bool,
     }
 
-    // ...
+    # ...
 
     x = SomeRecord { foo: 3, bar: false }
 
@@ -357,5 +357,6 @@ There is an automatic coercion from anonymous records to named records:
 .. code-block:: roto
 
     function foo(int: i32) -> SomeRecord {
-        { foo: int, bar: false } // implicitly coerced to SomeRecord
+        { foo: int, bar: false }  # implicitly coerced to SomeRecord
     }
+
