@@ -3,6 +3,7 @@ from sphinx.domains import Domain
 from sphinx import addnodes
 from sphinx.roles import XRefRole
 from sphinx.application import Sphinx
+from sphinx.util.nodes import make_refnode
 
 class RotoFunctionLike(ObjectDescription):
     """Generic Roto function-like object that we don't register into the domain"""
@@ -51,16 +52,33 @@ class RotoFunctionLike(ObjectDescription):
 
         signode['path'] = sig
         signode['fullname'] = fullname = f"{receiver}.{name}"
+    
         return fullname
 
     def needs_arglist(self):
         return False
+
+    def add_self(self, signature):
+        raise NotImplemented
+
+    def add_target_and_index(self, name_cls, sig, signode):
+        signode['ids'].append('roto' + '-' + name_cls)
+        roto_domain = self.env.get_domain('roto')
+        roto_domain.add_obj(self.class_name.replace(' ', '_') + 's', name_cls)
+
 
 class RotoType(ObjectDescription):
     def handle_signature(self, sig: str, signode):
         signode += addnodes.desc_annotation(text="type")
         signode += addnodes.desc_name(text=sig)
         return sig
+
+    
+    def add_target_and_index(self, name_cls, sig, signode):
+        signode['ids'].append('roto' + '-' + sig)
+
+        roto_domain = self.env.get_domain('roto')
+        roto_domain.add_obj('types', sig)
 
 class RotoFunction(RotoFunctionLike):
     class_name = "function"
@@ -74,7 +92,9 @@ class RotoMethod(RotoFunctionLike):
 class RecipeDomain(Domain):
     name = 'roto'
     label = 'Roto'
-    roles = {}
+    roles = {
+        'ref': XRefRole(),
+    }
 
     directives = {
         'function': RotoFunction,
@@ -94,6 +114,41 @@ class RecipeDomain(Domain):
 
     data_version = 0
 
+    def all_objects(self):
+        print(self.data)
+        for k, v in self.data.items():
+            if k == "version":
+                continue
+            yield from v.values()
+
+    def add_obj(self, category, signature):
+        name = f'roto.{signature}'
+        anchor = f'roto-{signature}'
+
+        self.data[category][signature] = (
+            name,
+            signature,
+            'Roto',
+            self.env.docname,
+            anchor,
+            0,
+        )
+
+    def resolve_xref(self, env, fromdocname, builder, typ, target, node, contnode):
+        print(f"RESOLVING REF: {repr(target)}")
+
+        match = [
+            (docname, anchor)
+            for name, sig, typ, docname, anchor, prio in self.all_objects()
+            if sig == target
+        ]
+
+        if len(match) > 0:
+            todocname = match[0][0]
+            targ = match[0][1]
+            return make_refnode(builder, fromdocname, todocname, targ, contnode, targ)
+        else:
+            return None
 
     def get_full_qualified_name(self, node):
         return f'roto.{node.arguments[0]}'
