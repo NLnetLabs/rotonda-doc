@@ -155,10 +155,13 @@ A prefix can be constructed with the `/` operator or with the [`Prefix.new`](Pre
 ````{roto:static_method} Prefix.new(ip: IpAddr, len: u8) -> Prefix
 Construct a new prefix
 
-A prefix can also be constructed with a prefix literal.
+A prefix can also be constructed with the `/` operator.
 
 ```roto
-Prefix.new(192.169.0.0)
+Prefix.new(192.169.0.0, 16)
+
+# or equivalently
+192.169.0.0 / 16
 ```
 ````
 
