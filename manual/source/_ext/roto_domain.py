@@ -30,13 +30,25 @@ class RotoFunctionLike(ObjectDescription):
             sig_param += addnodes.desc_name(text=param_name)
             sig_param += addnodes.desc_sig_punctuation(text=':')
             sig_param += addnodes.desc_sig_space(text=' ')
-            sig_param += addnodes.desc_type(text=ty)
+            sig_param += addnodes.pending_xref(
+                "",
+                addnodes.desc_type(text=ty),
+                refdomain="roto",
+                reftype="ref",
+                reftarget=ty,
+            )
             sig_param_list += sig_param
 
         signode += addnodes.desc_annotation(text=self.class_name)
 
         if receiver:
-            signode += addnodes.desc_addname(text=f"{receiver}")
+            signode += addnodes.pending_xref(
+                "",
+                addnodes.desc_addname(text=receiver),
+                refdomain="roto",
+                reftype="ref",
+                reftarget=receiver,
+            )
             signode += addnodes.desc_sig_punctuation(text='.')
     
         signode += addnodes.desc_name(text=name)
@@ -46,7 +58,13 @@ class RotoFunctionLike(ObjectDescription):
         
         ret = ret.strip().removeprefix('->').strip()
         sig_ret = addnodes.desc_returns()
-        sig_ret += addnodes.desc_type(text=ret)
+        sig_ret += addnodes.pending_xref(
+            "",
+            addnodes.desc_type(text=ret),
+            refdomain="roto",
+            reftype="ref",
+            reftarget=ret,
+        )
 
         signode += sig_ret
 

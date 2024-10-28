@@ -71,6 +71,14 @@ This type can represent integers from -9223372036854775808 up to (and including)
 `````{roto:type} Asn
 An ASN: an Autonomous System Number
 
+An AS number can contain a number of 32-bits and is therefore similar to a [`u32`](u32). However, AS numbers cannot be manipulated with arithmetic operations. An AS number is constructed with the `AS` prefix followed by a number.
+
+```roto
+AS0
+AS1010
+AS4294967295
+```
+
 `````
 
 `````{roto:type} IpAddr
@@ -134,10 +142,11 @@ Converts this address to an IPv4 if it is an IPv4-mapped IPv6 address, otherwise
 `````
 
 `````{roto:type} Prefix
-An IP address prefix: an IP address and a prefix length
+An IP address prefix: the combination of an IP address and a prefix length
 
-A prefix can be constructed with the `/` operator or with the `Prefix.new` function.
+A prefix can be constructed with the `/` operator or with the [`Prefix.new`](Prefix.new) function. This operator takes an [`IpAddr`](IpAddr) and a [`u8`](u8) as operands.
 
+            
 ```roto
 1.1.1.0 / 8
 192.0.0.0.0 / 24

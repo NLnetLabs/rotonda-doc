@@ -15,6 +15,14 @@ be inserted anywhere in the script and are ignored.
 
     # this is a comment
 
+Block comments are not supported. To create a multiline comment, prefix every
+line with a ``#``.
+
+.. code-block:: roto
+
+    # one comment line
+    # another comment line
+
 Literals
 --------
 
@@ -30,12 +38,12 @@ Roto supports literals for primitive types:
 Primitive types
 ---------------
 
-- ``bool``: booleans
-- ``u8``, ``u16``, ``u32``, ``u64``: unsigned integers of 8, 16, 32 and 64 bits, respectively
-- ``i8``, ``i16``, ``i32``, ``i64``: signed integers of 8, 16, 32 and 64 bits, respectively
-- ``IpAddr``: IP address
-- ``Prefix``: prefixes
-- ``Asn``: AS number
+- :roto:ref:`bool`: booleans
+- :roto:ref:`u8`, :roto:ref:`u16`, :roto:ref:`u32`, :roto:ref:`u64`: unsigned integers of 8, 16, 32 and 64 bits, respectively
+- :roto:ref:`i8`, :roto:ref:`i16`, :roto:ref:`i32`, :roto:ref:`i64`: signed integers of 8, 16, 32 and 64 bits, respectively
+- :roto:ref:`IpAddr`: IP address
+- :roto:ref:`Prefix`: prefixes
+- :roto:ref:`Asn`: AS number
 
 There are many more types available that have more to do with BGP. These are
 described elsewhere.
@@ -49,29 +57,29 @@ users of Python and similar languages which only have one integer type.
 
 Roto is a compiled language and as such needs to know how many bytes to use for
 a given integer. Hence, the number of bits are included in the type. The prefix
-`u` is used for unsigned (i.e. positive) numbers and `i` for signed integers.
+``u`` is used for unsigned (i.e. non-negative) numbers and ``i`` for signed integers.
 
 Below is a table of all available integer types.
 
-+---------+------+--------+----------------------------+----------------------------+
-| Type    | Bits | Signed |                        Min |                        Max |
-+=========+======+========+============================+============================+
-| ``u8``  |    8 |     No |                          0 |                         255|
-+---------+------+--------+----------------------------+----------------------------+
-| ``u16`` |   16 |     No |                          0 |                     65,535 |
-+---------+------+--------+----------------------------+----------------------------+
-| ``u32`` |   32 |     No |                          0 |              4,294,967,295 |
-+---------+------+--------+----------------------------+----------------------------+
-| ``u64`` |   64 |     No |                          0 | 18,446,744,073,709,551,615 |
-+---------+------+--------+----------------------------+----------------------------+
-| ``i8``  |    8 |    Yes |                       -128 |                         127|
-+---------+------+--------+----------------------------+----------------------------+
-| ``i16`` |   16 |    Yes |                     -32768 |                     65,535 |
-+---------+------+--------+----------------------------+----------------------------+
-| ``i32`` |   32 |    Yes |                -2147483648 |              4,294,967,295 |
-+---------+------+--------+----------------------------+----------------------------+
-| ``i64`` |   64 |    Yes | -9,223,372,036,854,775,808 |  9,223,372,036,854,775,807 |
-+---------+------+--------+----------------------------+----------------------------+
++-----------------+------+--------+----------------------------+----------------------------+
+| Type            | Bits | Signed |                        Min |                        Max |
++=================+======+========+============================+============================+
+| :roto:ref:`u8`  |    8 |     No |                          0 |                         255|
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`u16` |   16 |     No |                          0 |                     65,535 |
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`u32` |   32 |     No |                          0 |              4,294,967,295 |
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`u64` |   64 |     No |                          0 | 18,446,744,073,709,551,615 |
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`i8`  |    8 |    Yes |                       -128 |                         127|
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`i16` |   16 |    Yes |                     -32768 |                     65,535 |
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`i32` |   32 |    Yes |                -2147483648 |              4,294,967,295 |
++-----------------+------+--------+----------------------------+----------------------------+
+| :roto:ref:`i64` |   64 |    Yes | -9,223,372,036,854,775,808 |  9,223,372,036,854,775,807 |
++-----------------+------+--------+----------------------------+----------------------------+
 
 Arithmetic operators
 --------------------
