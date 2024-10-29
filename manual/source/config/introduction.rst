@@ -1,11 +1,6 @@
 Introduction
 ------------
 
-.. warning::
-
-    The current configuration setup of Rotonda has serious shortcomings. It
-    will very likely change drastically in the near future.
-
 Built-in vs file-based configuration
 ------------------------------------
 

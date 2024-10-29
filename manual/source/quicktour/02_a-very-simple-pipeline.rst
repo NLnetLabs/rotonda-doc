@@ -72,9 +72,9 @@ This pipeline however would just move all the data through its ingress unit to t
 Changing the Pipeline
 ---------------------
 
-As we've briefly explained in the <<gentle introduction>> and the
-<<configuration defualt>>, Rotonda consists of units that are connected to
-form a pipeline, where data flows from sources to targets.
+As we've briefly explained in the <<configuration default>>, Rotonda consists
+of units that are connected to form a pipeline, where data flows from sources
+to targets.
 
 When you start Rotonda without a configuration file, it will use its built-in
 configuration, that features a pipe-line that exists of five units, namely two

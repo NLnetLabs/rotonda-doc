@@ -37,9 +37,8 @@ started.
          -  Debian Stretch 9
 
        Packages for the ``amd64``/``x86_64`` architecture are available for
-       all listed versions. In addition, we offer ``armhf``/``armv7``
-       architecture packages for Debian/Raspbian Bullseye, and
-       ``arm64``/``aarch64`` for Buster and Bookworm.
+       all listed versions. In addition, we offer ``arm64``/``aarch64``
+       architecture packages for Debian/Raspbian Bullseye Buster and Bookworm.
        
        First update the :program:`apt` package index: 
 
@@ -294,14 +293,14 @@ Installing Specific Versions
 
 Before every new release of Rotonda, one or more release candidates are 
 provided for testing through every installation method. You can also install
-a specific version, if needed.
+a specific version, if needsed
 
 .. tabs::
 
    .. group-tab:: Debian
 
        If you would like to try out release candidates of Rotonda you can add
-       the *proposed* repository. This repository can live side by side wih
+       the *proposed* repository. This repository can live side by side with
        the *main* repository.
        
        If you have already installed the *main*
