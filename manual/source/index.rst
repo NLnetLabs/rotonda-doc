@@ -19,7 +19,7 @@ collect incoming routes from many peers into a in-memory database, modeled as
 a Routing Information Base (RIB). It also supports importing routes from MRT
 files into this database. Conditions for accepting incoming routes and sending
 messages to log files or a MQTT stream can be created using filters with the
-``Roto`` programming language.i The RIB can be queried through an HTTP/JSON
+``Roto`` programming language. The RIB can be queried through an HTTP/JSON
 API.
 
 Future versions of Rotonda will support an on-disk database, using external
