@@ -24,7 +24,12 @@ where Rotonda acts as BMP station.
 Configuration Options
 ---------------------
 
-`````{roto:type} listen
+.. roto:type
+	u8
+
+The unsigned 8-bit integer type
+
+This type can represent integers from 0 up to (and including) 255.
 
 
 bgp-tcp-in
