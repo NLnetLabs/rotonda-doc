@@ -46,8 +46,8 @@ Modularity
    aim for units to be hot-swappable, i.e. they can be added and removed in a
    *running* Rotonda application.
 
-   Rotonda offers units to create BGP and BMP sessions, filters, Routing
-   Information Bases (RIBs), and more.
+   Rotonda offers units to create BGP and BMP sessions, Routing Information
+   Bases (RIBs), and more.
 
 Flexibility
    The behaviour of the units can be modeled by using a small, fun programming
