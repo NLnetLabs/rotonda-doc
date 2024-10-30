@@ -1,6 +1,7 @@
 # Rotonda
 
-<img align="right" src="manual/source/resources/rotonda-illustrative-icon.png" height="150">
+<img align="right" src="manual/source/img/rotonda-illustrative-icon.png"
+height="150">
 
 
 The composable, programmable BGP Engine
