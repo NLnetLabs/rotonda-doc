@@ -148,7 +148,7 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Units
+   :caption: Units & Targets
    :name: toc-units
    :glob:
 

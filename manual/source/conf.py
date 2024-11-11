@@ -62,7 +62,6 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
     'sphinx_substitution_extensions',
-    'notfound.extension',
     'roto_domain',
     'myst_parser',
 ]
