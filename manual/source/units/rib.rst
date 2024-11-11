@@ -11,6 +11,10 @@ to a given IP prefix address and length.
 Upstream announcements cause routes to be added to the store. Upstream
 withdrawals cause routes to be flagged as withdrawn in the store.
 
+.. confval:: rib_type (mandatory)
+
+	The type of this RIB. Can be either ``physical``, or ``virtual``.
+
 .. confval:: sources (mandatory)
 
 	An ["array", "of", "upstream", "unit", "names"] from which data will be received.

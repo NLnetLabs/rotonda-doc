@@ -157,6 +157,15 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: HTTP API
+   :name: toc-http-api
+   :glob:
+
+   api/*
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
    :caption: Roto Language
    :name: toc-roto
    :glob:
