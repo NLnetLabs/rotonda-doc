@@ -32,9 +32,6 @@ of Rotonda. If you want to try it out right away, consider following
 the :doc:`Quick Tour<quicktour/00_running_rotonda>`, or jump directly to
 the :doc:`Installation Instructions<installation>`.
 
-For more background, read :doc:`why<about/why>` we made Rotonda and how we
-envision it can be used for different use cases.
-
 
 Goals
 -----
@@ -152,7 +149,10 @@ Open-source with professional support services
    :name: toc-units
    :glob:
 
-   units/*
+   units/00_intro
+   units/connector
+   units/rib
+   units/target
 
 .. toctree::
    :maxdepth: 2
