@@ -136,7 +136,7 @@ Open-source with professional support services
    :maxdepth: 2
    :hidden:
    :caption: Application
-   :name: toc-components
+   :name: toc-application
 
    units/00_intro
 
@@ -150,10 +150,14 @@ Open-source with professional support services
 
 .. toctree::
    :maxdepth: 3
+   :hidden:
    :caption: Components
    :name: toc-components
 
    units/connector
+   units/bmp-tcp-in
+   units/bgp-tcp-in
+   units/mrt-in
    units/target
    units/rib
 
