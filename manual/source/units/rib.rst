@@ -1,5 +1,5 @@
-Rib Unit
-========
+RIBs
+====
 
 This unit is a general purpose prefix store but is primarily intended to map
 prefixes to the details of the routes to those prefixes and the source from
@@ -10,6 +10,9 @@ to a given IP prefix address and length.
 
 Upstream announcements cause routes to be added to the store. Upstream
 withdrawals cause routes to be flagged as withdrawn in the store.
+
+Physical RIB
+============
 
 .. confval:: rib_type (mandatory)
 
@@ -23,11 +26,11 @@ withdrawals cause routes to be flagged as withdrawn in the store.
 
 	The relative URL prefix for HTTP REST API calls responded to by this instance of this unit.
 
-	Default: /prefixes/
+	Default: ``/prefixes/``
 
 .. confval:: query_limits.more_specifics.shortest_prefix_ipv4 
 
-	Default: 8
+	Default: ``8``
 
 .. confval:: query_limits.more_specifics.shortest_prefix_ipv6 (def: 19)
 
@@ -36,4 +39,4 @@ withdrawals cause routes to be flagged as withdrawn in the store.
 	shorter than /8 (e.g. /7), or for IPv6 prefixes shorter than /19 (e.g. /18),
 	will result in a HTTP 400 Bad Request status code.
 
-	Default: 8
+	Default: ``8``

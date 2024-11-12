@@ -1,5 +1,5 @@
-Connector Units
-================
+Connectors
+==========
 
 Connectors are units that allow data to flow into a Rotonda application.
 Currently Rotonda supports three different types of connectors. Connectors
@@ -111,7 +111,6 @@ Configuration Options
 
 	Default: None
 
-
 .. confval:: protocols
 
 	The list of address families (AFI/SAFI) that is accepted from this peer. These
@@ -120,11 +119,9 @@ Configuration Options
 	omitted or set to the empty list, the session will only carry conventional
 	IPv4 Unicast information.
 
-Currently supported are:
-    ``Ipv4Unicast``, ``Ipv6Unicast``,
-    ``Ipv4Multicast``, ``Ipv6Multicast``
+	Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
-mrt-in (experimental)
+mrt-in `(experimental)`
 ======================
 
 This unit can take one or several ``mrt`` files (:RFC:`6396`) and emulate an
@@ -135,8 +132,8 @@ be stored per peer.
 
 .. confval:: type (mandatory)
 
-This must be set to `mrt-in` for this type of connector.
+	This must be set to `mrt-in` for this type of connector.
 
 .. confval:: filename (mandatory)
 
-The path to the ``mrt`` file containing one or more table dump entries, that will be loaded into the receiving RIB.
+	The path to the ``mrt`` file containing one or more table dump entries, that will be loaded into the receiving RIB.

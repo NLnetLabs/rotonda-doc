@@ -56,20 +56,3 @@ may also be synthesized due to BMP Peer Down notification or loss of TCP/IP
 connection to the monitored BMP router.
 
 .. [1]: https://www.rfc-editor.org/rfc/rfc7854
-
-
-
-Configuration Options
-=====================
-
-.. confval:: http_listen
-
-    The "<IP ADDRESS>:<PORT>" to listen on for incoming HTTP requests.
-
-.. confval:: response_compression
-
-    Whether or not to GZIP compress responses if the client expresses support
-    for it (via the HTTP "Accept-Encoding: gzip" request header). Set to false to
-    completely disable GZIP response compression.
-
-    Default: true

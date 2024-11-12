@@ -115,18 +115,17 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Getting Started
-   :name: toc-getting-started
+   :caption: Installation
+   :name: toc-installation
 
    installation
    building
 
-
 .. toctree::
    :hidden:
    :titlesonly:
-   :caption: Quick Tour
-   :name: toc-quick-tour
+   :caption: Quick Start
+   :name: toc-quick-start
    :glob:
 
    quicktour/00_running_rotonda
@@ -136,23 +135,27 @@ Open-source with professional support services
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Configuration
-   :name: toc-configuration
-   :glob:
-   
-   config/*
+   :caption: Application
+   :name: toc-components
+
+   units/00_intro
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Units & Targets
-   :name: toc-units
-   :glob:
+   :caption: Configuration
+   :name: toc-configuration
+   
+   config/introduction
 
-   units/00_intro
+.. toctree::
+   :maxdepth: 3
+   :caption: Components
+   :name: toc-components
+
    units/connector
-   units/rib
    units/target
+   units/rib
 
 .. toctree::
    :maxdepth: 2
