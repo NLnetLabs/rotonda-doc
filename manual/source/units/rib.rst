@@ -12,7 +12,7 @@ Upstream announcements cause routes to be added to the store. Upstream
 withdrawals cause routes to be flagged as withdrawn in the store.
 
 Physical RIB
-============
+------------
 
 .. confval:: rib_type (mandatory)
 

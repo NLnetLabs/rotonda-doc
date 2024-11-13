@@ -153,13 +153,9 @@ Open-source with professional support services
    :hidden:
    :caption: Components
    :name: toc-components
+   :glob:
 
-   units/connector
-   units/bmp-tcp-in
-   units/bgp-tcp-in
-   units/mrt-in
-   units/target
-   units/rib
+   units/*
 
 .. toctree::
    :maxdepth: 2
