@@ -49,7 +49,9 @@ Alternatively you can use this ``rotonda.conf``:
 	type = "null-out"
 	sources = ["rib"]
 
-This file references a roto script called ``filters.roto``. It can also be downloaded from the above mentioned GitHub repository. You can alse use this file:
+This file references a roto script called ``filters.roto``. It can also be
+downloaded from the above mentioned GitHub repository. You can alse use this
+file:
 
 .. code-block:: roto
 
@@ -285,8 +287,7 @@ Second, you could try to add another query parameter, called
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?
-include=moreSpecifics
+	$ curl -s http://localhost:8080/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?include=moreSpecifics
 
 If you try a fairly large prefix, say a /16, you increase the chance of
 hitting an actual prefix.
