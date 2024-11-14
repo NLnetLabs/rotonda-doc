@@ -293,3 +293,55 @@ hitting an actual prefix.
 
 Your output should now include all more specific prefixes found for the one
 requested, in the "include" field in the root of the result JSON Object.
+
+Adding a filter
+---------------
+
+Certain Rotonda components have filters built in. One of these components is a
+RIB. The RIB filter can create a so-called verdict, ``accept``` or ``reject``,
+that Rotonda uses to determine whether to store the route passing through the
+filter in the RIB. The filter can also used to create a log message.
+
+Let's create a filter. First, kill you current Rotonda instance. Second,
+create a file called ``filters.roto``, preferably in the same directory as the
+``rotonda.conf`` file you're using. It should contain this:
+
+.. code:: roto
+
+	filter-map rib-in-pre(
+	    output: Log,
+	    route: Route,
+	    context: RouteContext,
+	) {
+
+	    define {
+	        my_prefix = 209.127.80.0/20;
+	    }
+
+	    apply {
+	        if route.prefix_matches(my_prefix) {
+	            accept
+	        } else {
+	            reject            
+	        }
+	    }
+	}
+
+
+Now, add a line at the top of your ``rotonda.conf``:
+
+.. code:: toml
+
+	roto_script = "filters.roto"
+
+Restart your Rotonda. If you now go to the status page, `<https://
+localhost:8080/status>`_, you'll see that rib_unit_num_items is set to 1.
+Rotonda filtered out all prefixes, except for the one we specified in the
+``define`` section. If you now query this particular prefix in the RIB with:
+
+.. code:: console
+
+	curl -s http://localhost:8080/prefixes/209.127.80.0/20
+
+You'll see approximately three entries in the "data" object: one for each peer
+in the mrt file that announced this prefix to the RIS collector.
