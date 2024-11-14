@@ -1,14 +1,6 @@
 Using Filters
 =============
 
-.. note::
-
-   Make sure your Rotonda instance found and loaded the filter scripts upon
-   startup before working your way through this section.
-
-   If not, refer to :ref:`troubleshooting` or :doc:`/config/introduction`.
-
-
 The filter scripts Rotonda uses are located in ``/etc/rotonda/filters`` if you
 installed via a package directory. If you list the contents of that directory,
 you'll notice a bunch of files of type ``.roto``, these are the files

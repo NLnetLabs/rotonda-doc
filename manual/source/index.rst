@@ -126,11 +126,8 @@ Open-source with professional support services
    :titlesonly:
    :caption: Quick Start
    :name: toc-quick-start
-   :glob:
 
    quicktour/00_running_rotonda
-   quicktour/inject_and_query
-   quicktour/*
 
 .. toctree::
    :maxdepth: 2
