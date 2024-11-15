@@ -71,14 +71,6 @@ This type can represent integers from -9223372036854775808 up to (and including)
 `````{roto:type} Asn
 An ASN: an Autonomous System Number
 
-An AS number can contain a number of 32-bits and is therefore similar to a [`u32`](u32). However, AS numbers cannot be manipulated with arithmetic operations. An AS number is constructed with the `AS` prefix followed by a number.
-
-```roto
-AS0
-AS1010
-AS4294967295
-```
-
 `````
 
 `````{roto:type} IpAddr
@@ -142,11 +134,10 @@ Converts this address to an IPv4 if it is an IPv4-mapped IPv6 address, otherwise
 `````
 
 `````{roto:type} Prefix
-An IP address prefix: the combination of an IP address and a prefix length
+An IP address prefix: an IP address and a prefix length
 
-A prefix can be constructed with the `/` operator or with the [`Prefix.new`](Prefix.new) function. This operator takes an [`IpAddr`](IpAddr) and a [`u8`](u8) as operands.
+A prefix can be constructed with the `/` operator or with the `Prefix.new` function.
 
-            
 ```roto
 1.1.1.0 / 8
 192.0.0.0.0 / 24
@@ -155,15 +146,115 @@ A prefix can be constructed with the `/` operator or with the [`Prefix.new`](Pre
 ````{roto:static_method} Prefix.new(ip: IpAddr, len: u8) -> Prefix
 Construct a new prefix
 
-A prefix can also be constructed with the `/` operator.
+A prefix can also be constructed with a prefix literal.
 
 ```roto
-Prefix.new(192.169.0.0, 16)
-
-# or equivalently
-192.169.0.0 / 16
+Prefix.new(192.169.0.0)
 ```
 ````
+
+`````
+
+`````{roto:type} Route
+A single announced or withdrawn path
+
+````{roto:method} Route.prefix_matches(to_match: Prefix) -> bool
+````
+
+````{roto:method} Route.aspath_origin(to_match: Asn) -> bool
+````
+
+````{roto:method} Route.has_attribute(to_match: u8) -> bool
+````
+
+`````
+
+`````{roto:type} RouteContext
+Contextual information pertaining to the Route
+
+`````
+
+`````{roto:type} Provenance
+Session/state information
+
+`````
+
+`````{roto:type} Log
+Machinery to create output entries
+
+````{roto:method} Log.log_prefix(prefix: Prefix) -> Unit
+````
+
+````{roto:method} Log.log_matched_asn(asn: Asn) -> Unit
+````
+
+````{roto:method} Log.log_matched_origin(origin: Asn) -> Unit
+````
+
+````{roto:method} Log.log_matched_community(community: u32) -> Unit
+````
+
+````{roto:method} Log.log_peer_down() -> Unit
+````
+
+````{roto:method} Log.log_custom(id: u32, local: u32) -> Unit
+````
+
+`````
+
+`````{roto:type} InsertionInfo
+Information from the RIB on an inserted route
+
+````{roto:method} InsertionInfo.new_peer() -> bool
+````
+
+````{roto:method} InsertionInfo.prefix_new() -> bool
+````
+
+`````
+
+`````{roto:type} BgpMsg
+BGP UPDATE message
+
+````{roto:method} BgpMsg.aspath_contains(to_match: Asn) -> bool
+````
+
+````{roto:method} BgpMsg.aspath_origin(to_match: Asn) -> bool
+````
+
+````{roto:method} BgpMsg.contains_community(to_match: u32) -> bool
+````
+
+````{roto:method} BgpMsg.has_attribute(to_match: u8) -> bool
+````
+
+`````
+
+`````{roto:type} BmpMsg
+BMP Message
+
+````{roto:method} BmpMsg.is_ibgp(asn: Asn) -> bool
+````
+
+````{roto:method} BmpMsg.is_peer_down() -> bool
+````
+
+````{roto:method} BmpMsg.aspath_contains(to_match: Asn) -> bool
+````
+
+````{roto:method} BmpMsg.aspath_origin(to_match: Asn) -> bool
+````
+
+````{roto:method} BmpMsg.contains_community(to_match: u32) -> bool
+````
+
+````{roto:method} BmpMsg.has_attribute(to_match: u8) -> bool
+````
+
+`````
+
+`````{roto:type} PerPeerHeader
+BMP Per Peer Header
 
 `````
 
