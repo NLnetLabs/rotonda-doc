@@ -9,21 +9,34 @@ keep state.
 bmp-tcp-in
 ----------
 
-This unit implements an :RFC:`7854` "BGP Monitoring Protocol (BMP)" "monitoring
-station" [1] by listening on a specified TCP/IP address and port number for
-incoming connections from zero or more BMP capable routers. This unit
-processes the incoming raw BMP messages through a BMP state machine in order
-to extract, store and propagate downstream the route announcements and
+This unit implements an :RFC:`7854` "BGP Monitoring Protocol (BMP)"
+"monitoring station" [1] by listening on a specified TCP/IP address and port
+number for incoming connections from zero or more BMP capable routers. This
+unit processes the incoming raw BMP messages through a BMP state machine in
+order to extract, store and propagate downstream the route announcements and
 withdrawals.
 
 This unit extends the HTTP API with endpoints that output HTML and text
 formatted information about the monitored routers currently streaming data
-into Rotonda. These endpoints are intended for operators as a diagnostic aid
-and not for automation purposes. The output format is not intended to be
+into Rotonda. These endpoints are intended for operators as a diagnostic
+aid and not for automation purposes. The output format is not intended to be
 machine readable and may change without warning.
 
 Configuration Options
 ---------------------
+
+The ``bmp-tcp-in`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[units.<NAME>]
+	type = "bmp-tcp-in"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
+
 
 .. confval:: type (mandatory)
 
@@ -47,12 +60,24 @@ bgp-tcp-in
 ----------
 
 This unit listens on a specified TCP/IP address and port number for incoming
-connections from zero or more :RFC:`4271` [1] BGP speakers. Currently supported
-AFI/SAFI combinations are IPv4/Unicast, IPv6/Unicast, IPv4/Multicast and IPv6/
-Multicast.
+connections from zero or more :RFC:`4271` [1] BGP speakers. Currently
+supported AFI/SAFI combinations are IPv4/Unicast, IPv6/Unicast, IPv4/Multicast
+and IPv6/ Multicast.
 
 Configuration Options
 ----------------------
+
+The ``bgp-tcp-in`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[units.<NAME>]
+	type = "bgp-tcp-in"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
 
 .. confval:: type (mandatory)
 
@@ -114,10 +139,11 @@ Configuration Options
 .. confval:: protocols
 
 	The list of address families (AFI/SAFI) that is accepted from this peer. These
-	are announced in the BGP OPEN as MultiProtocol Capabilities (:RFC:`4760`).  In
+	are announced in the BGP OPEN as MultiProtocol Capabilities (:RFC:`4760`). In
 	order to receive 'as much as possible', list all options. If this setting is
-	omitted or set to the empty list, the session will only carry conventional
-	IPv4 Unicast information.
+	omitted or set to the empty list, the session will only carry conventional 	
+
+IPv4 Unicast information.
 
 	Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
@@ -129,6 +155,22 @@ open BGP session with the contents of the table dumps in it.
 
 It will load all the RIB entries and load them into a Rotonda RIB. Routes will
 be stored per peer.
+
+
+Configuration Options
+---------------------
+
+The ``mrt-in`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[units.<NAME>]
+	type = "mrt-in"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
 
 .. confval:: type (mandatory)
 

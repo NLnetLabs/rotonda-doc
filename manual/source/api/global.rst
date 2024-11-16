@@ -1,4 +1,4 @@
-Global Endpoints
+Endpoints
 ================
 
 The HTTP API offers endpoints for interacting with and monitoring Rotonda at
@@ -8,12 +8,11 @@ runtime:
 
     Human readable application status information
 
-.. confval:: GET /routers/
+.. confval:: GET /bmp-routers/
 
-    Base path. Use the <http_api_path> unit setting to change this if using
-    multiple instances of this unit.
+    Base path. Use the ``http_api_path``` configuration setting for the corresponding ``bmp-tcp-in`` component to change this URL.
 
-.. confval:: GET /routers/<ROUTER ID>
+.. confval:: GET /bmp-routers/<ROUTER_ID>
 
     This endpoint outputs information about the specified router if it is
     currently connected to the unit.
@@ -23,14 +22,15 @@ runtime:
 
     Three different forms of router ID are supported:
 
-    - [SOURCE IP]:[SOURCE PORT], OR
-    - [sysName], OR
-    - [populated router_id_template]
+    - ``[SOURCE_IP]:[SOURCE_PORT]``, OR
+    - ``[sysName]``, OR
+    - ``[populated router_id_template]``
 
     Parameters:
 
-    <ROUTER ID>            The id of the router to query information about.
+    ``<ROUTER_ID>``          The id of the router to query information about.
 
+.. confval:: GET /<RIB_NAME>/prefixes/<IP_ADDR_PART>/<PREFIX_LENGTH>[?includeMoreSpecifics|includeLessSpecifics]
 
 Pipeline Interaction
 

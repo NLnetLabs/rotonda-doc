@@ -1,6 +1,9 @@
 Targets
 =======
 
+mqtt-out
+--------
+
 This target publishes JSON events to an MQTT broker via a TCP connection.
 
 .. tip:: The MQTT broker is not part of Rotonda, it is a separate service that
@@ -24,20 +27,25 @@ The JSON event structure produced by this target is a direct serialization
 of the received Roto type as JSON, i.e. a record with a set of key/value
 pairs.
 
-mqtt-out
---------
-
-This target can be used to do stuff.
-
 Configuration Options
 ---------------------
 
+The ``mqtt-out`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[target.<NAME>]
+	type = "mqtt-out"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
+
 .. confval:: type (mandatory)
 
-	This can be either ``mqtt-out``, which will output to a configurable MQTT
-	stream, or it can be ``null-out``, meaning there will be no payloads forwarded
-	after the payload is stored in the RIB.
-
+	This must be set to ``mqtt-out`` for this type of target.
+	
 .. confval:: sources (mandatory)
 
 	An ["array", "of", "upstream", "unit", "names"] from which data will be
@@ -117,11 +125,26 @@ null-out
 This target discards everything it receives.
 
 Rotonda requires that there always be at least one target. Using this target
-allows you to run Rotonda for testing purposes without any "real" targets,
-or if the only output is via Roto script output stream messages.
+allows you to run Rotonda without any output at the east-side of the pipeline.
 
 Configuration Options
 ---------------------
+
+The ``null-out`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[target.<NAME>]
+	type = "null-out"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
+
+.. confval:: type (mandatory)
+
+	This must be set to `null-out` for this type of target.
 
 .. confval:: source (mandatory)
 

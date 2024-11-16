@@ -171,11 +171,3 @@ Open-source with professional support services
    :glob:
 
    roto/*
-
-.. toctree::
-   :caption: Troubleshooting
-   :hidden:
-   :glob:
-   
-   troubleshooting/*
-

@@ -14,6 +14,18 @@ withdrawals cause routes to be flagged as withdrawn in the store.
 Physical RIB
 ------------
 
+The ``rib`` component can be defined in the Rotonda configuration file,
+like this:
+
+.. code-block:: text
+
+	[units.<NAME>]
+	type = "rib"
+	..
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
+
 .. confval:: rib_type (mandatory)
 
 	The type of this RIB. Can be either ``physical``, or ``virtual``.
@@ -26,7 +38,7 @@ Physical RIB
 
 	The relative URL prefix for HTTP REST API calls responded to by this instance of this unit.
 
-	Default: ``/prefixes/``
+	Default: ``/<NAME>/prefixes/``
 
 .. confval:: query_limits.more_specifics.shortest_prefix_ipv4 
 
