@@ -15,7 +15,7 @@ The composable, programmable BGP Engine
 ---------------------------------------
 
 The current version of Rotonda allows you to open BGP and BMP sessions and
-collect incoming routes from many peers into a in-memory database, modeled as
+collect incoming routes from many peers into an in-memory database, modeled as
 a Routing Information Base (RIB). It also supports importing routes from MRT
 files into this database. Conditions for accepting incoming routes and sending
 messages to log files or a MQTT stream can be created using filters with the
@@ -43,11 +43,11 @@ Modularity
 Flexibility
    The behaviour of the units can be modeled by using a small, fun programming
    language called ``Roto``, that we created to combine flexibility and
-   ease-of-use. Right now, ``Roto`` is used define filters that run in the hot
-   path of the Rotonda pipeline. It's our goal to integrate filter definition,
-   configuration syntax, and query syntax into ``Roto`` scripts in one place.
-   Modifying, versioning and provisioning of your ``Roto`` scripts should be
-   as straight forward as possible.
+   ease-of-use. Right now, ``Roto`` is used to define filters that run in
+   the hot path of the Rotonda pipeline. It's our goal to integrate filter
+   definition, configuration syntax, and query syntax into ``Roto`` scripts in
+   one place. Modifying, versioning and provisioning of your ``Roto`` scripts
+   should be as straight forward as possible.
 
 Tailored Performance
    All data structures come with a trade-off between space and time, and
