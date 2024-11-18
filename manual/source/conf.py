@@ -67,6 +67,7 @@ extensions = [
 ]
 
 autosectionlabel_prefix_document = True
+suppress_warnings = ['autosectionlabel.*']
 
 # Add any paths that contain templates here, relative to this directory.
 
@@ -109,7 +110,6 @@ html_logo = 'resources/rotonda-logo-white.svg'
 html_favicon = 'resources/rotonda-icon-offwhite-128x128.png'
 html_theme_options = {
     'logo_only': True,
-    'display_version': True,
     'style_external_links': False,
     'globaltoc_maxdepth': 1,
 }

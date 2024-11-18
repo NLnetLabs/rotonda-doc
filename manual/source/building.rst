@@ -9,7 +9,7 @@ Building From Source
    version if possible.
 
    If you do build from source but run into problems afterwards, refer to
-   :doc:`/config/introduction` or :ref:`troubleshooting`.
+   :doc:`/configuration`.
 
 
 

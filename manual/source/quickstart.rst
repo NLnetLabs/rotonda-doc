@@ -23,8 +23,9 @@ github.com/ NlnetLabs/rotonda/>`_.
 Alternatively you can use this ``rotonda.conf``:
 
 .. code-block:: toml
-	http_listen = ["0.0.0.0:8080"]
 
+	http_listen = ["0.0.0.0:8080"]
+	
 	[units.bmp-in]
 	type = "bmp-tcp-in"
 	listen = "0.0.0.0:11019"
@@ -165,8 +166,7 @@ Querying the RIB
 
 .. tip::
 
-	I really helps if you have ``curl`` and ``jq`` installed to query the JSON
-API.
+	I really helps if you have ``curl`` and ``jq`` installed to query the JSON API.
 
 You should now have routes loaded into the RIB in Rotonda, and we're now going
 to query them. We have to do some second guessing as to what's in your RIB,

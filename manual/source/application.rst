@@ -41,10 +41,10 @@ Components
 A Connector is a component that connects Rotonda to an external source of
 BGP data. This may currently be a BGP speaker (a router through a peering
 session), a BMP monitored router, or one of multiple MRT files. Rotonda
-requires at least one connector to be present. The ``bmp-tcp-in`` and the ``bgp-tcp-in`` connector types have a programmable :doc:`Roto </roto/introduction>` filter built in.
+requires at least one connector to be present. The ``bmp-tcp-in`` and the ``bgp-tcp-in`` connector types have a programmable :doc:`Roto </roto/00_introduction>` filter built in.
 
 A RIB is situated at an intermediate stage in the Rotonda pipeline and also
-has a :doc:`Roto </roto/introduction>` programmable filter in front of it. It
+has a :doc:`Roto </roto/00_introduction>` programmable filter in front of it. It
 allows users to filter, transform and store BGP (and related) data.
 
 A Target is a component that is situated at a final output stage in Rotonda,

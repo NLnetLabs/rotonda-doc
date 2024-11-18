@@ -133,7 +133,7 @@ class RecipeDomain(Domain):
     data_version = 0
 
     def all_objects(self):
-        print(self.data)
+        # print(self.data)
         for k, v in self.data.items():
             if k == "version":
                 continue
@@ -153,7 +153,7 @@ class RecipeDomain(Domain):
         )
 
     def resolve_xref(self, env, fromdocname, builder, typ, target, node, contnode):
-        print(f"RESOLVING REF: {repr(target)}")
+        # print(f"RESOLVING REF: {repr(target)}")
 
         match = [
             (docname, anchor)

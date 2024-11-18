@@ -27,12 +27,6 @@ datasets in filters, reading routes from Kafka streams, and more.
 
 Rotonda is and always will be free, open-source software.
 
-Below is a brief overview of the key concepts and characteristics
-of Rotonda. If you want to try it out right away, consider following
-the :doc:`Quick Tour<quicktour/00_running_rotonda>`, or jump directly to
-the :doc:`Installation Instructions<installation>`.
-
-
 Goals
 -----
 
@@ -138,14 +132,6 @@ Open-source with professional support services
    application
 
 .. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Configuration
-   :name: toc-configuration
-   
-   configuration
-
-.. toctree::
    :maxdepth: 3
    :hidden:
    :caption: Components
@@ -153,6 +139,14 @@ Open-source with professional support services
    :glob:
 
    components/*
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Configuration
+   :name: toc-configuration
+   
+   configuration
 
 .. toctree::
    :maxdepth: 2

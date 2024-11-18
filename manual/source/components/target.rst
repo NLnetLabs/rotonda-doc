@@ -42,23 +42,23 @@ like this:
 where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
 
-.. confval:: type (mandatory)
+.. describe:: type (mandatory)
 
 	This must be set to ``mqtt-out`` for this type of target.
 	
-.. confval:: sources (mandatory)
+.. describe:: sources (mandatory)
 
 	An ["array", "of", "upstream", "unit", "names"] from which data will be
 	received.
 
-.. confval:: destination (mandatory)
+.. describe:: destination (mandatory)
 
 	A "host:port" string specifying the host or IP address of an MQTT broker
 	to connect to. If the ":port" part is omitted the IANA registered MQTT port
 	number [3] 1883 will be used. Note: Only unencrypted TCP connections are
 	supported, i.e. TLS and WS are not supported.
 
-.. confval:: cliend_id (optional)
+.. describe:: cliend_id (optional)
 
 	A unique name to identify the client to the server in order to hold state
 	about the session. If empty the server will use a clean session and assign a
@@ -67,7 +67,7 @@ of the ``sources`` field in a receiving component.
 
 Default: ""
 
-.. confval:: qos (optional)
+.. describe:: qos (optional)
 
 	MQTT quality-of-service setting for determining how many times a message can
 	be delivered:
@@ -81,27 +81,27 @@ Default: ""
 
 Default: 2
 
-.. confval:: queue_size (optional)
+.. describe:: queue_size (optional)
 
 	The number of messages that can be buffered for delivery to the MQTT broker.
 
 	Default: 1000
 
-.. confval:: connect_retry_secs (optional)
+.. describe:: connect_retry_secs (optional)
 
 	The number of seconds to wait before attempting to reconnect to the MQTT
 	broker if the connection is lost.
 
 	Default: 60
 
-.. confval:: publish_max_secs (optional)
+.. describe:: publish_max_secs (optional)
 
 	The number of seconds to wait before timing out an attempt to publish a
 	message to the MQTT broker.
 
 	Default: 5
 
-.. confval:: topic_template (optional)
+.. describe:: topic_template (optional)
 
 	A "string" template that will be used to determine the MQTT topic to which
 	events will be published. If present, the "{id}" placeholder will be replaced
@@ -111,11 +111,11 @@ Default: 2
 
 Default: "rotonda/{id}"
 
-.. confval:: username (optional)
+.. describe:: username (optional)
 
 	A "string" username for login to the MQTT broker.
 
-.. confval:: password (optional)
+.. describe:: password (optional)
 
 	A "string" password for login to the MQTT broker.
 
@@ -142,10 +142,10 @@ like this:
 where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
 
-.. confval:: type (mandatory)
+.. describe:: type (mandatory)
 
 	This must be set to `null-out` for this type of target.
 
-.. confval:: source (mandatory)
+.. describe:: source (mandatory)
 
 	The upstream unit from which data will be received.

@@ -52,31 +52,31 @@ The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bmp-in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. confval:: filter bmp-in(BmpMsg, Log, Provenance) -> Verdict
+.. describe:: filter bmp-in(BmpMsg, Log, Provenance) -> Verdict
 
 	Argument Types
 	--------------
 
-	.. confval:: BmpMsg
+	.. describe:: BmpMsg
 
 	The BMP Message that is flowing through this filter. It can be inspected, 
 	and will be sent out unmodified. Note that the individual parts of the
 	NLRI of the message cannot be inspected. If you wish to do this, you
 	should do this further in the pipeline, e.g. on the filter in a RIB.
 
-	.. confval:: Log
+	.. describe:: Log
 
 	The output value that will be sent to a configured output, such as
 	``mqtt-out``.
 
-	.. confval:: Provenance
+	.. describe:: Provenance
 
 	Contextual data about the session.
 	
 	Return Value
 	------------
 
-	.. confval:: Verdict
+	.. describe:: Verdict
 	
 	The resulting value of this filter, a of value ``accept`` or ``reject``.
 
@@ -96,18 +96,18 @@ where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
 
 
-.. confval:: type (mandatory)
+.. describe:: type (mandatory)
 
 This must be set to `bmp-tcp-in` for this type of connector.
 
-.. confval:: listen (mandatory)
+.. describe:: listen (mandatory)
 
 The IP address and the port to listen on for incoming BGP connections from BGP
 speakers, in the form of: `"ip_address:port"`.
 	
 Example: ``listen = "0.0.0.0:11019"``.
 
-.. confval:: http_api_path (optional)
+.. describe:: http_api_path (optional)
 
 The relative URL prefix for HTTP REST API calls responded to by this instance
 of this unit.
@@ -144,29 +144,29 @@ The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bmp-in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. confval:: filter bgp-in(BgpMsg, Log, Provenance) -> Verdict
+.. describe:: filter bgp-in(BgpMsg, Log, Provenance) -> Verdict
 
 	Argument Types
 	--------------
 
-	.. confval:: BgpMsg (read-only)
+	.. describe:: BgpMsg (read-only)
 
 	The BGP Message that is flowing through this filter. It can be inspected,
 	and will be sent out unmodified.
 
-	.. confval:: Log
+	.. describe:: Log
 
 	The output value that will be sent to a configured output, such as
 	``mqtt-out``.
 
-	.. confval:: Provenance (read-only)
+	.. describe:: Provenance (read-only)
 
 	Contextual data about the session.
 	
 	Return Value
 	------------
 
-	.. confval:: Verdict
+	.. describe:: Verdict
 	
 	The resulting value of this filter, a of value ``accept`` or ``reject``.
 
@@ -185,28 +185,28 @@ like this:
 where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
 
-.. confval:: type (mandatory)
+.. describe:: type (mandatory)
 
 	This must be set to `bgp-tcp-in` for this type of connector.
 
-.. confval:: listen (mandatory)
+.. describe:: listen (mandatory)
 
 	The IP address and the port to listen on for incoming BGP connections from BGP
 	speakers, in the form of: `"ip_address:port"`.
 
 	Example: ``listen = "10.1.0.254:179"``
 
-.. confval:: my_asn (mandatory)
+.. describe:: my_asn (mandatory)
 
 	The positive number of the Autonomous System in which this instance of Rotonda
 	is operating and which will be sent by this BGP speaker in its :RFC:`4271` BGP
 	OPEN message in the "My Autonomous Number" field [3].
 
-.. confval:: my_bgp_id (mandatory)
+.. describe:: my_bgp_id (mandatory)
 
 	An array of four positive integer numbers, e.g. [1, 2, 3, 4], which together define per RFC 4271 "A 4-octet unsigned integer that indicates the BGP Identifier of the sender of BGP messages" which is "determined up startup and is the same for every local interface and BGP peer" [2].
 
-.. confval:: peers."<ADDRESS>" (optional)
+.. describe:: peers."<ADDRESS>" (optional)
 
 	This setting defines the set of peers from which incoming connections will be accepted. By default no such peers are defined and thus all incoming connections are accepted.
 
@@ -217,7 +217,7 @@ of the ``sources`` field in a receiving component.
 	The value of this setting is a TOML table which may be specified inline or as
 	a separate section in the config file, e.g.:
 
-	.. code-block:: toml
+	.. code-block:: text
 
 		[units.my-bgp-in.peers.".."]
 		name = ..
@@ -225,24 +225,24 @@ of the ``sources`` field in a receiving component.
 
 	Or:
 
-	.. code-block:: toml
+	.. code-block:: text
 
 		[units.my-bgp-in]
 		peers.".." = { name = .., remote_asn = .. }
 
 	These sections have the following fields:
 
-    .. confval:: name
+    .. describe:: name
 	
 	A name identifying the remote peer intended to make it easier for the operator to know which BGP speaker these settings refer to.
 
-    .. confval:: remote_asn
+    .. describe:: remote_asn
 	
 	The positive number, or [set, of, numbers], of the Autonomous System(s) which from which a remote BGP speaker that connects to this unit may identify itself (in the "My Autonomous Number" field of the RFC 4271 BGP OPEN message [3]) as belonging to.
 
 	Default: None
 
-.. confval:: protocols
+.. describe:: protocols
 
 	The list of address families (AFI/SAFI) that is accepted from this peer. These
 	are announced in the BGP OPEN as MultiProtocol Capabilities (:RFC:`4760`). In
@@ -301,10 +301,10 @@ like this:
 where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
 
-.. confval:: type (mandatory)
+.. describe:: type (mandatory)
 
 	This must be set to `mrt-in` for this type of connector.
 
-.. confval:: filename (mandatory)
+.. describe:: filename (mandatory)
 
 	The path to the ``mrt`` file containing one or more table dump entries, that will be loaded into the receiving RIB.
