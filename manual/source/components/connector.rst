@@ -247,9 +247,7 @@ of the ``sources`` field in a receiving component.
 	The list of address families (AFI/SAFI) that is accepted from this peer. These
 	are announced in the BGP OPEN as MultiProtocol Capabilities (:RFC:`4760`). In
 	order to receive 'as much as possible', list all options. If this setting is
-	omitted or set to the empty list, the session will only carry conventional 	
-
-IPv4 Unicast information.
+	omitted or set to the empty list, the session will only carry conventional IPv4 Unicast information.
 
 	Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 

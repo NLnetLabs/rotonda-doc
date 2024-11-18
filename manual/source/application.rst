@@ -55,11 +55,26 @@ Each component is able to process certain types of input and emit certain
 types of output. More information about each component type is given in the
 next sections.
 
+Route & Route Context
+=====================
+
+All connectors send out a stream of Routes to all connected components to
+their east side. Together with each Route, they send out meta-data about the
+session the connector has opened with the third-party system it ingresses
+data from. This ``RouteContext`` object is passed from component to component
+without being modified. One important field in this ``RouteContext``` object
+is the ``ingress_id`` field. This field refers to a field that is globally
+assigned by the Rotonda application to each unique sources of routing data.
+Some connectors create a stream that only has one ``ingress_id``, other
+connectors produce multiple of these ids. The RIB component stores, and allows
+user to retrueve, the routes it receives per ``ingress_id``. For the ``bmp-tcp-in`` connector Rotonda creates an HTTP endpoint that gives an overview of all ``ingress_id``s it produces.
+
 Definition & Configuration
---------------------------
+==========================
 
 All components have their own section in the configuration file and names
 must be unique, types must be valid and any mandatory settings specific to the
 component type must be specified. Components are included in the
 pipeline by setting the ``sources`` field inside the receiving component to
 include the name of the sending component.
+
