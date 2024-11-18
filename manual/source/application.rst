@@ -58,16 +58,25 @@ next sections.
 Route & Route Context
 =====================
 
-All connectors send out a stream of Routes to all connected components to
-their east side. Together with each Route, they send out meta-data about the
-session the connector has opened with the third-party system it ingresses
-data from. This ``RouteContext`` object is passed from component to component
-without being modified. One important field in this ``RouteContext``` object
-is the ``ingress_id`` field. This field refers to a field that is globally
-assigned by the Rotonda application to each unique sources of routing data.
-Some connectors create a stream that only has one ``ingress_id``, other
-connectors produce multiple of these ids. The RIB component stores, and allows
-user to retrueve, the routes it receives per ``ingress_id``. For the ``bmp-tcp-in`` connector Rotonda creates an HTTP endpoint that gives an overview of all ``ingress_id``s it produces.
+All connectors create a session with a designated third-party system and
+explode the incoming messages into a stream of (Prefix, Route, RouteContext)
+tuples, where Prefix is a IP Prefix, Route is an object representing a
+Route according to :RFC:`4271`, i.e. a collection of Path Attributes and
+the Next Hop. The RouteContext object contains meta-data about the session.
+This ``RouteContext`` object is passed from component to component without
+being modified. One important field in this ``RouteContext`` object is the
+``ingress_id`` field. This field refers to a field that is globally assigned
+by the Rotonda application to each unique source of routing data. Some
+connectors create a stream that only has one ``ingress_id``, other connectors
+produce multiple of these ids.
+
+The RIB component stores — and allows user to retrieve — the routes it
+receives per ``ingress_id``. In other words: the two-tuple ``(Prefix,
+ingress_id)`` is the key to a RIB, and the RIB overwrites older values for
+this key with new values.
+
+For the ``bmp-tcp-in`` connector Rotonda creates an HTTP endpoint that gives
+an overview of all ``ingress_ids`` it produces.
 
 Definition & Configuration
 ==========================
