@@ -11,8 +11,35 @@ to a given IP prefix address and length.
 Upstream announcements cause routes to be added to the store. Upstream
 withdrawals cause routes to be flagged as withdrawn in the store.
 
-Physical RIB
-------------
+Pipeline Interaction
+--------------------
+
+The ``rib`` component ingests messages from type ``Route``, that maybe
+accompagnied by an object of type ``RouteContext``. It is first filtered, and then may be stored in the RIB.
+
+.. raw:: html
+
+    <pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
+                             HTTP API
+                                ^ |
+                                | |
+                                | v
+                +-------------------------------------+
+    TCP/IP -->  | BmpMessage -> filter --> BmpMessage | --> N * (Prefix, Route, RouteContext)
+                +----------------|--------------------+
+                                 |
+                                 v         
+                      0..N Values of Log output
+    </pre>
+
+
+Filtering
+---------
+
+
+
+Configuration Options
+---------------------
 
 The ``rib`` component can be defined in the Rotonda configuration file,
 like this:
