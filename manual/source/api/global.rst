@@ -30,29 +30,7 @@ runtime:
 
     ``<ROUTER_ID>``          The id of the router to query information about.
 
-.. confval:: GET /<RIB_NAME>/prefixes/<IP_ADDR_PART>/<PREFIX_LENGTH>[?includeMoreSpecifics|includeLessSpecifics]
+.. confval:: GET /prefixes/<IP_ADDR_PART>/<PREFIX_LENGTH>[?includeMoreSpecifics|includeLessSpecifics]
 
-Pipeline Interaction
+    The RIB in the pipeline can be queried for prefixes with these URLs.
 
-.. raw:: html
-
-        <pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
-                                HTTP API
-                                    ^ |
-                                    | |
-                                    | v
-                    +-------------------------------------+
-        TCP/IP -->  | BmpMessage -> filter --> BmpMessage | --> N * Route
-                    +----------------|--------------------+
-                                     |
-                                     v         
-                        0..N output streams each
-                        emitting values of a single RT
-        </pre>
-
-One Route value is output per prefix announced or withdrawn via a BGP UPDATE
-message received as the payload of a BMP Route Monitoring message. Withdrawals
-may also be synthesized due to BMP Peer Down notification or loss of TCP/IP
-connection to the monitored BMP router.
-
-.. [1]: https://www.rfc-editor.org/rfc/rfc7854
