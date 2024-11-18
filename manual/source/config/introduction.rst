@@ -27,21 +27,13 @@ This file must be in `TOML format <https://toml.io/>`_ and is structured as
 follows:
 
     - global settings
-    - 1 or more units
+    - 1 or more connectors
+    - 1 or more RIBs
     - 1 or more targets
 
 
 Global Settings
 ===============
-
-.. confval:: roto_scripts_path
-
-    A ``path/to/a/directory/containing/*.roto`` script files. Each script file will
-    be loaded & compiled and may be referred to in unit and target settings by
-    using the name of a filter defined in the script file with the filter_name
-    setting of the unit or target.
-
-    Default: None
 
 .. confval:: http_listen
 
