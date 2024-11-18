@@ -19,19 +19,18 @@ Taken together one can think of the flow of information like so:
 .. raw:: html
 
     <pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
-                                 (North)
-                                HTTP APIs
-                                   ^ |
-                                   | |
-                                   | v
-              (West) Connector --> RIB --> Null Target (East)
-                                    |
-                                    |
-                                    v
-                            Optional MQTT Target
-                                 (South)
-    </pre>
-
+	                             (North)
+	                             HTTP/API
+	                               │ ▲
+	                               │ │
+	                      ┌────────▼─┴────────┐
+	(West) Connector ─●───▶        RIB        │───▶ Null Target (East)
+	                  │   └─────────┬─────────┘
+	       Connector ─┘             │
+	                                ▼
+	                       Optional MQTT Target
+	                             (South)
+	</pre>
 Both connectors and RIBs have programmable *roto* filters built into them.
 
 Components

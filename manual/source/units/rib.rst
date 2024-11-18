@@ -9,29 +9,24 @@ It offers a HTTP API for querying the set of known routes to a longest match
 to a given IP prefix address and length.
 
 Upstream announcements cause routes to be added to the store. Upstream
-withdrawals cause routes to be flagged as withdrawn in the store.
+withdrawals cause routes to be flagged as withdrawn in the store. Routes and their withdrawals are stored per unique value of the field ``ingress_id`` in the ``RouteContext`` object.
 
 Pipeline Interaction
 --------------------
 
 The ``rib`` component ingests messages from type ``Route``, that maybe
-accompagnied by an object of type ``RouteContext``. It is first filtered, and then may be stored in the RIB.
+accompagnied by an object of type ``RouteContext``. It is first filtered, and then may be stored in the RIB. Finally, it gets sent out if it was not filtered out.
 
 .. raw:: html
 
     <pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
-                             HTTP API
-                                ^ |
-                                | |
-                                | v
-                +-------------------------------------+
-    TCP/IP -->  | BmpMessage -> filter --> BmpMessage | --> N * (Prefix, Route, RouteContext)
-                +----------------|--------------------+
-                                 |
-                                 v         
-                      0..N Values of Log output
-    </pre>
-
+	                                        HTTP/API
+	                                          │ ▲
+	                                          │ │
+	                               ┌──────────▼─┴─┐
+	(Prefix,Route,RouteContext) ───▶ filter──▶RIB ├──▶ (Prefix,Route,RouteContext)
+	                               └──────────────┘
+	</pre>
 
 Filtering
 ---------
