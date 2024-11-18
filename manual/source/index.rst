@@ -135,7 +135,7 @@ Open-source with professional support services
    :caption: Application
    :name: toc-application
 
-   units/00_intro
+   application
 
 .. toctree::
    :maxdepth: 2
@@ -143,7 +143,7 @@ Open-source with professional support services
    :caption: Configuration
    :name: toc-configuration
    
-   config/introduction
+   configuration
 
 .. toctree::
    :maxdepth: 3
@@ -152,7 +152,7 @@ Open-source with professional support services
    :name: toc-components
    :glob:
 
-   units/*
+   components/*
 
 .. toctree::
    :maxdepth: 2

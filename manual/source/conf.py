@@ -104,7 +104,7 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_logo = 'resources/rotonda-logo-white.svg'
 html_favicon = 'resources/rotonda-icon-offwhite-128x128.png'
 html_theme_options = {
