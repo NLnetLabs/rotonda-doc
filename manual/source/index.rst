@@ -127,7 +127,7 @@ Open-source with professional support services
    :caption: Quick Start
    :name: toc-quick-start
 
-   quicktour/00_running_rotonda
+   quickstart
 
 .. toctree::
    :maxdepth: 2
