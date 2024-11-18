@@ -23,21 +23,12 @@ github.com/ NlnetLabs/rotonda/>`_.
 Alternatively you can use this ``rotonda.conf``:
 
 .. code-block:: toml
-
-	log_level = "info"
-	log_target = "stderr"
-	log_facility = "daemon"
-	log_file = "./rotonda.log"
-
-	roto_script = "filters.roto"
-
 	http_listen = ["0.0.0.0:8080"]
 
 	[units.bmp-in]
 	type = "bmp-tcp-in"
 	listen = "0.0.0.0:11019"
 	http_api_path = "/bmp-routers/"
-	tracing_mode = "Off"
 
 	[units.rib]
 	type = "rib"
@@ -48,89 +39,6 @@ Alternatively you can use this ``rotonda.conf``:
 	[targets.null]
 	type = "null-out"
 	sources = ["rib"]
-
-This file references a roto script called ``filters.roto``. It can also be
-downloaded from the above mentioned GitHub repository. You can alse use this
-file:
-
-.. code-block:: roto
-
-	filter-map bgp-in(
-	    output: Log,
-	    bgp: BgpMsg,
-	    prov: Provenance,
-	) {
-
-	    define {
-	        origin_to_log = AS65536;
-	        community_to_log = 0xffff029a;
-	    }
-
-	    apply {
-	        if bgp.aspath_origin(origin_to_log) {
-	            output.log_matched_origin(origin_to_log);
-	        }
-	        if bgp.contains_community(community_to_log) {
-	            output.log_matched_community(community_to_log)
-	        }
-
-	        accept
-	    }
-	}
-
-	filter-map bmp-in(
-	    output: Log,
-	    bmp: BmpMsg,
-	    prov: Provenance,
-	) {
-	    define {
-	        my_asn = AS12345;
-	        asn_to_log = AS65536;
-	        community_to_log = 0xffff029a;
-	    }
-
-	    apply {
-	        if bmp.is_peer_down() {
-	            output.log_peer_down()
-	        }
-	        if bmp.is_ibgp(my_asn) {
-	            reject
-	        } else {
-	            if bmp.aspath_contains(asn_to_log) {
-	                output.log_matched_asn(asn_to_log);
-	            }
-	            if bmp.contains_community(community_to_log) {
-	                output.log_matched_community(community_to_log)
-	            }
-	            accept
-	        }
-	    }
-	}
-
-	filter-map rib-in-pre(
-	    output: Log,
-	    route: Route,
-	    context: RouteContext,
-	) {
-
-	    define {
-	        attribute_to_log = 35;
-	        my_prefix = 100.40.0.0/17;
-	    }
-
-	    apply {
-	        if route.prefix_matches(my_prefix)  {
-	            output.log_custom(10, 20);
-	            output.log_prefix(my_prefix);
-	        }
-
-	        accept
-	    }
-	}
-
-Make sure that it lives in the same directory as the ``rotonda.conf`` you're
-using.
-
 
 Starting a Rotonda instance
 ===========================
