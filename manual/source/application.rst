@@ -31,7 +31,9 @@ Taken together one can think of the flow of information like so:
 	                       Optional MQTT Target
 	                             (South)
 	</pre>
-Both connectors and RIBs have programmable *roto* filters built into them.
+
+Some type of connectors and all RIBs have programmable *roto* filters built
+into them.
 
 Components
 ==========

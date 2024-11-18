@@ -112,7 +112,7 @@ Example: ``listen = "0.0.0.0:11019"``.
 The relative URL prefix for HTTP REST API calls responded to by this instance
 of this unit.
 	
-Defaults to ``/routers/``.
+Defaults to ``/bmp-routers/``.
 
 bgp-tcp-in
 ----------
