@@ -33,7 +33,6 @@ Alternatively you can use this ``rotonda.conf``:
 
 	[units.rib]
 	type = "rib"
-	rib_type = "Physical"
 	http_api_path = "/rib/"
 	sources = ["bmp-in"]
 
@@ -136,7 +135,6 @@ The next step is to kill your Rotonda instance, and edit the configuration file 
 	[units.rib]
 	type = "rib"
 	sources = ["mrt-in"]
-	rib_type = "Physical"
 
 	[targets.null]
 	type = "null-out"
