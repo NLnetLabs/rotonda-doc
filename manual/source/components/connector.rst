@@ -26,9 +26,13 @@ Pipeline Interaction
 --------------------
 
 The ``bmp-tcp-in`` component ingests BMP Messages from a source over a
-configured TCP session, optionally filters them, and explodes the NLRI into
-separate (Prefix, Route) tuples, that are sent out enriched with metadata of
-the session into the pipeline.
+configured TCP session, optionally filters them, and explodes the NLRI
+into separate ``(Prefix, Route, RouteContext)`` tuples, that are sent into the
+pipeline.
+
+Rotonda will assign one unique ``ingress_id`` per router present in the stream
+produced by a ``bmp-tcp-in`` connector. Closing and opening the session may
+lead to different ids per router.
 
 .. raw:: html
 
@@ -126,8 +130,11 @@ Pipeline Interaction
 --------------------
 
 The ``bgp-tcp-in`` component ingests BMP Messages from a source, optionally
-filters them, and explodes the NLRI into separate (Prefix, Route) tuples, that
-are sent out enriched with metadata of the session into the pipeline.
+filters them, and explodes the NLRI into separate ``(Prefix, Route,
+RouteContext)`` tuples, that are sent out into the pipeline.
+
+Rotonda will create one unique ``ingress_id`` per open session per
+``bgp-tcp-in`` connector.
 
 .. raw:: html
 
@@ -267,11 +274,13 @@ receiving RIB.
 Pipeline Interaction
 --------------------
 
-The ``mrt-in`` component ingests MRT messages from a file, extracts all
-the peers mentioned in the TableDump tables in it, and all the BGP messages
-encapsulated in it. It then explodes all the BGP messages into (prefix, Route)
-tuples, together with session data, including data about the peers. It keeps a
-session open for the file for the duration of the lifetime of the component.
+The ``mrt-in`` component ingests MRT messages from a file, extracts all the
+peers mentioned in the ``PEER_INDEX_TABLE`` in the TableDump, and all the
+BGP messages encapsulated in it. It then explodes all the BGP messages into
+``(prefix, Route, RouteContext)`` tuples. It keeps a session open for the file
+for the duration of the lifetime of the component.
+
+Rotonda will assign one ``ingress_id`` per peer found in the TableDump table.
 
 .. raw:: html
 

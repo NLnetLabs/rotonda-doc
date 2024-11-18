@@ -8,14 +8,21 @@ which they were received.
 It offers a HTTP API for querying the set of known routes to a longest match
 to a given IP prefix address and length.
 
+The key of the RIB is the tuple ``(Prefix, ingress_id)``. This means that new
+values for this key will override existing values in the RIB.
+
 Upstream announcements cause routes to be added to the store. Upstream
-withdrawals cause routes to be flagged as withdrawn in the store. Routes and their withdrawals are stored per unique value of the field ``ingress_id`` in the ``RouteContext`` object.
+withdrawals cause routes to be flagged as withdrawn in the store. Routes and
+their withdrawals are stored per unique value of the field ``ingress_id`` in
+the ``RouteContext`` object.
 
 Pipeline Interaction
 --------------------
 
 The ``rib`` component ingests messages from type ``Route``, that maybe
-accompagnied by an object of type ``RouteContext``. It is first filtered, and then may be stored in the RIB. Finally, it gets sent out if it was not filtered out.
+accompagnied by an object of type ``RouteContext``. It is first filtered,
+and then may be stored in the RIB. Finally, it gets sent out if it was not
+filtered out.
 
 .. raw:: html
 
