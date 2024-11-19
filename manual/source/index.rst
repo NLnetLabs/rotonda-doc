@@ -59,7 +59,7 @@ Tailored Performance
 Observability
    All Rotonda units will have their own finely-grained logging capabilities,
    and some have built-in queryable JSON API interfaces to give information
-   about their current state and content through Rotonda’s built-in HTTPS
+   about their current state and content through Rotonda’s built-in HTTP
    server. Signals can be sent to other applications. Moreover, Rotonda aims
    to offer true observability by allowing the user to trace BMP/BGP packets
    start-to-end through the whole pipeline.
@@ -73,7 +73,7 @@ Storage Persistence
 
 External Data Sources
    ``Roto`` filter units should be able to make decisions based on real-time
-   external data sources. Similarly filter units should be ahlt to make
+   external data sources. Similarly filter units should be able to make
    decisions based on data present in multiple RIBs. External data sources
    can be, among others, files, databases or even a RIB backed by an RTR
    connection.

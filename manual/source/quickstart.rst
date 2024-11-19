@@ -1,5 +1,5 @@
 For this quick start we assume that you already have installed Rotonda with
-one of the methods describe in the (see :doc:`Installation </installation>`)
+one of the methods described in the (see :doc:`Installation </installation>`)
 section.
 
 We will be invoking the Rotonda binary directly only, so either it needs to

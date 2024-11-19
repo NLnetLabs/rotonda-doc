@@ -2,15 +2,16 @@ Pipeline
 ========
 
 A Rotonda application consists of multiple components strung together into a
-pipeline. Currently Rotonda features three different types of components: Connectors, RIB and Targets.
+pipeline. Currently Rotonda features three different types of components:
+Connectors, RIBs and Targets.
 
 Data flows from West to East beginning with a connector, through
-one or more intermediate ribs and out terminating at at least one target.
+one or more intermediate RIBs and out terminating at at least one target.
 
 Additionally Rotonda has HTTP interfaces to the North and output stream
 interfaces to the South. The HTTP interfaces to the North may be used to
-inspect and interact with the application. a RIB extends the HTTP interface
-with additional capabilities. The target to the South provide support for
+inspect and interact with the application. A RIB extends the HTTP interface
+with additional capabilities. The target to the South provides support for
 alternate forms of output such as MQTT event publication and logging/capture
 to file.
 
@@ -40,7 +41,7 @@ Components
 
 A Connector is a component that connects Rotonda to an external source of
 BGP data. This may currently be a BGP speaker (a router through a peering
-session), a BMP monitored router, or one of multiple MRT files. Rotonda
+session), a BMP monitored router, or one or multiple MRT files. Rotonda
 requires at least one connector to be present. The ``bmp-tcp-in`` and the ``bgp-tcp-in`` connector types have a programmable :doc:`Roto </roto/00_introduction>` filter built in.
 
 A RIB is situated at an intermediate stage in the Rotonda pipeline and also

@@ -36,7 +36,7 @@ lead to different ids per router.
 
 .. raw:: html
 
-	<pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
+	<pre style="font-family: menlo,mono; font-weight: 400; font-size:0.75em;">
 	                       HTTP API
 	                         │ ▲
 	                         │ │
@@ -45,7 +45,7 @@ lead to different ids per router.
 	          └───────────────┬────────────────┘
 	                          │
 	              ┌───────────▼──────────────┐
-	              │0..N values of Log output │
+	              │0..M values of Log output │
 	              └──────────────────────────┘
 	</pre>
 
@@ -70,8 +70,7 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 
 	.. describe:: Log
 
-	The output value that will be sent to a configured output, such as
-	``mqtt-out``.
+    Handle to emit log entries to a configured output, such as ``mqtt-out``.
 
 	.. describe:: Provenance
 
@@ -82,7 +81,7 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 
 	.. describe:: Verdict
 	
-	The resulting value of this filter, a of value ``accept`` or ``reject``.
+	The resulting value of this filter, either ``accept`` or ``reject``.
 
 Configuration Options
 ---------------------
@@ -106,8 +105,8 @@ This must be set to `bmp-tcp-in` for this type of connector.
 
 .. describe:: listen (mandatory)
 
-The IP address and the port to listen on for incoming BGP connections from BGP
-speakers, in the form of: `"ip_address:port"`.
+The IP address and the port to listen on for incoming BMP connections from
+routers, in the form of: `"ip_address:port"`.
 	
 Example: ``listen = "0.0.0.0:11019"``.
 
@@ -124,21 +123,21 @@ bgp-tcp-in
 This unit listens on a specified TCP/IP address and port number for incoming
 connections from zero or more :RFC:`4271` [1] BGP speakers. Currently
 supported AFI/SAFI combinations are IPv4/Unicast, IPv6/Unicast, IPv4/Multicast
-and IPv6/ Multicast.
+and IPv6/Multicast.
 
 Pipeline Interaction
 --------------------
 
-The ``bgp-tcp-in`` component ingests BMP Messages from a source, optionally
-filters them, and explodes the NLRI into separate ``(Prefix, Route,
+The ``bgp-tcp-in`` component ingests BGP UPDATE Messages from a source,
+optionally filters them, and explodes the NLRI into separate ``(Prefix, Route,
 RouteContext)`` tuples, that are sent out into the pipeline.
 
-Rotonda will create one unique ``ingress_id`` per open session per
-``bgp-tcp-in`` connector.
+Rotonda will create one unique ``ingress_id`` per session per ``bgp-tcp-in``
+connector.
 
 .. raw:: html
 
-	<pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
+	<pre style="font-family: menlo,mono; font-weight: 400; font-size:0.75em;">
 	          ┌──────────────────────────────────┐
 	TCP/IP ───▶ BgpMessage──▶filter──▶BgpMessage ├──▶ N * (Prefix,Route,RouteContext)
 	          └──────────────────────────────────┘
@@ -147,8 +146,8 @@ Rotonda will create one unique ``ingress_id`` per open session per
 Filtering
 ---------
 
-The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
-hard-coded name ``bmp-in``, and it should be included in the Roto filter file
+The ``bgp-tcp-in`` connector has a programmable Roto filter built-in with a
+hard-coded name ``bgp-in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
 .. describe:: filter bgp-in(BgpMsg, Log, Provenance) -> Verdict
@@ -158,13 +157,12 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 
 	.. describe:: BgpMsg (read-only)
 
-	The BGP Message that is flowing through this filter. It can be inspected,
-	and will be sent out unmodified.
+    The BGP UPDATE Message that is flowing through this filter. It can be
+    inspected, and will be sent out unmodified.
 
 	.. describe:: Log
 
-	The output value that will be sent to a configured output, such as
-	``mqtt-out``.
+    Handle to emit log entries to a configured output, such as ``mqtt-out``.
 
 	.. describe:: Provenance (read-only)
 
@@ -175,7 +173,7 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 
 	.. describe:: Verdict
 	
-	The resulting value of this filter, a of value ``accept`` or ``reject``.
+	The resulting value of this filter, either ``accept`` or ``reject``.
 
 Configuration Options
 ----------------------
@@ -211,15 +209,19 @@ of the ``sources`` field in a receiving component.
 
 .. describe:: my_bgp_id (mandatory)
 
-	An array of four positive integer numbers, e.g. [1, 2, 3, 4], which together define per RFC 4271 "A 4-octet unsigned integer that indicates the BGP Identifier of the sender of BGP messages" which is "determined up startup and is the same for every local interface and BGP peer" [2].
+    An array of four positive integer numbers, e.g. [1, 2, 3, 4], which together
+    define per RFC 4271 "A 4-octet unsigned integer that indicates the BGP
+    Identifier of the sender of BGP messages" which is "determined up startup
+    and is the same for every local interface and BGP peer" [2].
 
 .. describe:: peers."<ADDRESS>" (optional)
 
-	This setting defines the set of peers from which incoming connections will be accepted. By default no such peers are defined and thus all incoming connections are accepted.
+    This setting defines the set of peers from which incoming connections will
+    be accepted. By default no such peers are defined and thus all incoming
+    connections are rejected.
 
-	The double-quoted address value must be an IPv4 or IPv6 address or a prefix
-	(an IP address and positive integer maximum length separated by a forward
-	slash, e.g. "1.2.3.4/32").
+	The double-quoted address value must be an IPv4 or IPv6 address or a prefix,
+    e.g. "1.2.3.4" or "1.2.3.0/24.
 
 	The value of this setting is a TOML table which may be specified inline or as
 	a separate section in the config file, e.g.:
@@ -241,28 +243,39 @@ of the ``sources`` field in a receiving component.
 
     .. describe:: name
 	
-	A name identifying the remote peer intended to make it easier for the operator to know which BGP speaker these settings refer to.
+    A name identifying the remote peer intended to make it easier for the
+    operator to know which BGP speaker these settings refer to.
 
     .. describe:: remote_asn
 	
-	The positive number, or [set, of, numbers], of the Autonomous System(s) which from which a remote BGP speaker that connects to this unit may identify itself (in the "My Autonomous Number" field of the RFC 4271 BGP OPEN message [3]) as belonging to.
+    The expected Autonomous System Number for the remote BGP speaker that
+    connects to this unit (i.e. the "My Autonomous Number"
+    field of the RFC 4271 BGP OPEN message [3]).
+    Can be specified as either a single ASN:
+    .. code-block:: text
+        remote_asn = 65001
 
-	Default: None
+    Or a list of multiple ASNs, where the empty list means 'accept everything':
+
+    .. code-block:: text
+        remote_asn = [] # accept any ASN send by the peer
+        remote_asn = [65001, 65002, 65003] # accept any of these ASN
 
 .. describe:: protocols
 
-	The list of address families (AFI/SAFI) that is accepted from this peer. These
-	are announced in the BGP OPEN as MultiProtocol Capabilities (:RFC:`4760`). In
-	order to receive 'as much as possible', list all options. If this setting is
-	omitted or set to the empty list, the session will only carry conventional IPv4 Unicast information.
+    The list of address families (AFI/SAFI) that is accepted from this peer.
+    These are announced in the BGP OPEN as MultiProtocol Capabilities
+    (:RFC:`4760`). In order to receive 'as much as possible', list all options.
+    If this setting is omitted or set to the empty list, the session will only
+    carry conventional IPv4 Unicast information.
 
 	Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
 mrt-in `(experimental)`
 -----------------------
 
-This unit can take one or several ``mrt`` files (:RFC:`6396`) and emulate an
-open BGP session with the contents of the table dumps in it.
+This unit can take one or several ``mrt`` files (:RFC:`6396`) and ingest the
+contents of the table dumps in it.
 
 It will load all the RIB entries and load them into a Rotonda RIB. Routes will
 be stored per peer.
@@ -284,7 +297,7 @@ Rotonda will assign one ``ingress_id`` per peer found in the TableDump table.
 
 .. raw:: html
 
-	<pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
+	<pre style="font-family: menlo,mono; font-weight: 400; font-size:0.75em;">
 	        ┌──────────────────────────┐
 	file ───▶ MrtMessage─┬▶BgpMessage  │
 	        │            │             ├──▶ N * (Prefix,Route,RouteContext)
