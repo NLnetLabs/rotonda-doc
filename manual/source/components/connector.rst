@@ -220,7 +220,7 @@ of the ``sources`` field in a receiving component.
     be accepted. By default no such peers are defined and thus all incoming
     connections are rejected.
 
-	The double-quoted address value must be an IPv4 or IPv6 address or a prefix,
+    The double-quoted address value must be an IPv4 or IPv6 address or a prefix,
     e.g. "1.2.3.4" or "1.2.3.0/24.
 
 	The value of this setting is a TOML table which may be specified inline or as
@@ -252,12 +252,15 @@ of the ``sources`` field in a receiving component.
     connects to this unit (i.e. the "My Autonomous Number"
     field of the RFC 4271 BGP OPEN message [3]).
     Can be specified as either a single ASN:
+
     .. code-block:: text
+
         remote_asn = 65001
 
     Or a list of multiple ASNs, where the empty list means 'accept everything':
 
     .. code-block:: text
+
         remote_asn = [] # accept any ASN send by the peer
         remote_asn = [65001, 65002, 65003] # accept any of these ASN
 

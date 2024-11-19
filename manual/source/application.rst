@@ -19,7 +19,7 @@ Taken together one can think of the flow of information like so:
 
 .. raw:: html
 
-    <pre style="font-family: menlo; font-weight: 400; font-size:0.75em;">
+    <pre style="font-family: menlo,mono; font-weight: 400; font-size:0.75em;">
 	                             (North)
 	                             HTTP/API
 	                               │ ▲
