@@ -9,23 +9,14 @@ This target publishes JSON events to an MQTT broker via a TCP connection.
 .. tip:: The MQTT broker is not part of Rotonda, it is a separate service that
     must be deployed and operated separately to Rotonda.
 
-Tested with the EMQX MQTT broker with both the free public MQTT 5 Broker [1]
-and with the EMQX Docker image [2].
-
 This target ONLY accepts input data that:
 
 - Was received from a configured upstream source unit.
-- Was emitted by a Roto script output stream.
-- Is of type Record with a "name" field whose value matches the name of this
-  instance of the mqtt-out target.
+- Was emitted by a Roto script output stream via the ``Log`` handle.
 
-So naming an instance of this unit in a Roto script output stream record is
-not sufficient to have this unit receive it, this unit must still be
-downstream of the producing unit to receive its output.
 
-The JSON event structure produced by this target is a direct serialization
-of the received Roto type as JSON, i.e. a record with a set of key/value
-pairs.
+Currently, emitted entries are non-customizable JSON objects, with different
+objects for different Log type entries.
 
 Configuration Options
 ---------------------
@@ -39,8 +30,7 @@ like this:
 	type = "mqtt-out"
 	..
 
-where ``<NAME>`` is the name of the component, to be referenced in the value
-of the ``sources`` field in a receiving component.
+where ``<NAME>`` is the name of the component. This must be 'mqtt' for now. 
 
 .. describe:: type (mandatory)
 
@@ -58,7 +48,7 @@ of the ``sources`` field in a receiving component.
 	number [3] 1883 will be used. Note: Only unencrypted TCP connections are
 	supported, i.e. TLS and WS are not supported.
 
-.. describe:: cliend_id (optional)
+.. describe:: client_id (optional)
 
 	A unique name to identify the client to the server in order to hold state
 	about the session. If empty the server will use a clean session and assign a

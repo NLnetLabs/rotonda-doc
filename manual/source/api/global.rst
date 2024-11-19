@@ -6,11 +6,11 @@ runtime:
 
 .. confval:: GET /status                
 
-    Human readable application status information
+    Human readable application status information in Prometheus format.
 
 .. confval:: GET /bmp-routers/
 
-    Base path. Use the ``http_api_path``` configuration setting for the corresponding ``bmp-tcp-in`` component to change this URL.
+    Base path. Use the ``http_api_path`` configuration setting for the corresponding ``bmp-tcp-in`` component to change this URL.
 
 .. confval:: GET /bmp-routers/<ROUTER_ID>
 

@@ -4,7 +4,8 @@ File-based Configuration
 Rotonda 0.2 should normally run as a daemon, and a configuration file is
 required using the ``-c`` option. This may change for future versions of Rotonda.
 
-If you've installed Rotonda through a package manager, a simple configuration file is included in ``/etc/rotonda/rotonda.conf``.
+If you've installed Rotonda through a package manager, a simple configuration
+file is included in ``/etc/rotonda/rotonda.conf``.
 
 If you've installed Rotonda with ``cargo install``, you will have to supply
 a configuration yourself. Sample configurations can be found in the ``/etc``
@@ -13,7 +14,8 @@ rotonda/>`_.
 
 
 The ``/etc/rotonda/rotonda.conf`` configuration file that comes with the
-packaged version of Rotonada will listen to a router on all interfaces, on port 11019. You will probably want to edit that.
+packaged version of Rotonada will listen for BMP streams from routers on all
+interfaces, on port 11019. You will probably want to edit that.
 
 
 File Structure
@@ -28,7 +30,7 @@ follows:
 
     - global settings
     - 1 or more connectors
-    - 1 or more RIBs
+    - 0 or more RIBs
     - 1 or more targets
 
 
@@ -57,7 +59,7 @@ Global Settings
 
 .. confval:: log_target (optional)
 
-    The output that log messages are send to.
+    The output that log messages are sent to.
 
     Possible values are: [``stderr``, ``files``, ``syslog``]
 

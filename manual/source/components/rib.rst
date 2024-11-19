@@ -20,7 +20,7 @@ Pipeline Interaction
 --------------------
 
 The ``rib`` component ingests messages from type ``Route``, that maybe
-accompagnied by an object of type ``RouteContext``. It is first filtered,
+accompanied by an object of type ``RouteContext``. It is first filtered,
 and then may be stored in the RIB. Finally, it gets sent out if it was not
 filtered out.
 
@@ -42,20 +42,20 @@ The ``RIB`` component has a programmable Roto filter built-in with a
 hard-coded name ``rib-in-pre``, and it should be included in the Roto filter
 file specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. confval:: filter rib-in-pre(BgpMsg, Log, RouteContext) -> Verdict
+.. confval:: filter rib-in-pre(Log, Route, RouteContext) -> Verdict
 
 	Argument Types
 	--------------
-
-	.. confval:: Route (read-only)
-
-	The Route that is flowing through this filter. It can be inspected,
-	and will be sent out unmodified.
 
 	.. confval:: Log
 
 	The output value that will be sent to a configured output, such as
 	``mqtt-out``.
+
+	.. confval:: Route (read-only)
+
+	The Route that is flowing through this filter. It can be inspected,
+	and will be sent out unmodified.
 
 	.. confval:: RouteContext (read-only)
 

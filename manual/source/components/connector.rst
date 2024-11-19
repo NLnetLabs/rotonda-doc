@@ -56,10 +56,14 @@ The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bmp-in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. describe:: filter bmp-in(BmpMsg, Log, Provenance) -> Verdict
+.. describe:: filter bmp-in(Log, BmpMsg, Provenance) -> Verdict
 
 	Argument Types
 	--------------
+
+	.. describe:: Log
+
+	Handle to emit log entries to a configured output, such as ``mqtt-out``.
 
 	.. describe:: BmpMsg
 
@@ -67,10 +71,6 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 	and will be sent out unmodified. Note that the individual parts of the
 	NLRI of the message cannot be inspected. If you wish to do this, you
 	should do this further in the pipeline, e.g. on the filter in a RIB.
-
-	.. describe:: Log
-
-    Handle to emit log entries to a configured output, such as ``mqtt-out``.
 
 	.. describe:: Provenance
 
@@ -150,19 +150,19 @@ The ``bgp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bgp-in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. describe:: filter bgp-in(BgpMsg, Log, Provenance) -> Verdict
+.. describe:: filter bgp-in(Log, BgpMsg, Provenance) -> Verdict
 
 	Argument Types
 	--------------
 
-	.. describe:: BgpMsg (read-only)
-
-    The BGP UPDATE Message that is flowing through this filter. It can be
-    inspected, and will be sent out unmodified.
-
 	.. describe:: Log
 
-    Handle to emit log entries to a configured output, such as ``mqtt-out``.
+	Handle to emit log entries to a configured output, such as ``mqtt-out``.
+
+	.. describe:: BgpMsg (read-only)
+
+	The BGP UPDATE Message that is flowing through this filter. It can be
+	inspected, and will be sent out unmodified.
 
 	.. describe:: Provenance (read-only)
 
@@ -223,23 +223,23 @@ of the ``sources`` field in a receiving component.
     The double-quoted address value must be an IPv4 or IPv6 address or a prefix,
     e.g. "1.2.3.4" or "1.2.3.0/24.
 
-	The value of this setting is a TOML table which may be specified inline or as
-	a separate section in the config file, e.g.:
+    The value of this setting is a TOML table which may be specified inline or
+    as a separate section in the config file, e.g.:
 
-	.. code-block:: text
+    .. code-block:: text
 
-		[units.my-bgp-in.peers.".."]
-		name = ..
-		remote_asn = ..
+        [units.my-bgp-in.peers.".."]
+        name = ..
+        remote_asn = ..
 
-	Or:
+    Or:
 
-	.. code-block:: text
+    .. code-block:: text
 
-		[units.my-bgp-in]
-		peers.".." = { name = .., remote_asn = .. }
+        [units.my-bgp-in]
+        peers.".." = { name = .., remote_asn = .. }
 
-	These sections have the following fields:
+    These sections have the following fields:
 
     .. describe:: name
 	
@@ -261,8 +261,8 @@ of the ``sources`` field in a receiving component.
 
     .. code-block:: text
 
-        remote_asn = [] # accept any ASN send by the peer
-        remote_asn = [65001, 65002, 65003] # accept any of these ASN
+        remote_asn = [] # accept any ASN sent by the peer
+        remote_asn = [65001, 65002, 65003] # accept any of these ASNs
 
 .. describe:: protocols
 
@@ -272,7 +272,7 @@ of the ``sources`` field in a receiving component.
     If this setting is omitted or set to the empty list, the session will only
     carry conventional IPv4 Unicast information.
 
-	Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
+    Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
 mrt-in `(experimental)`
 -----------------------
