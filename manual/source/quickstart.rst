@@ -113,10 +113,10 @@ currently used by Rotonda, and then send a SIGHUP to Rotonda. Restarting will
 also work, of course.
 
 If you don't have a router or routing daemon with BMP capabilities at your
-disposal you can use the `mrt-in` connector. The next section describes this
+disposal you can use the `mrt-file-in` connector. The next section describes this
 process.
 
-Using the `mrt-in` connector
+Using the `mrt-file-in` connector
 ----------------------------
 
 First, you'll have to download a ``mrt`` file from somewhere. Our suggestion is to download a bview file from the `RIS (Routing Information Service) <https://ris.ripe.net>`_ project, managed and hosted by the `RIPE NCC <https://www.ripe.net>`_. One of the smallest ``mrt`` files in the whole RIS project should be `this file <https://data.ris.ripe.net/rrc26/latest-bview.gz>`_. If you download this, or any other bview file from RIS, make sure to unpack ("gunzip") it.
@@ -128,7 +128,7 @@ The next step is to kill your Rotonda instance, and edit the configuration file 
 	http_listen = ["127.0.0.1:8080"]
 
 	[units.mrt-in]
-	type = "mrt-in"
+	type = "mrt-file-in"
 	# fill out the correct path to the downloaded bview file here.
 	filename = "../bview/latest-bview-rrc26"
 

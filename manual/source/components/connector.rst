@@ -274,7 +274,7 @@ of the ``sources`` field in a receiving component.
 
     Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
-mrt-in `(experimental)`
+mrt-file-in `(experimental)`
 -----------------------
 
 This unit can take one or several ``mrt`` files (:RFC:`6396`) and ingest the
@@ -283,14 +283,15 @@ contents of the table dumps in it.
 It will load all the RIB entries and load them into a Rotonda RIB. Routes will
 be stored per peer.
 
-Currently, the ``mrt-in`` connector does not offer any programmable filtering.
-You can, however, filter further on in the pipeline, e.g. in the filter of a
+Currently, the ``mrt-file-in`` connector does not offer any programmable
+filtering.  You can, however, filter further on in the pipeline, e.g. in the
+filter of a
 receiving RIB.
 
 Pipeline Interaction
 --------------------
 
-The ``mrt-in`` component ingests MRT messages from a file, extracts all the
+The ``mrt-file-in`` component ingests MRT messages from a file, extracts all the
 peers mentioned in the ``PEER_INDEX_TABLE`` in the TableDump, and all the
 BGP messages encapsulated in it. It then explodes all the BGP messages into
 ``(prefix, Route, RouteContext)`` tuples. It keeps a session open for the file
@@ -312,13 +313,13 @@ Rotonda will assign one ``ingress_id`` per peer found in the TableDump table.
 Configuration Options
 ---------------------
 
-The ``mrt-in`` component can be defined in the Rotonda configuration file,
+The ``mrt-file-in`` component can be defined in the Rotonda configuration file,
 like this:
 
 .. code-block:: text
 
 	[units.<NAME>]
-	type = "mrt-in"
+	type = "mrt-file-in"
 	..
 
 where ``<NAME>`` is the name of the component, to be referenced in the value
@@ -326,7 +327,7 @@ of the ``sources`` field in a receiving component.
 
 .. describe:: type (mandatory)
 
-	This must be set to `mrt-in` for this type of connector.
+	This must be set to `mrt-file-in` for this type of connector.
 
 .. describe:: filename (mandatory)
 
