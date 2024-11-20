@@ -22,7 +22,6 @@ sphinx-notfound-page==1.0.4
 sphinx-rtd-theme==3.0.1
 sphinx-substitution-extensions==2022.2.16
 sphinx-tabs==3.4.7
-sphinx-toolbox
 sphinx-version-warning==1.1.2
 sphinxcontrib-applehelp==2.0.0
 sphinxcontrib-devhelp==2.0.0

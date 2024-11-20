@@ -57,7 +57,6 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
     'sphinx_tabs.tabs',
-    'sphinx_toolbox.confval',
     'sphinx_copybutton',
     'sphinxcontrib.jquery',
     'sphinx.ext.intersphinx',
