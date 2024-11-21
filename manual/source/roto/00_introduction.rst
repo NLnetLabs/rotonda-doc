@@ -6,7 +6,7 @@ in Roto:
 
 .. code-block:: roto
 
-    filter-map disallow_ip(message: BgpMessage) {
+    filter disallow_ip(message: BgpMessage) {
         apply {
             if message.ip() == 0.0.0.0 {
                 reject
