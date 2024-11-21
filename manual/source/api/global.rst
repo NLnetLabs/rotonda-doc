@@ -6,7 +6,7 @@ runtime:
 
 .. confval:: GET /status                
 
-    Human readable application status information in Prometheus format.
+    Human readable application status information.
 
 .. confval:: GET /bmp-routers/
 
