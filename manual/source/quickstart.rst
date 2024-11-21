@@ -205,7 +205,7 @@ Adding a filter
 ---------------
 
 Certain Rotonda components have filters built in. One of these components is a
-RIB. The RIB filter can create a so-called verdict, ``accept``` or ``reject``,
+RIB. The RIB filter can create a so-called verdict, ``accept`` or ``reject``,
 that Rotonda uses to determine whether to store the route passing through the
 filter in the RIB. The filter can also used to create a log message.
 
@@ -215,7 +215,7 @@ create a file called ``filters.roto``, preferably in the same directory as the
 
 .. code:: roto
 
-	filter-map rib-in-pre(
+	filter rib-in-pre(
 	    output: Log,
 	    route: Route,
 	    context: RouteContext,
