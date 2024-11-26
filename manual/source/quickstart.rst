@@ -186,14 +186,14 @@ into Rotonda, like so:
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/<ADDRESS_PART_OF_PREFIX>/<PREFIX_LENGTH> | jq .
+	$ curl -s http://localhost:8080/prefixes/<ADDRESS_PART_OF_PREFIX>/<PREFIX_LENGTH> | jq .
 
 Second, you could try to add another query parameter, called
 ``include=moreSpecifics``, like so:
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?include=moreSpecifics
+	$ curl -s http://localhost:8080/prefixes/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?include=moreSpecifics
 
 If you try a fairly large prefix, say a /16, you increase the chance of
 hitting an actual prefix.
