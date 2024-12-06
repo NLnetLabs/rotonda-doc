@@ -31,11 +31,9 @@ started.
          -  Debian Bookworm 12
          -  Debian Bullseye 11
          -  Debian Buster 10
-         -  Debian Stretch 9
 
-       Packages for the ``amd64``/``x86_64`` architecture are available for
-       all listed versions. In addition, we offer ``arm64``/``aarch64``
-       architecture packages for Debian/Raspbian Bullseye Buster and Bookworm.
+       These Packages are all available for the ``amd64``/``x86_64`` and
+       ``arm64``/``aarch64`` architectures.
        
        First update the :program:`apt` package index: 
 
@@ -98,7 +96,6 @@ started.
          - Ubuntu Jammy 22.04 (LTS)
          - Ubuntu Focal 20.04 (LTS)
          - Ubuntu Bionic 18.04 (LTS)
-         - Ubuntu Xenial 16.04 (LTS)
 
        Packages are available for the ``amd64``/``x86_64`` architecture only.
        
