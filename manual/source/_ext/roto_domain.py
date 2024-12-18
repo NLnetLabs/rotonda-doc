@@ -98,6 +98,40 @@ class RotoType(ObjectDescription):
         roto_domain = self.env.get_domain('roto')
         roto_domain.add_obj('types', sig)
 
+class RotoContext(ObjectDescription):
+    def handle_signature(self, sig: str, signode):
+        signode += addnodes.desc_annotation(text="context")
+        name, ty = sig.split(":")
+        signode += addnodes.desc_name(text=name.strip())
+        signode += addnodes.desc_sig_punctuation(text=":")
+        signode += addnodes.desc_sig_space(text=' ')
+
+        ty = ty.strip()
+        signode += addnodes.pending_xref(
+            "",
+            addnodes.desc_type(text=ty),
+            refdomain="roto",
+            reftype="ref",
+            reftarget=ty,
+        )
+
+class RotoConstant(ObjectDescription):
+    def handle_signature(self, sig: str, signode):
+        signode += addnodes.desc_annotation(text="constant")
+        name, ty = sig.split(":")
+        signode += addnodes.desc_name(text=name.strip())
+        signode += addnodes.desc_sig_punctuation(text=":")
+        signode += addnodes.desc_sig_space(text=' ')
+
+        ty = ty.strip()
+        signode += addnodes.pending_xref(
+            "",
+            addnodes.desc_type(text=ty),
+            refdomain="roto",
+            reftype="ref",
+            reftarget=ty,
+        )
+
 class RotoFunction(RotoFunctionLike):
     class_name = "function"
 
@@ -119,6 +153,8 @@ class RecipeDomain(Domain):
         'method': RotoMethod,
         'static_method': RotoStaticMethod,
         'type': RotoType,
+        'constant': RotoConstant,
+        'context': RotoContext,
     }
 
     indices = []
@@ -153,8 +189,6 @@ class RecipeDomain(Domain):
         )
 
     def resolve_xref(self, env, fromdocname, builder, typ, target, node, contnode):
-        # print(f"RESOLVING REF: {repr(target)}")
-
         match = [
             (docname, anchor)
             for name, sig, typ, docname, anchor, prio in self.all_objects()
