@@ -7,12 +7,10 @@ in Roto:
 .. code-block:: roto
 
     filter disallow_ip(message: BgpMessage) {
-        apply {
-            if message.ip() == 0.0.0.0 {
-                reject
-            } else {
-                accept message
-            }
+        if message.ip() == 0.0.0.0 {
+            reject
+        } else {
+            accept message
         }
     }
 
