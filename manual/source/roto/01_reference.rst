@@ -8,7 +8,7 @@ the language.
 Comments
 --------
 
-Comments in Roto start with a ``#`` and end at the end of a line. They can
+Comments in Roto start with a ``#`` and continue until the end of a line. They can
 be inserted anywhere in the script and are ignored.
 
 .. code-block:: roto
@@ -200,8 +200,8 @@ Strings can be concatenated with ``+``:
 
     "race" + "car" # yields the string "racecar"
 
-It also has some methods such as :ref:`String.contains` that can be very
-useful. See the documentation for the :ref:`String` type for more
+It also has some methods such as :roto:ref:`String.contains` that can be very
+useful. See the documentation for the :roto:ref:`String` type for more
 information.
 
 If-else
