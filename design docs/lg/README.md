@@ -27,7 +27,7 @@ I see two options (we can do both):
 Reverse engineer Barry O'Donovan's Birdwatcher API[^3] and host that API on Rotonda. Rotonda can now be hooked up to Alice.
 
 Advantages:
-- Ready-to-roll integration with Alice, which can also host other daemons, or multiple Rotonda's.
+- Ready-to-roll integration with Alice, which can also host other daemons, or multiple Rotondas.
 - Network perimeter is unchanged, Rotonda can run in the core, and the Alice lives on the perimeter.
 - Limited amount of work to implement for Rotonda
 
