@@ -10,7 +10,7 @@ Alice can ingress data from multiple different BGP daemons in one Alice instance
 
 ## Bird-lg
 
-For Bird there's another daemonm, called Bid-lg[^2] that directly creates a (public facing) web server with a HTML UI. It's supposed to work like this:
+For Bird there's another daemonm, called Bird-lg[^2] that directly creates a (public facing) web server with a HTML UI. It's supposed to work like this:
 
 <img alt="Bird lg" src="bird_lg.png" max-height="53">
 
