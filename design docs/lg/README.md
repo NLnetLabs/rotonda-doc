@@ -32,7 +32,7 @@ Advantages:
 - Limited amount of work to implement for Rotonda
 
 Disadvantage:
-- Implementing a unstructured, messy, ad-hoc API that's meant to be tightly coupled with Bird output is not great, and requires corner-cutting.
+- Implementing an unstructured, messy, ad-hoc API that's meant to be tightly coupled with Bird output is not great, and requires corner-cutting.
 - Not all relevant data in Rotonda's RIBs can be modeled.
 - Zero guarantees about stability of this API, we don't even know if Alice implements all of the Birdwatcher API. Also, no versioning, no schema
 ### 2. Shove everything of the table
