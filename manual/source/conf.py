@@ -274,6 +274,11 @@ class RotoLexer(RegexLexer):
             (r'[a-zA-Z_][a-zA-Z0-9_]*', token.Name),
             (r'[0-9]', token.Number),
             (r'\s+', token.Text.Whitespace),
+            (r'"', token.String, "string"),
+        ],
+        'string': [
+            (r'[^"]', token.String),
+            (r'"', token.String, "#pop"),
         ]
     }
 
