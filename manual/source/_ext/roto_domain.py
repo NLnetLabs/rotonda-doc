@@ -90,7 +90,10 @@ class RotoType(ObjectDescription):
         signode += addnodes.desc_annotation(text="type")
         signode += addnodes.desc_name(text=sig)
         return sig
-
+    
+    def _toc_entry_name(self, signode):
+        text = signode.children[1].children[0]
+        return str(text)
     
     def add_target_and_index(self, name_cls, sig, signode):
         signode['ids'].append('roto' + '-' + sig)
