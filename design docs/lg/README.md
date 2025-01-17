@@ -2,7 +2,7 @@
 
 The Alice Looking Glass[^1] is a stand-alone web server + optional database, so in fact, a complete server-side web application. It is supposed to work like this:
 
-[Alice lg setup](alice_lg.png)
+<img alt="Alice lg" src="alice_lg.png" height="100">
 
 With the exception of GoBGP all routing daemons need another daemon to host the JSON API that interfaces with the Alice daemon (which also may rely on a database daemon).
 
@@ -12,7 +12,7 @@ Alice can ingress data from multiple different BGP daemons in one Alice instance
 
 For Bird there's another daemonm, called Bid-lg[^2] that directly creates a (public facing) web server with a HTML UI. It's supposed to work like this:
 
-[Bird lg setup](bird_lg.png)
+<img alt="Bird lg" src="bird_lg.png" height="100">
 
 So that's one extra public-facing daemon
 
@@ -20,7 +20,7 @@ So that's one extra public-facing daemon
 
 I see two options (we can do both):
 
-[rotonda lg setup](rotonda_lg.png)
+<img alt="Rotonda lg" src="rotonda_lg.png" height="100">
 
 ### 1. Alice compat JSON API
 
