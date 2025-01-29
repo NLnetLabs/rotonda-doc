@@ -275,7 +275,7 @@ of the ``sources`` field in a receiving component.
     Currently supported are: [``"Ipv4Unicast"``, ``"Ipv6Unicast"``, ``"Ipv4Multicast"``, ``"Ipv6Multicast"``]
 
 mrt-file-in `(experimental)`
------------------------
+----------------------------
 
 This unit can take one or several ``mrt`` files (:RFC:`6396`) and ingest the
 contents of the table dumps in it.
