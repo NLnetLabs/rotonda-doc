@@ -8,7 +8,7 @@ the language.
 Comments
 --------
 
-Comments in Roto start with a ``#`` and end at the end of a line. They can
+Comments in Roto start with a ``#`` and continue until the end of a line. They can
 be inserted anywhere in the script and are ignored.
 
 .. code-block:: roto
@@ -34,9 +34,12 @@ Roto supports literals for primitive types:
   for IP addresses
 - ``0.0.0.0/10`` for prefixes
 - ``AS1234`` for AS numbers
+- ``"Hello"`` for strings
 
 Primitive types
 ---------------
+
+There are several types at Roto's core, which can be expressed as literals.
 
 - :roto:ref:`bool`: booleans
 - :roto:ref:`u8`, :roto:ref:`u16`, :roto:ref:`u32`, :roto:ref:`u64`: unsigned integers of 8, 16, 32 and 64 bits, respectively
@@ -44,9 +47,11 @@ Primitive types
 - :roto:ref:`IpAddr`: IP address
 - :roto:ref:`Prefix`: prefixes
 - :roto:ref:`Asn`: AS number
+- :roto:ref:`String`: Strings
 
 There are many more types available that have more to do with BGP. These are
-described elsewhere.
+described elsewhere. Note that Roto is case sensitive; writing the ``Asn`` type as
+``ASN`` or ``asn`` won't work.
 
 Integers
 --------
@@ -180,6 +185,25 @@ This is equivalent to:
 
     ((1 + (x * 3)) == 5) && (y < 10)
 
+Strings
+-------
+
+Strings are enclosed in double quotes like so:
+
+.. code-block:: roto
+
+    "This is a string!"
+
+Strings can be concatenated with ``+``:
+
+.. code-block:: roto
+
+    "race" + "car" # yields the string "racecar"
+
+It also has some methods such as :roto:ref:`String.contains` that can be very
+useful. See the documentation for the :roto:ref:`String` type for more
+information.
+
 If-else
 -------
 
@@ -257,6 +281,16 @@ This function does not return anything:
 The ``return`` keyword can still be used in functions that don't return a value to
 exit the function early.
 
+When a function becomes more complex, intermediate results can be stored in local
+variables with ``let``.
+
+.. code-block:: roto
+
+    function greater_than_square(x: i32, y: i32) {
+        let y_squared = y * y;
+        x > y_squared
+    }
+
 Filter-map
 ----------
 
@@ -264,40 +298,33 @@ A ``filter-map`` is a function that filters and transforms some incoming value.
 
 Filter-maps resemble functions but they don't ``return``. Instead they
 either ``accept`` or ``reject``, which determines what happens to the value.
-
-A very simple ``filter-map`` takes just one parameter and only has an ``apply``
-section:
+Generally, as accepted value is stored or fed to some other component and a
+reject value is dropped.
 
 .. code-block:: roto
 
     filter-map reject_zeros(input: IpAddr) {
-        apply {
-            if input == 0.0.0.0 {
-                reject
-            } else {
-                accept
-            }
+        if input == 0.0.0.0 {
+            reject
+        } else {
+            accept
         }
     }
 
 This describes a filter which takes in an IP address and accepts it if it is not
 equal to ``0.0.0.0``.
 
-A more complicated filter can use a ``define`` section to add variable
-definitions.
+Like with functions, intermediate results can be stored in variables with let
+bindings.
 
 .. code-block:: roto
 
     filter-map reject_zeros(input: IpAddr) {
-        define {
-            zeros = 0.0.0.0;
-        }
-        apply {
-            if input == zeros {
-                reject
-            } else {
-                accept
-            }
+        let zeros = 0.0.0.0;
+        if input == zeros {
+            reject
+        } else {
+            accept
         }
     }
 
@@ -368,3 +395,8 @@ There is an automatic coercion from anonymous records to named records:
         { foo: int, bar: false }  # implicitly coerced to SomeRecord
     }
 
+Next steps
+----------
+
+You can learn more about Roto by looking at the documentation for the
+:doc:`02_rotonda_std`.

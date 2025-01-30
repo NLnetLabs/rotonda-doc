@@ -34,3 +34,17 @@ runtime:
 
     The RIB in the pipeline can be queried for prefixes with these URLs.
 
+.. confval:: GET /mrt/<MRT_UNIT_NAME>/queue?file=<FILENAME>
+
+    When configured with an `update_path`, a `mrt-file-in` can be instructed to
+    add a file to its processing queue.
+
+    Parameters:
+
+    ``<FILENAME>``
+    The path to an .mrt (or .gz, .bz2) file to be queued, relative to the
+    configured `update_path`. The path may contain (relative) subdirectories,
+    but the resulting file must reside under the configured `update_path`.
+    For example, configured with ``update_path=my_mrt_files``, ``/queue?file=2025/01/30/updates1.mrt``
+
+
