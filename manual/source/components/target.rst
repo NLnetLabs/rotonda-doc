@@ -1,6 +1,45 @@
 Targets
 =======
 
+file-out
+--------
+
+This target writes logged entries to a file on disk.
+
+
+Configuration Options
+---------------------
+
+An example ``file-out`` target configuration looks like:
+
+.. code-block:: text
+
+   [target.<NAME>]
+   type = "file-out"
+   filename = "/tmp/rotonda.log"
+   sources = "bmp-in"
+   format = "json"
+
+
+.. describe:: type (mandatory)
+
+   This must be set to ``file-out`` for this type of target.
+
+.. describe:: filename (mandatory)
+
+   The destination file on the filesystem to write log entries to. If the file
+   does not exist, it is created. If it exists, it will be overwritten.
+
+.. describe:: sources (mandatory)
+
+   The source Rotonda unit for this target.
+
+.. describe:: format (mandatory)
+
+   This is one of ``json``, ``json-min`` (JSON with empty values omitted) or
+   ``csv``. 
+
+
 mqtt-out
 --------
 

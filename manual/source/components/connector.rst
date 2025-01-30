@@ -320,7 +320,8 @@ like this:
 
 	[units.<NAME>]
 	type = "mrt-file-in"
-	..
+	filename = ["dump.mrt", "updates1.mrt", "updates2.mrt"]
+	update_path = "path/to/updates"
 
 where ``<NAME>`` is the name of the component, to be referenced in the value
 of the ``sources`` field in a receiving component.
@@ -331,4 +332,12 @@ of the ``sources`` field in a receiving component.
 
 .. describe:: filename (mandatory)
 
-	The path to the ``mrt`` file containing one or more table dump entries, that will be loaded into the receiving RIB.
+    The path to the one or multiple ``mrt`` files, either 'RIB dumps' containing
+    complete tables, or 'updates' containing BGP messages.
+
+.. describe:: update_path (optional)
+
+	The path on the filesystem from where files can be queued for processing.
+	When set, an API endpoint on ``/mrt/<NAME>?queue=<FILENAME>`` is enabled.
+	If ``<FILENAME>`` is not under the configured ``update_path``, it will not
+	be processed.
