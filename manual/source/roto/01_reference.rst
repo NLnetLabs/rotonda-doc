@@ -294,7 +294,7 @@ variables with ``let``.
 Filter-map
 ----------
 
-A ``filter-map`` is a function that filters and transforms some incoming value.
+A ``filtermap`` is a function that filters and transforms some incoming value.
 
 Filter-maps resemble functions but they don't ``return``. Instead they
 either ``accept`` or ``reject``, which determines what happens to the value.
@@ -303,7 +303,7 @@ reject value is dropped.
 
 .. code-block:: roto
 
-    filter-map reject_zeros(input: IpAddr) {
+    filtermap reject_zeros(input: IpAddr) {
         if input == 0.0.0.0 {
             reject
         } else {
@@ -319,7 +319,7 @@ bindings.
 
 .. code-block:: roto
 
-    filter-map reject_zeros(input: IpAddr) {
+    filtermap reject_zeros(input: IpAddr) {
         let zeros = 0.0.0.0;
         if input == zeros {
             reject
@@ -328,7 +328,7 @@ bindings.
         }
     }
 
-A ``filter-map`` can also ``accept`` or ``reject`` with a value.
+A ``filtermap`` can also ``accept`` or ``reject`` with a value.
 
 Anonymous records
 -----------------
@@ -359,13 +359,9 @@ Fields of records can be accessed with the `.` operator.
 
 .. code-block:: roto
 
-    filter-map example_filter_map() {
-        define {
-            x = { foo: 5 };
-        }
-        apply {
-            accept x.foo
-        }
+    filtermap example_filter_map() {
+        let x = { foo: 5 };
+        accept x.foo
     }
 
 Named records
@@ -393,6 +389,131 @@ There is an automatic coercion from anonymous records to named records:
 
     function foo(int: i32) -> SomeRecord {
         { foo: int, bar: false }  # implicitly coerced to SomeRecord
+    }
+
+Modules
+-------
+
+A Roto script can be split over multiple files. To do this, we have to create
+a folder with the name of the script and create a Roto file directly in it
+called ``pkg.roto``. This file is the root of our script. The contents of
+``pkg.roto`` will form the ``pkg`` module. No other files in the directory 
+can be called ``pkg.roto``.
+
+Files adjacent to ``pkg.roto`` are submodules of ``pkg``. For example, a file
+called ``foo.roto`` will define the module ``pkg.foo``.
+
+A directory next to ``pkg.roto`` will also be a submodule if it contains a file
+called ``lib.roto``. A file ``foo/lib.roto`` is therefore equivalent to ``foo.roto``
+and defines the module called ``pkg.foo``. We can do this recursively, so we can
+define the module ``pkg.foo.bar`` with either a file called ``foo/bar.roto`` or
+``foo/bar/lib.roto`` and so forth.
+
+The files ``foo.roto`` and ``foo/lib.roto`` cannot both exist and only
+``foo/lib.roto`` can have submodules.
+
+An item such as a function, filtermap or type can be used from other modules in
+a couple of ways. To access them, we must know the path, which is the
+period-separated list of identifiers to follow to get to the item, starting with
+the module name and ending with the name of the item.
+
+For the following examples, we will work with the following files:
+
+.. code-block::
+
+    pkg.roto
+    foo.roto
+    bar/lib.roto
+    bar/baz.roto
+
+These define the following modules:
+
+.. code-block::
+
+    pkg
+    pkg.foo
+    pkg.bar
+    pkg.bar.baz
+
+Now assume that ``foo.roto`` contains a function called ``square``, this
+function can be referenced in any of the other files with the absolute path
+``pkg.foo.square``. For example:
+
+.. code-block:: roto
+
+    function add_and_square(x: i32, y: i32) -> i32 {
+        pkg.foo.square(x + y)
+    }
+
+We can also use the relative path, which is different for each file. We can use
+the ``super`` keyword in a path to reference the parent module of the current
+module. Multiple ``super`` keywords can appear at the start of a path.
+
+.. code-block:: roto
+
+    # in pkg.roto   
+    foo.square
+
+    # in foo.roto
+    square
+
+    # in bar.roto
+    super.foo.square
+
+    # in bar/baz.roto
+    super.super.foo.square
+
+There are 3 special identifiers that can only be used at the start of a path
+and automatically make the path an absolute path:
+
+- ``pkg`` for the current package 
+- ``std`` for the Roto standard library
+- ``dep`` for dependencies (not implemented yet, but the identifier is reserved)
+
+Imports
+-------
+
+Of course, writing out the full path to anything you want to use can become
+quite tedious. We can import items from other modules into the current module
+with the ``import`` keyword. The ``import`` keyword is followed by a path. The
+item the path references will be available by name in the current scope.
+
+.. code-block:: roto
+    
+    import foo.square;
+
+    function fourth_power(x: i32) -> i32 {
+        square(square(x))
+    }
+
+We can also import entire modules. Imported modules are not available in other
+modules.
+
+An ``import`` does not need to be at the top-level, they can be in any scope.
+We can rewrite the previous example as follows.
+
+.. code-block:: roto
+ 
+    function fourth_power(x: i32) -> i32 {
+        import foo.square;
+        square(square(x))
+    }
+
+Now the name `square` can only be used within the `fourth_power` function and
+not in any other functions we define. But we can define even more granular
+imports such as in the following example, where we use a function ``foo`` from
+either module ``A`` or ``B``, depending on a boolean flag.
+
+.. code-block:: roto
+
+    function use_foo(x: i32, choice: bool) -> i32 {
+        if choice {
+            import A.foo;
+            foo(x)
+        } else {
+            import B.foo;
+            foo(x)
+        }
     }
 
 Next steps
