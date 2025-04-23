@@ -39,10 +39,10 @@ Filtering
 ---------
 
 The ``RIB`` component has a programmable Roto filter built-in with a
-hard-coded name ``rib-in-pre``, and it should be included in the Roto filter
+hard-coded name ``rib_in_pre``, and it should be included in the Roto filter
 file specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. confval:: filter rib-in-pre(Log, Route, RouteContext) -> Verdict
+.. confval:: filter rib_in_pre(Log, Route, RouteContext) -> Verdict
 
 	Argument Types
 	--------------

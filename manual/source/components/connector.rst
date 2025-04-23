@@ -53,10 +53,10 @@ Filtering
 ---------
 
 The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
-hard-coded name ``bmp-in``, and it should be included in the Roto filter file
+hard-coded name ``bmp_in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. describe:: filter bmp-in(Log, BmpMsg, Provenance) -> Verdict
+.. describe:: filter bmp_in(Log, BmpMsg, Provenance) -> Verdict
 
 	Argument Types
 	--------------
@@ -147,10 +147,10 @@ Filtering
 ---------
 
 The ``bgp-tcp-in`` connector has a programmable Roto filter built-in with a
-hard-coded name ``bgp-in``, and it should be included in the Roto filter file
+hard-coded name ``bgp_in``, and it should be included in the Roto filter file
 specified in the Rotonda configuration. The type of this Roto filter is:
 
-.. describe:: filter bgp-in(Log, BgpMsg, Provenance) -> Verdict
+.. describe:: filter bgp_in(Log, BgpMsg, Provenance) -> Verdict
 
 	Argument Types
 	--------------
