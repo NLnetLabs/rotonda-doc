@@ -341,3 +341,42 @@ of the ``sources`` field in a receiving component.
 	When set, an API endpoint on ``/mrt/<NAME>?queue=<FILENAME>`` is enabled.
 	If ``<FILENAME>`` is not under the configured ``update_path``, it will not
 	be processed.
+
+
+rtr-tcp-in
+----------
+
+This unit connects to Relying Party software or cache, obtaining RPKI
+information via the RTR protocol. It is able to retrieve VRPs (from ROAs),
+enabling Route Origin Validation (ROV) from roto filter scripts.
+
+Currently, newly incoming RTR information does not trigger reevaluation (i.e.,
+ROV) of routes already stored in Rotonda. Furthermore, the `check_rov` method to
+perform ROV from a roto script is only available in the `rib_in_pre` filter. As
+such, the RIB unit should include the RTR unit in its sources.
+
+Configuration Options
+---------------------
+
+.. code-block:: text
+
+	[units.<NAME>]
+	type = "rtr-tcp-in"
+	remote = "[::1]:3323"
+	retry = 60
+
+where ``<NAME>`` is the name of the component, to be referenced in the value
+of the ``sources`` field in a receiving component.
+
+.. describe:: type (mandatory)
+
+	This must be set to `rtr-tcp-in` for this type of connector.
+
+.. describe:: remote (mandatory)
+
+	The remote IP address and port of the RTR server/cache to connect to.
+
+.. describe:: retry (optional)
+
+   The delay before trying to reconnect to the RTR server, in seconds. Default
+   60.
