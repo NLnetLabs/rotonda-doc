@@ -1,29 +1,32 @@
 # Standard Library
 
-````{roto:function} Community(raw: u32) -> Community
+````{roto:function} community(raw: u32) -> Community
 ````
 
 `````{roto:context} output: Log
+`````
+
+`````{roto:context} rpki: Rpki
 `````
 
 `````{roto:constant} LOCALHOSTV6: IpAddr
 The IPv6 address pointing to localhost: `::1`
 `````
 
-`````{roto:constant} NO_ADVERTISE: Community
-The well-known NO_ADVERTISE community (RFC1997)
-`````
-
 `````{roto:constant} LOCALHOSTV4: IpAddr
 The IPv4 address pointing to localhost: `127.0.0.1`
+`````
+
+`````{roto:constant} NO_EXPORT_SUBCONFED: Community
+The well-known NO_EXPORT_SUBCONFED community (RFC1997)
 `````
 
 `````{roto:constant} NO_EXPORT: Community
 The well-known NO_EXPORT community (RFC1997)
 `````
 
-`````{roto:constant} NO_EXPORT_SUBCONFED: Community
-The well-known NO_EXPORT_SUBCONFED community (RFC1997)
+`````{roto:constant} NO_ADVERTISE: Community
+The well-known NO_ADVERTISE community (RFC1997)
 `````
 
 `````{roto:constant} NO_PEER: Community
@@ -95,6 +98,88 @@ This type can represent integers from -2147483648 up to (and including) 21474836
 The signed 64-bit integer type
 
 This type can represent integers from -9223372036854775808 up to (and including) 9223372036854775807.
+
+`````
+
+`````{roto:type} f32
+The 4-bit floating point type
+
+````{roto:method} f32.floor() -> f32
+Returns the largest integer less than or equal to self.
+````
+
+````{roto:method} f32.ceil() -> f32
+Returns the smallest integer greater than or equal to self.
+````
+
+````{roto:method} f32.round() -> f32
+Returns the nearest integer to self. If a value is half-way between two integers, round away from 0.0.
+````
+
+````{roto:method} f32.abs() -> f32
+Computes the absolute value of self.
+````
+
+````{roto:method} f32.sqrt() -> f32
+Returns the square root of a number.
+````
+
+````{roto:method} f32.pow(y: f32) -> f32
+Raises a number to a floating point power.
+````
+
+````{roto:method} f32.is_nan() -> bool
+Returns true if this value is NaN.
+````
+
+````{roto:method} f32.is_infinite() -> bool
+Returns true if this value is positive infinity or negative infinity, and false otherwise.
+````
+
+````{roto:method} f32.is_finite() -> bool
+Returns true if this number is neither infinite nor NaN.
+````
+
+`````
+
+`````{roto:type} f64
+The 8-bit floating point type
+
+````{roto:method} f64.floor() -> f64
+Returns the largest integer less than or equal to self.
+````
+
+````{roto:method} f64.ceil() -> f64
+Returns the smallest integer greater than or equal to self.
+````
+
+````{roto:method} f64.round() -> f64
+Returns the nearest integer to self. If a value is half-way between two integers, round away from 0.0.
+````
+
+````{roto:method} f64.abs() -> f64
+Computes the absolute value of self.
+````
+
+````{roto:method} f64.sqrt() -> f64
+Returns the square root of a number.
+````
+
+````{roto:method} f64.pow(y: f64) -> f64
+Raises a number to a floating point power.
+````
+
+````{roto:method} f64.is_nan() -> bool
+Returns true if this value is NaN.
+````
+
+````{roto:method} f64.is_infinite() -> bool
+Returns true if this value is positive infinity or negative infinity, and false otherwise.
+````
+
+````{roto:method} f64.is_finite() -> bool
+Returns true if this number is neither infinite nor NaN.
+````
 
 `````
 
@@ -292,6 +377,14 @@ Check whether this `RotondaRoute` contains the given Large Community
 Check whether this `RotondaRoute` contains the given Path Attribute
 ````
 
+````{roto:method} Route.fmt_prefix() -> String
+Return a formatted string for the prefix
+````
+
+````{roto:method} Route.fmt_rov_status() -> String
+Return a formatted string for the ROV status
+````
+
 ````{roto:method} Route.fmt_aspath() -> String
 Return a formatted string for the AS_PATH
 ````
@@ -339,7 +432,7 @@ Log the given ASN (NB: this method will likely be removed)
 Log the given ASN as origin (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.log_matched_community(community: u32) -> Unit
+````{roto:method} Log.log_matched_community(community: Community) -> Unit
 Log the given community (NB: this method will likely be removed)
 ````
 
@@ -355,7 +448,7 @@ Log a custom entry in forms of a tuple (NB: this method will likely be removed)
 Print a message to standard error
 ````
 
-````{roto:method} Log.entry() -> LogEntryPtr
+````{roto:method} Log.entry() -> LogEntry
 Get the current/new entry
 
 A `LogEntry` is only written to the output if [`write_entry`] is
@@ -372,6 +465,22 @@ empty `LogEntry`.
 
 `````
 
+`````{roto:type} Rpki
+RPKI information retrieved via RTR
+
+````{roto:method} Rpki.check_rov(rr: Route) -> RovStatus
+Perform Route Origin Validation on the route
+
+This sets the 'rpki_info' for this Route to Valid, Invalid or
+NotFound (RFC6811).
+
+In order for this method to have effect, a 'rtr-in' connector should
+be configured, and it should have received VRP data from the connected
+RP software.
+````
+
+`````
+
 `````{roto:type} InsertionInfo
 Information from the RIB on an inserted route
 
@@ -380,12 +489,7 @@ Information from the RIB on an inserted route
 `````{roto:type} LogEntry
 Entry to log to file/mqtt
 
-`````
-
-`````{roto:type} LogEntryPtr
-Entry to log to file/mqtt
-
-````{roto:method} LogEntryPtr.custom(custom_msg: String) -> Unit
+````{roto:method} LogEntry.custom(custom_msg: String) -> Unit
 Log a custom message based on the given string
 
 By setting a custom message for a `LogEntry`, all other fields are
@@ -393,35 +497,35 @@ ignored when the entry is written to the output. Combining the custom
 message with the built-in fields is currently not possible.
 ````
 
-````{roto:method} LogEntryPtr.origin_as(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.origin_as(msg: BmpMsg) -> LogEntry
 Log the AS_PATH origin ASN for the given message
 ````
 
-````{roto:method} LogEntryPtr.peer_as(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.peer_as(msg: BmpMsg) -> LogEntry
 Log the peer ASN for the given message
 ````
 
-````{roto:method} LogEntryPtr.as_path_hops(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.as_path_hops(msg: BmpMsg) -> LogEntry
 Log the number of AS_PATH hops for the given message
 ````
 
-````{roto:method} LogEntryPtr.conventional_reach(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.conventional_reach(msg: BmpMsg) -> LogEntry
 Log the number of conventional announcements for the given message
 ````
 
-````{roto:method} LogEntryPtr.conventional_unreach(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.conventional_unreach(msg: BmpMsg) -> LogEntry
 Log the number of conventional withdrawals for the given message
 ````
 
-````{roto:method} LogEntryPtr.mp_reach(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.mp_reach(msg: BmpMsg) -> LogEntry
 Log the number of MultiProtocol announcements for the given message
 ````
 
-````{roto:method} LogEntryPtr.mp_unreach(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.mp_unreach(msg: BmpMsg) -> LogEntry
 Log the number of MultiProtocol withdrawals for the given message
 ````
 
-````{roto:method} LogEntryPtr.log_all(msg: BmpMsg) -> LogEntryPtr
+````{roto:method} LogEntry.log_all(msg: BmpMsg) -> LogEntry
 Log all the built-in features for the given message
 ````
 
@@ -482,6 +586,9 @@ Format this message as hexadecimal Wireshark input
 
 `````{roto:type} Community
 A BGP Standard Community (RFC1997)
+
+````{roto:static_method} Community.new(raw: u32) -> Community
+````
 
 `````
 
@@ -560,6 +667,23 @@ Format this message as hexadecimal Wireshark input
 
 `````{roto:type} PerPeerHeader
 BMP Per Peer Header
+
+`````
+
+`````{roto:type} RovStatus
+ROV status of a `Route`
+
+````{roto:method} RovStatus.is_valid() -> bool
+Returns 'true' if the status is 'Valid'
+````
+
+````{roto:method} RovStatus.is_invalid() -> bool
+Returns 'true' if the status is 'Invalid'
+````
+
+````{roto:method} RovStatus.is_not_found() -> bool
+Returns 'true' if the status is 'NotFound'
+````
 
 `````
 
