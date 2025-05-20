@@ -9,16 +9,26 @@
 `````{roto:context} rpki: Rpki
 `````
 
-`````{roto:constant} LOCALHOSTV6: IpAddr
-The IPv6 address pointing to localhost: `::1`
+`````{roto:context} asn_lists: AsnLists
+`````
+
+`````{roto:context} prefix_lists: PrefixLists
+`````
+
+`````{roto:constant} NO_EXPORT_SUBCONFED: Community
+The well-known NO_EXPORT_SUBCONFED community (RFC1997)
+`````
+
+`````{roto:constant} NO_PEER: Community
+The well-known NO_PEER community (RFC3765)
 `````
 
 `````{roto:constant} LOCALHOSTV4: IpAddr
 The IPv4 address pointing to localhost: `127.0.0.1`
 `````
 
-`````{roto:constant} NO_EXPORT_SUBCONFED: Community
-The well-known NO_EXPORT_SUBCONFED community (RFC1997)
+`````{roto:constant} LOCALHOSTV6: IpAddr
+The IPv6 address pointing to localhost: `::1`
 `````
 
 `````{roto:constant} NO_EXPORT: Community
@@ -27,10 +37,6 @@ The well-known NO_EXPORT community (RFC1997)
 
 `````{roto:constant} NO_ADVERTISE: Community
 The well-known NO_ADVERTISE community (RFC1997)
-`````
-
-`````{roto:constant} NO_PEER: Community
-The well-known NO_PEER community (RFC3765)
 `````
 
 `````{roto:type} Unit
@@ -63,6 +69,9 @@ This type can represent integers from 0 up to (and including) 65535.
 The unsigned 32-bit integer type
 
 This type can represent integers from 0 up to (and including) 4294967295.
+
+````{roto:method} u32.fmt() -> String
+````
 
 `````
 
@@ -353,6 +362,10 @@ Repeat a string `n` times and join them
 `````{roto:type} Route
 A single announced or withdrawn path
 
+````{roto:method} Route.prefix() -> Prefix
+Return the prefix for this `RotondaRoute`
+````
+
 ````{roto:method} Route.prefix_matches(to_match: Prefix) -> bool
 Check whether the prefix for this `RotondaRoute` matches
 ````
@@ -448,6 +461,10 @@ Log a custom entry in forms of a tuple (NB: this method will likely be removed)
 Print a message to standard error
 ````
 
+````{roto:method} Log.timestamped_print(msg: String) -> Unit
+Print a timestamped message to standard error
+````
+
 ````{roto:method} Log.entry() -> LogEntry
 Get the current/new entry
 
@@ -481,6 +498,69 @@ RP software.
 
 `````
 
+`````{roto:type} VrpUpdate
+A single announced or withdrawn VRP
+
+````{roto:method} VrpUpdate.asn() -> Asn
+Returns the `Asn` for this `VrpUpdate`
+````
+
+````{roto:method} VrpUpdate.prefix() -> Prefix
+Returns the prefix of the updated route
+````
+
+````{roto:method} VrpUpdate.fmt() -> String
+Return a formatted string for `vrp_update`
+````
+
+`````
+
+`````{roto:type} OriginAsn
+Origin ASN
+
+Represents an optional ASN.
+        
+
+`````
+
+`````{roto:type} AsnLists
+Named lists of ASNs
+
+````{roto:method} AsnLists.add(name: String, s: String) -> Unit
+Add a named ASN list
+````
+
+````{roto:method} AsnLists.contains(name: String, asn: Asn) -> bool
+Returns 'true' if `asn` is in the named list
+````
+
+````{roto:method} AsnLists.contains_origin(name: String, origin: OriginAsn) -> bool
+Returns 'true' if the named list contains `origin`
+
+This method returns false if the list does not exist, or if `origin`
+does not actually contain an `Asn`. The latter could occur for
+announcements with an empty 'AS_PATH' attribute (iBGP).
+````
+
+`````
+
+`````{roto:type} PrefixLists
+Named lists of prefixes
+
+````{roto:method} PrefixLists.add(name: String, s: String) -> Unit
+Add a named prefix list
+````
+
+````{roto:method} PrefixLists.contains(name: String, prefix: Prefix) -> bool
+Returns 'true' if `prefix` is in the named list
+````
+
+````{roto:method} PrefixLists.covers(name: String, prefix: Prefix) -> bool
+Returns 'true' if `prefix` or a less-specific is in the named list
+````
+
+`````
+
 `````{roto:type} InsertionInfo
 Information from the RIB on an inserted route
 
@@ -495,6 +575,12 @@ Log a custom message based on the given string
 By setting a custom message for a `LogEntry`, all other fields are
 ignored when the entry is written to the output. Combining the custom
 message with the built-in fields is currently not possible.
+````
+
+````{roto:method} LogEntry.timestamped_custom(custom_msg: String) -> Unit
+Log a custom, timestamped message based on the given string
+
+Also see [`custom`].
 ````
 
 ````{roto:method} LogEntry.origin_as(msg: BmpMsg) -> LogEntry
@@ -536,6 +622,14 @@ BGP UPDATE message
 
 ````{roto:method} BgpMsg.aspath_contains(to_match: Asn) -> bool
 Check whether the AS_PATH contains the given `Asn`
+````
+
+````{roto:method} BgpMsg.aspath_origin() -> OriginAsn
+Returns the right-most `Asn` in the 'AS_PATH' attribute
+
+Note that the returned value is of type `OriginAsn`, which optionally
+contains an `Asn`. In case of empty an 'AS_PATH' (e.g. in iBGP) this
+method will still return an `OriginAsn`, though representing 'None'.
 ````
 
 ````{roto:method} BgpMsg.match_aspath_origin(to_match: Asn) -> bool
@@ -619,6 +713,17 @@ Check whether this message is of type 'PeerDownNotification'
 Check whether the AS_PATH contains the given `Asn`
 ````
 
+````{roto:method} BmpMsg.aspath_origin() -> OriginAsn
+Returns the right-most `Asn` in the 'AS_PATH' attribute
+
+Note that the returned value is of type `OriginAsn`, which optionally
+contains an `Asn`. In case of empty an 'AS_PATH' (e.g. in iBGP) this
+method will still return an `OriginAsn`, though representing 'None'.
+
+When called on BMP messages not of type 'RouteMonitoring', the
+'None'-variant is returned as well.
+````
+
 ````{roto:method} BmpMsg.match_aspath_origin(to_match: Asn) -> bool
 Check whether the AS_PATH origin matches the given `Asn`
 ````
@@ -683,6 +788,39 @@ Returns 'true' if the status is 'Invalid'
 
 ````{roto:method} RovStatus.is_not_found() -> bool
 Returns 'true' if the status is 'NotFound'
+````
+
+`````
+
+`````{roto:type} RovStatusUpdate
+ROV update of a `Route`
+
+````{roto:method} RovStatusUpdate.prefix() -> Prefix
+Returns the prefix of the updated route
+````
+
+````{roto:method} RovStatusUpdate.origin() -> Asn
+Returns the origin `asn` from the 'AS_PATH' of the updated route
+````
+
+````{roto:method} RovStatusUpdate.peer_asn() -> Asn
+Returns the peer `asn` from which the route was received
+````
+
+````{roto:method} RovStatusUpdate.has_changed() -> bool
+Returns 'true' if the new status differs from the old status
+````
+
+````{roto:method} RovStatusUpdate.previous_status() -> RovStatus
+Returns the old status of the route
+````
+
+````{roto:method} RovStatusUpdate.current_status() -> RovStatus
+Returns the new status of the route
+````
+
+````{roto:method} RovStatusUpdate.fmt() -> String
+Return a formatted string for `rov_update`
 ````
 
 `````
