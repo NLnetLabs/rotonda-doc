@@ -23,7 +23,7 @@ aid and not for automation purposes. The output format is not intended to be
 machine readable and may change without warning.
 
 Pipeline Interaction
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 The ``bmp-tcp-in`` component ingests BMP Messages from a source over a
 configured TCP session, optionally filters them, and explodes the NLRI
@@ -50,7 +50,7 @@ lead to different ids per router.
 	</pre>
 
 Filtering
----------
+^^^^^^^^^
 
 The ``bmp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bmp_in``, and it should be included in the Roto filter file
@@ -84,7 +84,7 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 	The resulting value of this filter, either ``accept`` or ``reject``.
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 The ``bmp-tcp-in`` component can be defined in the Rotonda configuration file,
 like this:
@@ -126,7 +126,7 @@ supported AFI/SAFI combinations are IPv4/Unicast, IPv6/Unicast, IPv4/Multicast
 and IPv6/Multicast.
 
 Pipeline Interaction
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 The ``bgp-tcp-in`` component ingests BGP UPDATE Messages from a source,
 optionally filters them, and explodes the NLRI into separate ``(Prefix, Route,
@@ -144,7 +144,7 @@ connector.
 	</pre>
 
 Filtering
----------
+^^^^^^^^^
 
 The ``bgp-tcp-in`` connector has a programmable Roto filter built-in with a
 hard-coded name ``bgp_in``, and it should be included in the Roto filter file
@@ -176,7 +176,7 @@ specified in the Rotonda configuration. The type of this Roto filter is:
 	The resulting value of this filter, either ``accept`` or ``reject``.
 
 Configuration Options
-----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 The ``bgp-tcp-in`` component can be defined in the Rotonda configuration file,
 like this:
@@ -289,7 +289,7 @@ filter of a
 receiving RIB.
 
 Pipeline Interaction
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 The ``mrt-file-in`` component ingests MRT messages from a file, extracts all the
 peers mentioned in the ``PEER_INDEX_TABLE`` in the TableDump, and all the
@@ -311,7 +311,7 @@ Rotonda will assign one ``ingress_id`` per peer found in the TableDump table.
 
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 The ``mrt-file-in`` component can be defined in the Rotonda configuration file,
 like this:
@@ -360,7 +360,7 @@ For newly incoming routes, the :roto:ref:`check_rov <Rpki.check_rov>` method to
 perform ROV from a roto script is available in the `rib_in_pre` filter.
 
 Filtering
----------
+^^^^^^^^^
 
 The ``rtr-tcp-in`` component has a programmable Roto filter built-in with the
 hardcoded name ``vrp_update``. This filter is called from Rotonda whenever new
@@ -401,7 +401,7 @@ For changes to the ROV status of stored routes in the RIB, see the
 
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: text
 
