@@ -348,12 +348,57 @@ rtr-tcp-in
 
 This unit connects to Relying Party software or cache, obtaining RPKI
 information via the RTR protocol. It is able to retrieve VRPs (from ROAs),
-enabling Route Origin Validation (ROV) from roto filter scripts.
+enabling Route Origin Validation (ROV) from roto filter scripts. 
 
-Currently, newly incoming RTR information does not trigger reevaluation (i.e.,
-ROV) of routes already stored in Rotonda. Furthermore, the `check_rov` method to
-perform ROV from a roto script is only available in the `rib_in_pre` filter. As
-such, the RIB unit should include the RTR unit in its sources.
+**NB:** The RIB unit should include the RTR unit in its sources in
+`rotonda.conf`.
+
+
+Newly incoming RTR information will trigger reevaluation (i.e., ROV) of
+routes already stored in Rotonda.
+For newly incoming routes, the :roto:ref:`check_rov <Rpki.check_rov>` method to
+perform ROV from a roto script is available in the `rib_in_pre` filter.
+
+Filtering
+---------
+
+The ``rtr-tcp-in`` component has a programmable Roto filter built-in with the
+hardcoded name ``vrp_update``. This filter is called from Rotonda whenever new
+VRP information as response to a Serial Query comes in via the RTR connection
+(so not for information coming in during a full Cache Reset, e.g. the initial
+synchronisation). It is not triggered for BGPsec routerkey or ASPA related
+updates.
+
+Note that in almost all cases, one would not want to actually filter out any VRP
+updates, and thus one should almost always return ``accept``. This filter is
+merely available for logging and monitoring purposes.
+
+For changes to the ROV status of stored routes in the RIB, see the
+:label:ref:`rib_in_rov_status_update <roto_rov_status_update>` function.
+
+.. confval:: filter vrp_update(vrp_update: VrpUpdate) -> Verdict
+
+	Argument Types
+	--------------
+
+	.. confval:: VrpUpdate
+
+	The VRP update containing the `prefix` and `asn` from the updated ROA.
+	See :roto:ref:`VrpUpdate` for the available roto methods.
+
+	Return Value
+	------------
+
+	.. confval:: Verdict
+
+	The resulting value of this filter, ``accept`` or ``reject``, affects whether
+	or not this VRP update will be applied to the cache maintained in Rotonda.
+	If this filter definition is omitted from the roto scripts, Rotonda defaults
+	to ``accept``.
+
+    
+
+
 
 Configuration Options
 ---------------------
