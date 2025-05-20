@@ -374,7 +374,7 @@ updates, and thus one should almost always return ``accept``. This filter is
 merely available for logging and monitoring purposes.
 
 For changes to the ROV status of stored routes in the RIB, see the
-:label:ref:`rib_in_rov_status_update <roto_rov_status_update>` function.
+:ref:`rib_in_rov_status_update <roto_rov_status_update>` function.
 
 .. confval:: filter vrp_update(vrp_update: VrpUpdate) -> Verdict
 
