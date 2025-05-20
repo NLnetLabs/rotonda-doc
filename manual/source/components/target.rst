@@ -8,7 +8,7 @@ This target writes logged entries to a file on disk.
 
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 An example ``file-out`` target configuration looks like:
 
@@ -58,7 +58,7 @@ Currently, emitted entries are non-customizable JSON objects, with different
 objects for different Log type entries.
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 The ``mqtt-out`` component can be defined in the Rotonda configuration file,
 like this:
@@ -157,7 +157,7 @@ Rotonda requires that there always be at least one target. Using this target
 allows you to run Rotonda without any output at the east-side of the pipeline.
 
 Configuration Options
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 The ``null-out`` component can be defined in the Rotonda configuration file,
 like this:
