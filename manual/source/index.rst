@@ -149,9 +149,9 @@ Open-source with professional support services
    configuration
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :hidden:
-   :caption: HTTP API
+   :caption: HTTP services
    :name: toc-http-api
    :glob:
 
