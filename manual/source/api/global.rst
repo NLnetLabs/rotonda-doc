@@ -4,7 +4,7 @@ HTTP services
 Rotonda runs an HTTP server providing a (very basic) Web UI, metrics in
 Prometheus format, and various JSON endpoints. All these are served on one
 single port, configured in `rotonda.conf`.
-Note that even though the endpoints are under `api/v1`, this does not
+Note that even though the endpoints are under ``/api/v1``, this does not
 mean everything on this page is considered stable at this point.
 
 Web UI
@@ -19,7 +19,7 @@ Prometheus metrics
 ******************
 
 On ``/metrics`` a Prometheus style file is served. This currently contains a
-mix of metrics from Rotonda it self, and possibly user-defined metrics from
+mix of metrics from Rotonda itself, and possibly user-defined metrics from
 Roto filters. 
 
 .. warning::
@@ -36,7 +36,7 @@ JSON endpoints
 
 .. important::
 
-   While under ``api/v1``, these endpoints are considered under development and
+   While under ``/api/v1``, these endpoints are considered under development and
    might change without a version bump in the URL.
 
 Rotonda offers endpoints to query information on `ingresses`, i.e. sources of
@@ -127,9 +127,9 @@ request.
         taking path attributes as a parameter, and indicating via ``accept`` or
         ``reject`` whether a route should be included in the response.
 
-        For example, the filter returns routes that contain both an `OTC` and
-        `AS_PATH` path attribute where the ASN for the OTC is not part of the
-        AS_PATH.
+        For example, the filter returns routes that contain both an ``OTC`` and
+        ``AS_PATH`` path attribute where the ASN for the OTC is not part of the
+        ``AS_PATH``.
 
         .. code-block:: rust
 
@@ -155,9 +155,9 @@ request.
     Fields
     ======
 
-    Fields can be used to override the default selection of output of certain
-    parts of the response. This can help to greatly reduce the size of
-    responses. Note that this is different from *filtering*.
+    Fields can be used to override the default output fields of parts of the
+    response. This can help to greatly reduce the size of responses. Note
+    that this is different from *filtering*.
 
     - ``?fields[pathAttributes]=<LIST_OF_TYPECODES>``
         where **<LIST_OF_TYPECODES>** is a comma separated list of integers,
@@ -168,14 +168,14 @@ request.
 
       .. code-block::
 
-        api/v1/ribs/ipv4unicast/routes?fields[pathAttributes]=8,32
+        /api/v1/ribs/ipv4unicast/routes?fields[pathAttributes]=8,32
         
 
     Includes
     ========
 
     Includes are used to incorporate data additional to the exact prefix
-    searched for. The ``filter``'s and ``field``'s are applied on these as
+    searched for. The ``filter``s and ``field``s are applied on these as
     well.
 
     .. danger::
@@ -198,7 +198,7 @@ request.
     Returns all the active routes for this IPv6 Unicast prefix.
 
     Takes the same ``filter``, ``fields``, ``function`` and ``include`` as the
-    ipv4unicast endpoint described above.
+    ipv4 unicast endpoint described above.
 
 .. danger::
 
@@ -211,7 +211,7 @@ request.
     Returns all the active routes for the entire IPv4 Unicast address family.
 
     This mimics a request to
-    ``api/v1/ribs/ipv4unicast/0.0.0.0/0?include=moreSpecifics`` and as such,
+    ``/api/v1/ribs/ipv4unicast/0.0.0.0/0?include=moreSpecifics`` and as such,
     all results will be part of the `included` object in the response:
 
     .. code-block::
