@@ -1,8 +1,5 @@
 # Standard Library
 
-````{roto:function} community(raw: u32) -> Community
-````
-
 `````{roto:context} output: Log
 `````
 
@@ -22,24 +19,24 @@
 The well-known NO_PEER community (RFC3765)
 `````
 
-`````{roto:constant} LOCALHOSTV4: IpAddr
-The IPv4 address pointing to localhost: `127.0.0.1`
-`````
-
-`````{roto:constant} LOCALHOSTV6: IpAddr
-The IPv6 address pointing to localhost: `::1`
+`````{roto:constant} NO_EXPORT_SUBCONFED: Community
+The well-known NO_EXPORT_SUBCONFED community (RFC1997)
 `````
 
 `````{roto:constant} NO_EXPORT: Community
 The well-known NO_EXPORT community (RFC1997)
 `````
 
-`````{roto:constant} NO_EXPORT_SUBCONFED: Community
-The well-known NO_EXPORT_SUBCONFED community (RFC1997)
+`````{roto:constant} LOCALHOSTV4: IpAddr
+The IPv4 address pointing to localhost: `127.0.0.1`
 `````
 
 `````{roto:constant} NO_ADVERTISE: Community
 The well-known NO_ADVERTISE community (RFC1997)
+`````
+
+`````{roto:constant} LOCALHOSTV6: IpAddr
+The IPv6 address pointing to localhost: `::1`
 `````
 
 `````{roto:type} bool
@@ -486,6 +483,12 @@ The Path attributes pertaining to a certain Route
 ````{roto:method} PathAttributes.otc() -> Asn?
 ````
 
+````{roto:method} PathAttributes.contains_community(to_match: Community) -> bool
+````
+
+````{roto:method} PathAttributes.contains_large_community(to_match: LargeCommunity) -> bool
+````
+
 ````{roto:method} PathAttributes.aspath() -> aspath?
 ````
 
@@ -778,13 +781,16 @@ Format this message as hexadecimal Wireshark input
 `````{roto:type} Community
 A BGP Standard Community (RFC1997)
 
-````{roto:static_method} Community.new(raw: u32) -> Community
+````{roto:static_method} Community.from(s: String) -> Community
 ````
 
 `````
 
 `````{roto:type} LargeCommunity
 A BGP Large Community (RFC8092)
+
+````{roto:static_method} LargeCommunity.from(s: String) -> LargeCommunity
+````
 
 `````
 
