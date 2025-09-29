@@ -15,8 +15,7 @@
 `````{roto:context} prefix_lists: PrefixLists
 `````
 
-`````{roto:constant} NO_EXPORT_SUBCONFED: Community
-The well-known NO_EXPORT_SUBCONFED community (RFC1997)
+`````{roto:context} metrics: Metrics
 `````
 
 `````{roto:constant} NO_PEER: Community
@@ -35,19 +34,22 @@ The IPv6 address pointing to localhost: `::1`
 The well-known NO_EXPORT community (RFC1997)
 `````
 
-`````{roto:constant} NO_ADVERTISE: Community
-The well-known NO_ADVERTISE community (RFC1997)
+`````{roto:constant} NO_EXPORT_SUBCONFED: Community
+The well-known NO_EXPORT_SUBCONFED community (RFC1997)
 `````
 
-`````{roto:type} Unit
-The unit type that has just one possible value. It can be used when there is nothing meaningful to be returned.
-
+`````{roto:constant} NO_ADVERTISE: Community
+The well-known NO_ADVERTISE community (RFC1997)
 `````
 
 `````{roto:type} bool
 The boolean type
 
 This type has two possible values: `true` and `false`. Several boolean operations can be used with booleans, such as `&&` (logical and), `||` (logical or) and `not`.
+
+````{roto:method} bool.to_string() -> String
+Convert this value into a `String`
+````
 
 `````
 
@@ -56,6 +58,10 @@ The unsigned 8-bit integer type
 
 This type can represent integers from 0 up to (and including) 255.
 
+````{roto:method} u8.to_string() -> String
+Convert this value into a `String`
+````
+
 `````
 
 `````{roto:type} u16
@@ -63,12 +69,20 @@ The unsigned 16-bit integer type
 
 This type can represent integers from 0 up to (and including) 65535.
 
+````{roto:method} u16.to_string() -> String
+Convert this value into a `String`
+````
+
 `````
 
 `````{roto:type} u32
 The unsigned 32-bit integer type
 
 This type can represent integers from 0 up to (and including) 4294967295.
+
+````{roto:method} u32.to_string() -> String
+Convert this value into a `String`
+````
 
 ````{roto:method} u32.fmt() -> String
 ````
@@ -80,12 +94,20 @@ The unsigned 64-bit integer type
 
 This type can represent integers from 0 up to (and including) 18446744073709551615.
 
+````{roto:method} u64.to_string() -> String
+Convert this value into a `String`
+````
+
 `````
 
 `````{roto:type} i8
 The signed 8-bit integer type
 
 This type can represent integers from -128 up to (and including) 127.
+
+````{roto:method} i8.to_string() -> String
+Convert this value into a `String`
+````
 
 `````
 
@@ -94,12 +116,20 @@ The signed 16-bit integer type
 
 This type can represent integers from -32768 up to (and including) 32767.
 
+````{roto:method} i16.to_string() -> String
+Convert this value into a `String`
+````
+
 `````
 
 `````{roto:type} i32
 The signed 32-bit integer type
 
 This type can represent integers from -2147483648 up to (and including) 2147483647.
+
+````{roto:method} i32.to_string() -> String
+Convert this value into a `String`
+````
 
 `````
 
@@ -108,10 +138,18 @@ The signed 64-bit integer type
 
 This type can represent integers from -9223372036854775808 up to (and including) 9223372036854775807.
 
+````{roto:method} i64.to_string() -> String
+Convert this value into a `String`
+````
+
 `````
 
 `````{roto:type} f32
-The 4-bit floating point type
+The 32-bit floating point type
+
+````{roto:method} f32.to_string() -> String
+Convert this value into a `String`
+````
 
 ````{roto:method} f32.floor() -> f32
 Returns the largest integer less than or equal to self.
@@ -152,7 +190,11 @@ Returns true if this number is neither infinite nor NaN.
 `````
 
 `````{roto:type} f64
-The 8-bit floating point type
+The 64-bit floating point type
+
+````{roto:method} f64.to_string() -> String
+Convert this value into a `String`
+````
 
 ````{roto:method} f64.floor() -> f64
 Returns the largest integer less than or equal to self.
@@ -203,6 +245,10 @@ AS1010
 AS4294967295
 ```
 
+````{roto:method} Asn.to_string() -> String
+Convert this value into a `String`
+````
+
 ````{roto:method} Asn.fmt() -> String
 Return the formatted string for `asn`
 ````
@@ -213,6 +259,8 @@ Return the formatted string for `asn`
 An IP address
 
 Can be either IPv4 or IPv6.
+
+For IPv4, only dot-separated quad notation is supported.
 
 ```roto
 # IPv4 examples
@@ -225,6 +273,10 @@ Can be either IPv4 or IPv6.
 ::1
 ::
 ```
+
+````{roto:method} IpAddr.to_string() -> String
+Convert this value into a `String`
+````
 
 ````{roto:method} IpAddr.eq(b: IpAddr) -> bool
 Check whether two IP addresses are equal
@@ -280,6 +332,10 @@ A prefix can be constructed with the `/` operator or with the [`Prefix.new`](Pre
 192.0.0.0.0 / 24
 ```
 
+````{roto:method} Prefix.to_string() -> String
+Convert this value into a `String`
+````
+
 ````{roto:static_method} Prefix.new(ip: IpAddr, len: u8) -> Prefix
 Construct a new prefix
 
@@ -297,6 +353,10 @@ Prefix.new(192.169.0.0, 16)
 
 `````{roto:type} String
 The string type
+
+````{roto:method} String.to_string() -> String
+Convert this value into a `String`
+````
 
 ````{roto:method} String.append(b: String) -> String
 Append a string to another, creating a new string
@@ -319,8 +379,8 @@ Check whether a string contains another string
 Check whether a string starts with a given prefix
 
 ```roto
-"haystack".contains("hay")   # -> true
-"haystack".contains("trees") # -> false
+"haystack".starts_with("hay")   # -> true
+"haystack".starts_with("trees") # -> false
 ```
 ````
 
@@ -328,8 +388,8 @@ Check whether a string starts with a given prefix
 Check whether a string end with a given suffix
 
 ```roto
-"haystack".contains("stack") # -> true
-"haystack".contains("black") # -> false
+"haystack".ends_with("stack") # -> true
+"haystack".ends_with("black") # -> false
 ```
 ````
 
@@ -342,7 +402,7 @@ Create a new string with all characters converted to lowercase
 ````
 
 ````{roto:method} String.to_uppercase() -> String
-Create a new string with all characters converted to lowercase
+Create a new string with all characters converted to uppercase
 
 ```roto
 "quiet".to_uppercase() # -> "QUIET"
@@ -355,6 +415,10 @@ Repeat a string `n` times and join them
 ```roto
 "ha".repeat(6) # -> "hahahahahaha"
 ```
+````
+
+````{roto:method} String.eq(other: String) -> bool
+Check for string equality
 ````
 
 `````
@@ -416,6 +480,17 @@ Return a formatted string for the Large Communities
 
 `````
 
+`````{roto:type} PathAttributes
+The Path attributes pertaining to a certain Route
+
+````{roto:method} PathAttributes.otc() -> Asn?
+````
+
+````{roto:method} PathAttributes.aspath() -> aspath?
+````
+
+`````
+
 `````{roto:type} RouteContext
 Contextual information pertaining to the Route
 
@@ -433,35 +508,35 @@ Return the peer ASN
 `````{roto:type} Log
 Machinery to create output entries
 
-````{roto:method} Log.log_prefix(prefix: Prefix) -> Unit
+````{roto:method} Log.log_prefix(prefix: Prefix) -> ()
 Log the given prefix (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.log_matched_asn(asn: Asn) -> Unit
+````{roto:method} Log.log_matched_asn(asn: Asn) -> ()
 Log the given ASN (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.log_matched_origin(origin: Asn) -> Unit
+````{roto:method} Log.log_matched_origin(origin: Asn) -> ()
 Log the given ASN as origin (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.log_matched_community(community: Community) -> Unit
+````{roto:method} Log.log_matched_community(community: Community) -> ()
 Log the given community (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.log_peer_down() -> Unit
+````{roto:method} Log.log_peer_down() -> ()
 Log a PeerDown event
 ````
 
-````{roto:method} Log.log_custom(id: u32, local: u32) -> Unit
+````{roto:method} Log.log_custom(id: u32, local: u32) -> ()
 Log a custom entry in forms of a tuple (NB: this method will likely be removed)
 ````
 
-````{roto:method} Log.print(msg: String) -> Unit
+````{roto:method} Log.print(msg: String) -> ()
 Print a message to standard error
 ````
 
-````{roto:method} Log.timestamped_print(msg: String) -> Unit
+````{roto:method} Log.timestamped_print(msg: String) -> ()
 Print a timestamped message to standard error
 ````
 
@@ -472,7 +547,7 @@ A `LogEntry` is only written to the output if [`write_entry`] is
 called on it after populating its fields.
 ````
 
-````{roto:method} Log.write_entry() -> Unit
+````{roto:method} Log.write_entry() -> ()
 Finalize this entry and ensure it will be written to the output
 
 Calling this method will close the log entry that is currently being
@@ -526,7 +601,7 @@ Represents an optional ASN.
 `````{roto:type} AsnLists
 Named lists of ASNs
 
-````{roto:method} AsnLists.add(name: String, s: String) -> Unit
+````{roto:method} AsnLists.add(name: String, s: String) -> ()
 Add a named ASN list
 ````
 
@@ -547,7 +622,7 @@ announcements with an empty 'AS_PATH' attribute (iBGP).
 `````{roto:type} PrefixLists
 Named lists of prefixes
 
-````{roto:method} PrefixLists.add(name: String, s: String) -> Unit
+````{roto:method} PrefixLists.add(name: String, s: String) -> ()
 Add a named prefix list
 ````
 
@@ -561,6 +636,28 @@ Returns 'true' if `prefix` or a less-specific is in the named list
 
 `````
 
+`````{roto:type} Metrics
+User-defined Prometheus style metrics
+
+````{roto:method} Metrics.increase_counter(name: String, value: u64) -> ()
+````
+
+````{roto:method} Metrics.set_gauge(name: String, value: u64) -> ()
+````
+
+`````
+
+`````{roto:type} IngressInfo
+Information pertaining to the source of the Message or Route
+
+````{roto:method} IngressInfo.peer_asn() -> Asn
+````
+
+````{roto:method} IngressInfo.peer_address() -> IpAddr
+````
+
+`````
+
 `````{roto:type} InsertionInfo
 Information from the RIB on an inserted route
 
@@ -569,7 +666,7 @@ Information from the RIB on an inserted route
 `````{roto:type} LogEntry
 Entry to log to file/mqtt
 
-````{roto:method} LogEntry.custom(custom_msg: String) -> Unit
+````{roto:method} LogEntry.custom(custom_msg: String) -> ()
 Log a custom message based on the given string
 
 By setting a custom message for a `LogEntry`, all other fields are
@@ -577,7 +674,7 @@ ignored when the entry is written to the output. Combining the custom
 message with the built-in fields is currently not possible.
 ````
 
-````{roto:method} LogEntry.timestamped_custom(custom_msg: String) -> Unit
+````{roto:method} LogEntry.timestamped_custom(custom_msg: String) -> ()
 Log a custom, timestamped message based on the given string
 
 Also see [`custom`].
@@ -648,11 +745,11 @@ Check whether this message contains the given Large Community
 Check whether this message contains the given Path Attribute
 ````
 
-````{roto:method} BgpMsg.announcements_count() -> u32
+````{roto:method} BgpMsg.announcements_count() -> u64
 Return the number of announcements in this message
 ````
 
-````{roto:method} BgpMsg.withdrawals_count() -> u32
+````{roto:method} BgpMsg.withdrawals_count() -> u64
 Return the number of withdrawals in this message
 ````
 
@@ -709,6 +806,10 @@ Check whether this message is of type 'RouteMonitoring'
 Check whether this message is of type 'PeerDownNotification'
 ````
 
+````{roto:method} BmpMsg.is_peer_up() -> bool
+Check whether this message is of type 'PeerUpNotification'
+````
+
 ````{roto:method} BmpMsg.aspath_contains(to_match: Asn) -> bool
 Check whether the AS_PATH contains the given `Asn`
 ````
@@ -740,11 +841,11 @@ Check whether this message contains the given Large Community
 Check whether this message contains the given Path Attribute
 ````
 
-````{roto:method} BmpMsg.announcements_count() -> u32
+````{roto:method} BmpMsg.announcements_count() -> u64
 Return the number of announcements in this message
 ````
 
-````{roto:method} BmpMsg.withdrawals_count() -> u32
+````{roto:method} BmpMsg.withdrawals_count() -> u64
 Return the number of withdrawals in this message
 ````
 
@@ -821,6 +922,14 @@ Returns the new status of the route
 
 ````{roto:method} RovStatusUpdate.fmt() -> String
 Return a formatted string for `rov_update`
+````
+
+`````
+
+`````{roto:type} aspath
+AS_PATH path attribute
+
+````{roto:method} aspath.contains(asn: Asn) -> bool
 ````
 
 `````
