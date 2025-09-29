@@ -124,8 +124,9 @@ request.
 
     - ``?function[roto]=<ROTO_FUNCTION>``
         where **<ROTO_FUNCTION>** is the name of a user-defined Roto function
-        taking path attributes as a parameter, and indicating via ``accept`` or
-        ``reject`` whether a route should be included in the response.
+        taking :roto:ref:`PathAttributes <PathAttributes>` as a parameter, and
+        indicating via ``accept`` or ``reject`` whether a route should be
+        included in the response.
 
         For example, the filter returns routes that contain both an ``OTC`` and
         ``AS_PATH`` path attribute where the ASN for the OTC is not part of the
