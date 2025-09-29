@@ -28,9 +28,10 @@ started.
        To install a Rotonda package, you need the 64-bit version of one of
        these Debian versions:
 
-         -  Debian Bookworm 12
-         -  Debian Bullseye 11
-         -  Debian Buster 10
+         - Debian Trixie 13
+         - Debian Bookworm 12
+         - Debian Bullseye 11
+         - Debian Buster 10
 
        These Packages are all available for the ``amd64``/``x86_64`` and
        ``arm64``/``aarch64`` architectures.
@@ -93,6 +94,7 @@ started.
        To install a Rotonda package, you need the 64-bit version of one of
        these Ubuntu versions:
 
+         - Ubuntu Noble 24.04 (LTS)
          - Ubuntu Jammy 22.04 (LTS)
          - Ubuntu Focal 20.04 (LTS)
          - Ubuntu Bionic 18.04 (LTS)
