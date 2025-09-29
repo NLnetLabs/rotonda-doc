@@ -133,7 +133,7 @@ request.
 
         .. code-block:: rust
 
-            fn my_filter_function(attr: Attributes) {
+            fn my_filter_function(attr: PathAttributes) {
                 match attr.otc() {
                     Some(otc) -> {
                         match attr.aspath() {
