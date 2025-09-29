@@ -33,7 +33,7 @@ started.
          - Debian Bullseye 11
          - Debian Buster 10
 
-       These Packages are all available for the ``amd64``/``x86_64`` and
+       These packages are all available for the ``amd64``/``x86_64`` and
        ``arm64``/``aarch64`` architectures.
        
        First update the :program:`apt` package index: 
