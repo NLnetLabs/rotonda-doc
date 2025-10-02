@@ -163,6 +163,18 @@ started.
        To install a Rotonda package, you need Red Hat Enterprise Linux
        (RHEL) 7 or 8, or compatible operating system such as Rocky Linux.
        Packages are available for the ``amd64``/``x86_64`` architecture only.
+
+       .. warning::
+         
+         The default SELinux policies prohibit Rotonda from starting because
+         Roto needs special permissions. This only happens when a `roto_script`
+         is configured in ``rotonda.conf``. One way to loosen the required policy
+         is:
+
+         .. code-block:: bash
+
+           setsebool -P selinuxuser_execheap 1
+
        
        First create a file named :file:`/etc/yum.repos.d/nlnetlabs.repo`,
        enter this configuration and save it:
