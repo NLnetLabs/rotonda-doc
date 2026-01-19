@@ -119,6 +119,10 @@ request.
     - ``?filter[peerAsn]=<ASN>``
         where **<ASN>** is an Autonomous System Number, possibly prefixed with "AS".
 
+    - ``?filter[peerAddress]=<IP_ADDR>``
+        where **<IP_ADDR>** is an IPv6 or IPv4 address.
+
+
     Functions
     =========
 
