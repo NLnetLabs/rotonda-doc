@@ -1,0 +1,11 @@
+The easiest way to build the docs is probably using `uv` for all the python stuff.
+
+Note that the Makefile does not call `uv` directly, so one should use something
+like the following:
+
+
+```
+make clean && uv run make html -w
+```
+
+
