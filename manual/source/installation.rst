@@ -175,6 +175,8 @@ started.
 
            setsebool -P selinuxuser_execheap 1
 
+         (This workaround is not necessary anymore from Rotonda v0.5.1 onwards.)
+
        
        First create a file named :file:`/etc/yum.repos.d/nlnetlabs.repo`,
        enter this configuration and save it:
