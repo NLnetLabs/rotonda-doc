@@ -84,7 +84,7 @@ this command:
 
 .. code:: console
 
-  $ curl http://localhost:8080/status
+  $ curl http://localhost:8080/metrics
 
 
 (Or open the URL in a browser; also make sure to **not** add a trailing slash)
@@ -93,8 +93,8 @@ Then you'll see a list of variables names with zeroes and minus ones as
 values. Again, not super exciting, but at least we are seeing the confirmation
 that it is running and waiting.
 
-Now let’s query another endpoint, preferably in a browser (since it outputs
-html): `<http://localhost:8080/bmp-routers/>`_.
+Now let’s query the minimal web UI, preferably in a browser (since it outputs
+html): `<http://localhost:8080/>`_.
 
 Hopefully, you’ll see a (for now empty) table, with column headers hinting at
 the type of information it will present once occupied.
@@ -173,7 +173,7 @@ hard. Let's try:
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/prefixes/213.0.0.0/16 | jq .
+	$ curl -s http://localhost:8080/api/v1/ribs/ipv4unicast/routes/213.0.0.0/16 | jq .
 
 You should see output that starts with a field called "data", filled with
 a one or more objects, that all have distinct values in their "ingress_id"
@@ -186,14 +186,14 @@ into Rotonda, like so:
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/prefixes/<ADDRESS_PART_OF_PREFIX>/<PREFIX_LENGTH> | jq .
+	$ curl -s http://localhost:8080/api/v1/ribs/ipv4unicast/routes/<ADDRESS_PART_OF_PREFIX>/<PREFIX_LENGTH> | jq .
 
 Second, you could try to add another query parameter, called
 ``include=moreSpecifics``, like so:
 
 .. code:: console
 
-	$ curl -s http://localhost:8080/prefixes/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?include=moreSpecifics
+	$ curl -s http://localhost:8080/api/v1/ribs/ipv4unicast/routes/<ADDRESS_PATH_OF_PREFIX>/<PREFIX_LENGTH>?include=moreSpecifics
 
 If you try a fairly large prefix, say a /16, you increase the chance of
 hitting an actual prefix.
@@ -248,7 +248,7 @@ Rotonda filtered out all prefixes, except for the one we specified in the
 
 .. code:: console
 
-	curl -s http://localhost:8080/prefixes/209.127.80.0/20
+	curl -s http://localhost:8080/api/v1/ribs/ipv4unicast/routes/209.127.80.0/20
 
 You'll see approximately three entries in the "data" object: one for each peer
 in the mrt file that announced this prefix to the RIS collector.
