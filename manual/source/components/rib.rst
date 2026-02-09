@@ -69,6 +69,23 @@ file specified in the Rotonda configuration. The type of this Roto filter is:
 	The resulting value of this filter, a of value ``accept`` or ``reject``.
 
 
+Upon updates to the ROV status of a stored prefix, the function
+``rib_in_rov_status_update`` is called. This happens when new RTR updates
+(responses to Serial Queries, not the initial Cache Reset synchronisation) come
+in. 
+
+Note that this is a ``function``, not a ``filter``: there is no return type for
+Rotonda to act upon afterwards.
+
+.. _roto_rov_status_update:
+
+.. confval:: function rib_in_rov_status_update(rov_update: RovStatusUpdate)
+
+    .. confval:: rov_update
+
+    Describes the previous and current :roto:ref:`RovStatus`
+    (Valid/Invalid/NotFound) for a stored route. See :roto:ref:`RovStatusUpdate`
+    for the available roto methods.
 
 Configuration Options
 ---------------------
