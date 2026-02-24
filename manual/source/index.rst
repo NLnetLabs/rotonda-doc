@@ -158,10 +158,11 @@ Open-source with professional support services
    api/*
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :hidden:
    :caption: Roto Language
    :name: toc-roto
    :glob:
 
    roto/*
+   roto/03_rotonda_std/*
