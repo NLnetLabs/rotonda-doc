@@ -165,3 +165,4 @@ Open-source with professional support services
    :glob:
 
    roto/*
+   roto/02_rotonda_std/*
