@@ -94,10 +94,10 @@ started.
        To install a Rotonda package, you need the 64-bit version of one of
        these Ubuntu versions:
 
+         - Ubuntu Resolute 26.04 (LTS)
          - Ubuntu Noble 24.04 (LTS)
          - Ubuntu Jammy 22.04 (LTS)
          - Ubuntu Focal 20.04 (LTS)
-         - Ubuntu Bionic 18.04 (LTS)
 
        Packages are available for the ``amd64``/``x86_64`` architecture only.
        
@@ -161,11 +161,17 @@ started.
    .. group-tab:: RHEL/CentOS
 
        To install a Rotonda package, you need Red Hat Enterprise Linux
-       (RHEL) 7 or 8, or compatible operating system such as Rocky Linux.
+       (RHEL) 8, 9 or 10 or compatible operating system such as Rocky Linux.
        Packages are available for the ``amd64``/``x86_64`` architecture only.
 
        First create a file named :file:`/etc/yum.repos.d/nlnetlabs.repo`,
        enter this configuration and save it:
+
+       .. tip::
+
+           On Fedora systems replace $releasever with 10 (or 8 or 9 if 10 is too
+           new for your Fedora) as there is no repository with Fedora numbers,
+           e.g. 42, in our package repository.
        
        .. code-block:: text
        
