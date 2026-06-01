@@ -64,8 +64,10 @@ extensions = [
     'sphinx_substitution_extensions',
     'roto_domain',
     'myst_parser',
+    'roto_domain',
 ]
 
+myst_enable_extensions = ['colon_fence', 'attrs_block']
 autosectionlabel_prefix_document = True
 suppress_warnings = ['autosectionlabel.*']
 
