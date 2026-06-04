@@ -291,6 +291,14 @@ variables with ``let``.
         x > y_squared
     }
 
+Any local variable can be overwritten with an assignment, which is expressed as ``=``
+without `let`:
+
+.. code-block:: roto
+
+    let x = 0;
+    x = x + 1;
+
 Filter-map
 ----------
 
@@ -363,6 +371,13 @@ Fields of records can be accessed with the `.` operator.
         let x = { foo: 5 };
         accept x.foo
     }
+
+Fields can also be updated with an assignment.
+
+.. code-block:: roto
+
+    let x = { foo: 5 };
+    x.foo = 6;
 
 Named records
 -------------
