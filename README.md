@@ -91,4 +91,4 @@ NLnet Labs offers [professional support and consultancy
 services](https://www.nlnetlabs.nl/services/contracts/) with a service-level
 agreement. Rotonda is liberally licensed under the
 [Mozilla Public License 2.0]
-(https://github.com/NLnetLabs/rotonda/blob/main/LICENSE).
+(https://codeberg.org/NLnetLabs/rotonda/blob/main/LICENSE).

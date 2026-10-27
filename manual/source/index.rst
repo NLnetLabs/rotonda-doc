@@ -8,8 +8,8 @@ Rotonda |version|
    0.x versions.
 
    For more information
-   on upcoming features and changes see the `ROADMAP <https://github.com/
-   NLnetLabs/rotonda/blob/main/ROADMAP.md>`__.
+   on upcoming features and changes see the `ROADMAP
+   <https://community.nlnetlabs.nl/t/rotonda-roadmap-for-2026/34>`__.
 
 The composable, programmable BGP Engine
 ---------------------------------------
@@ -91,7 +91,7 @@ Open-source with professional support services
    NLnet Labs offers `professional support and consultancy
    services <https://www.nlnetlabs.nl/services/contracts/>`__ with a
    service-level agreement. Rotonda is liberally licensed under the
-   `Mozilla Public License 2.0 <https://github.com/NLnetLabs/rotonda/blob/main/LICENSE>`__.
+   `Mozilla Public License 2.0 <https://codeberg.org/NLnetLabs/rotonda/blob/main/LICENSE>`__.
 
    .. only:: html
 

@@ -116,7 +116,7 @@ Downloading the configuration files
 
 Although Rotonda has a built-in configuration, and you can create a
 configuration file from scratch it's very useful to download the configuration
-files that come with Rotonda. These files are situated in the github
+files that come with Rotonda. These files are situated in the Codeberg
 repository of Rotonda. Provided you have a version of `git` higher than or
 equal to 2.25 installed, you can issue these commands to download them to a
 newly created directory, called ``rotonda`` in your current working directory:
@@ -124,7 +124,7 @@ newly created directory, called ``rotonda`` in your current working directory:
 .. code-block:: bash
   :substitutions:
 
-  $ git clone --no-checkout --depth 1 --branch v|version| https://github.com/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout v|version|
+  $ git clone --no-checkout --depth 1 --branch v|version| https://codeberg.org/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout v|version|
 
 Again, the version of the configuration files installed here matches with the
 Rotonda version you just installed, and this documentation. If you've
@@ -152,19 +152,19 @@ Installing Rotonda from the main branch
 """""""""""""""""""""""""""""""""""""""
 
 All new features of Rotonda are built on a branch and merged via a `pull
-request <https://github.com/NLnetLabs/rotonda/pulls>`_, allowing you to
+request <https://codeberg.org/NLnetLabs/rotonda/pulls>`_, allowing you to
 easily try them out using Cargo. If you want to try a specific branch from
 the repository you can use the ``--git`` and ``--branch`` options:
 
 .. code-block:: text
 
-  $ cargo install --git https://github.com/NLnetLabs/rotonda.git --branch main
+  $ cargo install --git https://codeberg.org/NLnetLabs/rotonda.git --branch main
 
 Note that you will also have to download the correct configuration files with:
 
 .. code-block:: bash
 
-  $ git clone --no-checkout --depth 1 --branch main https://github.com/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout main
+  $ git clone --no-checkout --depth 1 --branch main https://codeberg.org/nlnetlabs/rotonda && cd rotonda/ && git sparse-checkout set etc && git checkout main
 
 .. Seealso:: For more installation options refer to the `Cargo book
              <https://doc.rust-lang.org/cargo/commands/cargo-install.html#install-options>`_.
