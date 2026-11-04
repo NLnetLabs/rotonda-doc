@@ -9,7 +9,7 @@ file is included in ``/etc/rotonda/rotonda.conf``.
 
 If you've installed Rotonda with ``cargo install``, you will have to supply
 a configuration yourself. Sample configurations can be found in the ``/etc``
-directory of the `github repository of Rotonda <https://github.com/NLnetLabs/
+directory of the `Codeberg repository of Rotonda <https://codeberg.org/NLnetLabs/
 rotonda/>`_.
 
 

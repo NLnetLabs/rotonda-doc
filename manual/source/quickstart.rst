@@ -17,8 +17,8 @@ you will have a directory ``/etc/rotonda``, which will contain a file
 
 If you have built Rotonda with ``cargo install``, or from source, you should
 create the directory ``/etc/rotonda`` yourself. You can copy the configuration
-need for this quick start from the `Rotonda GitHub repository <https://
-github.com/ NlnetLabs/rotonda/>`_.
+need for this quick start from the `Rotonda Codeberg repository <https://
+codeberg.org/ NlnetLabs/rotonda/>`_.
 
 Alternatively you can use this ``rotonda.conf``:
 
